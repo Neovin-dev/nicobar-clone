@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'EulerFlex';
+  src: url(./assets/euclid-flex/EuclidCircularALight.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'EulerFlex', sans-serif;
+}
