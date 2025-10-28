@@ -7,6 +7,25 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'EulerFlexBold';
+  src: url(./assets/euclid-flex/EuclidCircularABold.ttf);
+  ont-weight: normal;
+  font-style: normal;
+}
+
 * {
   font-family: 'EulerFlex', sans-serif;
+}
+
+:root {
+    --main-heading-font: NewParisText;
+    --main-headline-font: NewParis-headline;
+    --main-body-font: EuclidFlex;
+    --main-body-font-bold: EuclidFlexBold;
+    --main-body-font-med: EuclidFlexMed;
+    --main-body-Butler-Med: ButlerMedium;
+    --base-font-size: 14px;
+    --bulter-font-bold: Butler-bold;
+    --bulter-font-regular: Butler-regular;
 }
