@@ -135,11 +135,7 @@ export default defineComponent({
 
 <style scoped>
 
-.data-text {
-  font-size: 10px;
-}
-
-.data-text-secondary {
+.data-text, .data-text-secondary {
   font-size: 14px;
 }
 
