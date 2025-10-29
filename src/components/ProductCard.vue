@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-white p-1 overflow-hidden transition-all duration-300 
+  <div class=" cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 
   flex-[25%]">
     <div class="relative w-full aspect-3/4 bg-gray-100 group">
       <span class="absolute top-3 bg-white text-xs font-semibold px-2 py-1 z-10">
@@ -123,7 +123,7 @@ export default defineComponent({
 
   computed: {
     formattedPrice(): string {
-      // Formats the price with commas
+
       return this.product.price.toLocaleString('en-IN');
     }
   },
@@ -135,7 +135,7 @@ export default defineComponent({
 
       if (step > 0) {
         this.transitionDirection = (newIndex >= numImages) ? 'slide-right' : 'slide-right';
-      } else { // step < 0
+      } else { 
         this.transitionDirection = (newIndex < 0) ? 'slide-left' : 'slide-left';
       }
 
@@ -151,27 +151,24 @@ export default defineComponent({
 </script>
 
 <style>
-/* Transition for sliding right (forward index change) */
+
 .slide-right-enter-active,
 .slide-right-leave-active {
   transition: all 300ms ease;
-  position: absolute; /* Ensures elements don't affect flow during transition */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
 
-/* New image enters from the right */
 .slide-right-enter-from {
   transform: translateX(100%);
 }
 
-/* Old image leaves to the left */
 .slide-right-leave-to {
   transform: translateX(-100%);
 }
 
-/* Transition for sliding left (backward index change) */
 .slide-left-enter-active,
 .slide-left-leave-active {
   transition: all 300ms ease;
@@ -181,17 +178,14 @@ export default defineComponent({
   width: 100%;
 }
 
-/* New image enters from the left */
 .slide-left-enter-from {
   transform: translateX(-100%);
 }
 
-/* Old image leaves to the right */
 .slide-left-leave-to {
   transform: translateX(100%);
 }
 
-/* Ensure the entering/leaving element stays on the same vertical level */
 .slide-right-enter-to,
 .slide-right-leave-from,
 .slide-left-enter-to,

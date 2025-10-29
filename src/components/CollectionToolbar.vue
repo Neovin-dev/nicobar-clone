@@ -33,7 +33,7 @@
               <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide h-1 w-2 "><path xmlns="http://www.w3.org/2000/svg" id="down-arrow" d="M990.5,3700.5l3-3,3,3" transform="translate(997.208 3701.207) rotate(180)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path></svg>
             </div>
         </div>
-        <ul class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-20 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10">
+        <ul class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-20 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10 hidden">
               <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="3" data-value="created-descending"><span>What’s New</span></li>
               <li value="manual" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="0" data-value="manual"><span>Featured</span></li>
               <li value="price-ascending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="1" data-value="price-ascending"><span>Price - low to high</span></li>
