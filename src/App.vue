@@ -9,6 +9,8 @@ import ProductCardBanner from './components/ProductCardBanner.vue';
 import CollectionToolbar from './components/CollectionToolbar.vue';
 import PaginationSection from './components/PaginationSection.vue';
 import SectionFooter from './components/SectionFooter.vue';
+import ProductFilterSidebar from './components/ProductFilterSidebar.vue';
+
 </script>
 
 <template>
@@ -29,26 +31,12 @@ import SectionFooter from './components/SectionFooter.vue';
     <ProductCard />
     <ProductCard />
     <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
   </div>
   
   <PaginationSection />
   <SectionFooter />
+
+  <ProductFilterSidebar />
   
 </template>
 

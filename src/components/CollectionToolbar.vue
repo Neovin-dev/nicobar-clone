@@ -21,24 +21,25 @@
       </span>
     </div>
     <div class="collectionToolbarFilterSort flex h-10 align-middle">
-      <div class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center">
+      <div class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative">
         <div class="sort-by-select-header flex text-center text-[10px]">
-        <span class="title-text text-[#9ea5ad]">
-          Sort by:
-        </span>
-        <span class="active-sort-by flex items-center pl-1 font-bold">
-          <span>Featured</span>
-        </span>
-        <div class="chevron-down-icon pl-2 pt-1.5">
-          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide h-1 w-2 "><path xmlns="http://www.w3.org/2000/svg" id="down-arrow" d="M990.5,3700.5l3-3,3,3" transform="translate(997.208 3701.207) rotate(180)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path></svg>
+            <span class="title-text text-[#9ea5ad]">
+              Sort by:
+            </span>
+            <span class="active-sort-by flex items-center pl-1 font-bold">
+              <span>Featured</span>
+            </span>
+            <div class="chevron-down-icon pl-2 pt-1.5">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide h-1 w-2 "><path xmlns="http://www.w3.org/2000/svg" id="down-arrow" d="M990.5,3700.5l3-3,3,3" transform="translate(997.208 3701.207) rotate(180)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path></svg>
+            </div>
         </div>
-        </div>
-      <!-- <ul class="sort-by-data" style="top: 40px !important">
-          <li value="created-descending" class="data first-child" data-index="3" data-value="created-descending"><span>What’s New</span></li>
-          <li value="manual" class="data is-selected" data-index="0" data-value="manual"><span>Featured</span></li>
-          <li value="price-ascending" class="data" data-index="1" data-value="price-ascending"><span>Price - low to high</span></li>
-          <li value="price-descending" class="data" data-index="2" data-value="price-descending"><span>Price - high to low</span></li>
-        </ul> -->
+        <ul class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-20 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10">
+              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="3" data-value="created-descending"><span>What’s New</span></li>
+              <li value="manual" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="0" data-value="manual"><span>Featured</span></li>
+              <li value="price-ascending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="1" data-value="price-ascending"><span>Price - low to high</span></li>
+              <li value="price-descending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="2" data-value="price-descending"><span>Price - high to low</span></li>
+        </ul>
+      
       </div>
       <div class="filter-container flex ml-2.5">
         <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">
