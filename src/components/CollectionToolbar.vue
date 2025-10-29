@@ -1,5 +1,5 @@
 <template>
-<div class="collectionToolbar my-0.5 mx-10 flex justify-between">
+<div class="collectionToolbar my-0.5 mx-10 flex justify-between mt-8">
     <div class="collectionToobarView flex flex-row py-5">
         <button aria-label="Show four products per row" class="CollectionToolbar__LayoutType is-active h-5 w-5 flex justify-center align-middle" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh"><svg class="Icon Icon--wall-2" role="presentation">
         <g id="grid4" transform="translate(-73 -520)">

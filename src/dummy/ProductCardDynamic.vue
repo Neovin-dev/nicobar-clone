@@ -105,7 +105,7 @@ export default defineComponent({
 
   computed: {
     formattedPrice(): string {
-      return this.productData.price; 
+      return this.productData.price.toLocaleString('en-IN'); 
     },
     
     currentImage(): { id: number, src: string } {

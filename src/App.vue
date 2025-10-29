@@ -6,15 +6,16 @@
   <SearchBar 
       v-if="isSearchEnable" 
       @close-search-bar="closeSearchBar"
+      @update-search="searchProducts"
   />
   <div v-else>
     <CollectionBanner />
       <TopCarousel />
       <ExpressBanner />
       <ProductCardBanner />
-      <CollectionToolbar />
+      
   </div>
-  
+  <CollectionToolbar />
   <div class="card-container flex flex-[100%] flex-wrap">
     <div class="loading-overlay" v-if="isLoading">Loading Products...</div>
     
@@ -85,7 +86,7 @@ export default defineComponent({
   data() {
     return {
       isLoading: true as boolean,
-      searchValue: '*' as string,
+      searchValue: 'men' as string,
       searchResult: null as any,
       isSearchEnable: false as boolean,
 
@@ -115,6 +116,21 @@ export default defineComponent({
         this.isSearchEnable = true;
       }
     },
+    async searchProducts(newSearchValue: string) {
+    this.isLoading = true;
+    this.searchResult = null;
+    this.searchValue = newSearchValue;
+
+    try {
+        console.log(`Searching for: ${this.searchValue}`);
+        const result = await searchClient.search(this.searchValue, collectionId);
+        this.searchResult = result;
+    } catch (error) {
+        console.log("Search failed:", error);
+        } finally {
+        this.isLoading = false;
+      }
+    }
 
   }
 })
