@@ -126,7 +126,7 @@
                        <div class="Footer-promotional-care">
 
                        </div>
-                       <div class="butterfly-image absolute top-30 left-79">
+                       <div class="butterfly-image absolute top-30 left-98">
                             <div class="butterfly-img-wrapper">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.289" height="46.162" viewBox="0 0 79.289 46.162">
                                 <g id="Group_3239" data-name="Group 3239" transform="translate(0 0)">
@@ -160,9 +160,9 @@
                         </div>
                        </div>
                 </div>
-                <div class="footer-middle-righ py-10  w-[30%] flex-[100%] bg-white">
-                    <div class="three-part-container">
-                        <div class="linklist-container flex-[0_0_33%] max-w-[33%]">
+                <div class="footer-middle-right py-10  w-[70%]  bg-white">
+                    <div class="three-part-container flex-[0_0_100%] max-w-full flex h-full">
+                        <div class="linklist-container flex-[0_0_33%] max-w-[33%] px-22.5 border-r-[#6A6A6A] border-r border-solid">
                             <div class="linklist-block-inner flex justify-center">
                                 <div class="linklist-block-wrapper">
                                     <div class="linklist-title pb-3.5"> About us</div>
@@ -199,17 +199,89 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="linklist-container">
+                        <div class="linklist-container flex-[0_0_33%] max-w-[33%] px-22.5 border-r-[#6A6A6A] border-r border-solid">
                             <div class="linklist-block-inner">
                                 <div class="linklist-block-wrapper">
-                                    
-                                </div>
+                                    <div class="Linklist-title pb-3.5">
+                                        Quick links
+                                    </div><ul class="Linklist text-[14px] text-[#565e6b]"><li class="Linklist__Item">
+                                            <a href="https://www.nicobar.com/pages/tracking-order" class="xs-show Link Link--primary">Track your order</a>
+                                        </li><li class="Linklist__Item">
+                                            <a href="/pages/return-and-exchange" class="xs-show Link Link--primary">Initiate a return</a>
+                                        </li><li class="Linklist__Item">
+                                            <a href="/pages/shipping-returns" class="xs-show Link Link--primary">Shipping &amp; returns</a>
+                                        </li><li class="Linklist__Item">
+                                            <a href="https://www.nicobar.com/pages/shipping-returns" class="xs-show Link Link--primary">FAQs</a>
+                                        </li><li class="Linklist__Item">
+                                            <a href="/pages/terms-conditions" class="xs-show Link Link--primary">Terms &amp; Conditions</a>
+                                        </li><li class="Linklist__Item">
+                                            <a href="/pages/privacy-policy" class="xs-show Link Link--primary">Privacy policy</a>
+                                        </li>
+                                    </ul></div>
                             </div>
                         </div>
-                        <div class="linklist-container">
+                        <div class="linklist-container flex-[0_0_33%] max-w-[33%] px-22.5 ">
                             <div class="linklist-block-inner">
-                                <div class="linklist-block-wrapper">
-                                
+                                <div class="linklist-block-wrapper h-full flex flex-col">
+                                    <div class="nicoradio-wrapper mb-30 justify-center flex text-[#9ea5ad] text-[10px]">
+                                        <div class="Footer-promotional-nicoradio">
+                                    <a class="xs-hide nico-radio-link" target="_blank" href="/pages/nicoradio-zanazibar/">
+                                        <div class="svg-wrapper">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="149.738" height="25.904" viewBox="0 0 149.738 25.904">
+                                                <g id="nico_footer_radio" transform="translate(0 0.003)">
+                                                    <g id="Group_1194" data-name="Group 1194" transform="translate(0 0.006)">
+                                                    <path id="Path_102" data-name="Path 102" d="M2.64,99.289v10.217H0V93.3l10.922,10.394V93.476h2.64v16.207Z" transform="translate(0 -93.3)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1195" data-name="Group 1195" transform="translate(23.429 0.359)">
+                                                    <path id="Path_103" data-name="Path 103" d="M13.3,93.5h2.64v16.027H13.3Z" transform="translate(-13.3 -93.5)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1196" data-name="Group 1196" transform="translate(33.641 0.173)">
+                                                    <path id="Path_104" data-name="Path 104" d="M19.1,101.507A8.082,8.082,0,0,1,27.207,93.4a7.187,7.187,0,0,1,5.637,2.29l-1.766,1.764a5.656,5.656,0,0,0-3.871-1.764,5.639,5.639,0,0,0,0,11.274,5.047,5.047,0,0,0,3.876-1.762l1.762,1.762a7.187,7.187,0,0,1-5.637,2.29,7.489,7.489,0,0,1-8.109-7.746Z" transform="translate(-19.094 -93.39)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1197" data-name="Group 1197" transform="translate(55.299 -0.003)">
+                                                    <path id="Path_105" data-name="Path 105" d="M31.4,101.934a8.2,8.2,0,1,1,8.632,7.751,7.919,7.919,0,0,1-8.632-7.751Zm13.564-.7a5.562,5.562,0,0,0-5.813-5.461,5.818,5.818,0,1,0,5.813,5.46Z" transform="translate(-31.387 -93.293)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1198" data-name="Group 1198" transform="translate(54.962 19.736)">
+                                                    <path id="Path_106" data-name="Path 106" d="M41.947,108.2l-5.639-3.7L31.2,107.847v1.586l5.109-3.347,5.637,3.523,4.932-3.17v-1.586Z" transform="translate(-31.2 -104.5)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1199" data-name="Group 1199" transform="translate(54.962 20.793)">
+                                                    <path id="Path_107" data-name="Path 107" d="M41.947,108.8l-5.639-3.7L31.2,108.447v1.586l5.109-3.347,5.637,3.523,4.932-3.17v-1.586Z" transform="translate(-31.2 -105.1)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1206" data-name="Group 1206" transform="translate(78.038 0.88)">
+                                                    <g id="Group_1200" data-name="Group 1200" transform="translate(0 0.007)">
+                                                        <path id="Path_108" data-name="Path 108" d="M55.574,107.717v-2.29l-1.409-3-.7-.7,1.233-.529,1.233-1.057.529-1.233V96.97l-.529-1.233L54.87,94.5l-1.586-.7H45l-.7.353v1.057l.529.353h1.409v12.331H45l-.7.353V109.3l.529.353h4.756l.7-.353v-1.057l-.529-.353H48V102.08h3.347l1.233,1.233,1.233,2.29v3.17a.623.623,0,0,0,.7.7h2.64l.7-.353v-1.057l-.529-.353Zm-1.941-7.751-.529.353H48.176V95.386h4.932l.529.353.7.7.353.529v1.586l-.353.7Z" transform="translate(-44.3 -93.8)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1201" data-name="Group 1201" transform="translate(17.263 4.235)">
+                                                        <path id="Path_109" data-name="Path 109" d="M64.141,105.008l-.353.529v.353l-.176.176-.179-.177-.353-.529V98.666l-.353-.881-.7-.881L60.442,96.2h-3l-1.586.7-.881.7-.353.881v.529l.529,1.057.881.353h.529l1.057-.529.353-.881v-.529l-.353-.7.353-.176h1.937l.881.529.176.176.353.529v.881l-.353.881H57.623l-1.937.881-1.233,1.057-.353.881v1.586l.353.881.7.881,1.937.881h2.819l1.057-.529.353-.353.176.353.881.353h1.586l1.057-.529.353-.881v-.53l-.353-.7h-.881Zm-2.819-2.29v1.233l-.7,1.233-.529.529-.529.353H57.623l-.529-.353-.529-.529-.353-.529v-.529l.353-.529.529-.529,1.233-.7h2.29Z" transform="translate(-54.1 -96.2)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1202" data-name="Group 1202" transform="translate(32.77 0)">
+                                                        <path id="Path_110" data-name="Path 110" d="M72.941,107.716V94.5a.623.623,0,0,0-.708-.7H69.77l-.7.353v1.057l.529.353H71.18v4.054l-.7-.7-1.233-.529H66.6l-1.233.529-1.586,1.409-.881,1.937V105.6l.881,1.937,1.409,1.586,1.233.529h2.819l1.057-.529.881-.881v.529l.353.7h2.819l.7-.353v-1.057l-.529-.353Zm-5.813.176-.529-.353-1.409-1.233-.529-.881v-3l.529-.881,1.409-1.233.529-.353h1.586l.529.353,1.409,1.233.7,1.233v2.29l-.7,1.233-1.409,1.233-.529.353Z" transform="translate(-62.904 -93.793)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1203" data-name="Group 1203" transform="translate(48.972 4.58)">
+                                                        <path id="Path_111" data-name="Path 111" d="M76.68,105.733V97.1a.623.623,0,0,0-.7-.7H72.8l-.7.353v1.057l.529.353h2.29v7.751H72.8l-.7.353v1.057l.529.353h6.342l.7-.353v-1.057l-.529-.353Z" transform="translate(-72.1 -96.393)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1204" data-name="Group 1204" transform="translate(51.085 0.006)">
+                                                        <path id="Path_112" data-name="Path 112" d="M74.533,96.97h.7l.881-.353.353-.881v-.529l-.353-.881-.881-.529h-.529l-1.057.529-.353.7v.529l.353,1.057Z" transform="translate(-73.299 -93.799)" fill="#464749"></path>
+                                                    </g>
+                                                    <g id="Group_1205" data-name="Group 1205" transform="translate(60.426 4.41)">
+                                                        <path id="Path_113" data-name="Path 113" d="M88.994,98.766l-1.409-1.586L85.646,96.3h-2.64l-1.937.881L79.484,98.59l-.881,1.937v2.64l.881,1.937,1.409,1.586,1.937.881h2.819l1.762-.881L89,105.281l.881-1.937V100.7Zm-5.461,7.222-1.233-.7-1.409-1.233-.529-.881v-2.29L80.89,100,82.3,98.767l1.233-.7h1.586l1.233.7L87.761,100l.529.881v2.29l-.529.881-1.409,1.233-1.233.7Z" transform="translate(-78.603 -96.3)" fill="#464749"></path>
+                                                    </g>
+                                                    </g>
+                                                    </g>
+                                            </svg>
+                                        </div>
+                                        <div class="nico-radio-text">A specially curated musical stream</div>
+                                    </a>                                                                    
+                                        </div>
+                                    </div>
+                                    <div class="copyright-text-wrapper text-[#7c878e] opacity-100 leading-[1.4] font-light text-[10px] flex justify-center">
+                                        <p class="copyright-text text-[9px]">
+                                            Nicobar Design Pvt. Ltd. All Rights
+                                            <span class="copyright-text-desk xs-hide">
+                                                <br /> Reserved © 2020
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
