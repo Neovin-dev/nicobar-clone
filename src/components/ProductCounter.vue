@@ -1,0 +1,23 @@
+<template>
+<div class="back-to-top-wrapper fixed bottom-22.5 right-22.5 bg-white px-4 py-2 text-[12px] rounded-full shadow-[0_2px_4px_#00000029]">
+    <div class="product-count-backtotop flex">
+        <span class="view-count">
+            21
+        </span>
+        <span>/</span>
+        <total-product-count class="pr-2">
+            144
+        </total-product-count>
+        <img src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/arrow-top.svg?v=1671523432" alt="back to top"></img>
+    </div>
+</div>
+
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+
+})
+</script>

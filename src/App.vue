@@ -10,12 +10,16 @@ import CollectionToolbar from './components/CollectionToolbar.vue';
 import PaginationSection from './components/PaginationSection.vue';
 import SectionFooter from './components/SectionFooter.vue';
 import ProductFilterSidebar from './components/ProductFilterSidebar.vue';
+import SearchBar from './components/SearchBar.vue';
+import WhatsappRedirect from './components/WhatsappRedirect.vue';
+import ProductCounter from './components/ProductCounter.vue';
 
 </script>
 
 <template>
   <AnnouncementCarousel />
   <HeaderBar />
+  <SearchBar />
   <CollectionBanner />
   <TopCarousel />
   <ExpressBanner />
@@ -37,6 +41,8 @@ import ProductFilterSidebar from './components/ProductFilterSidebar.vue';
   <SectionFooter />
 
   <ProductFilterSidebar />
+  <ProductCounter />
+  <WhatsappRedirect />
   
 </template>
 
