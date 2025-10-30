@@ -89,7 +89,7 @@ export default defineComponent({
   data() {
     return {
       isLoading: true as boolean,
-      searchValue: 'men' as string,
+      searchValue: 'mens kurta' as string,
       searchResult: { result: [] } as any,
       intialResult: null as any,
       isSearchEnable: false as boolean,
@@ -99,23 +99,7 @@ export default defineComponent({
     };
   },
   async mounted(){
-    try {
-      this.isLoading = true;
-      console.log("Componenet Mounted. Started searching");
-      const result = await searchClient.search(this.searchValue, collectionId);
-
-      const safeResult = result ||  null; 
-      
-      this.searchResult = safeResult;
-      this.intialResult = safeResult; // caching initial load
-      console.log(JSON.stringify(safeResult, null, 2));
-    } catch (error){
-      console.log("Search failed:", error);
-
-      this.searchResult =  null; 
-    }finally {
-      this.isLoading = false;
-    }
+    this.searchOperation(this.searchValue, collectionId);
   },
   methods: {
     closeSearchBar(){
@@ -147,60 +131,26 @@ export default defineComponent({
          document.body.classList.add('overflow-hidden');
       }
     },
-    async applySort(sortValue: string){
-        this.currSort = sortValue;
-        await this.searchProducts(this.searchValue);
-        this.toggleSortState();
-    },
-
-    async searchProducts(newSearchValue: string, isInitialLoad = false) {
-      this.searchValue = newSearchValue;
-      let sortKeyToUse = this.currSort; 
-
-    if (!newSearchValue.trim()) {
-        console.log("Empty Search String: Setting sort to bestseller");
-        sortKeyToUse = 'manual'
-        this.searchValue = 'men'; 
-    }
-
-      this.isLoading = true;
-      if(!isInitialLoad){
-        this.searchResult =  null; // clear previous result
-      }
-      
-      let currentSearchClient = searchClient;
-
+    async searchOperation(searchVal: string, collectionId: string){
       try {
-          console.log(`Searching for: "${this.searchValue}" with sort: "{this.currSort}"`);
+          this.isLoading = true;
+          console.log("Search Operation");
+          const result = await searchClient.search(searchVal, collectionId);
 
-          switch (this.currSort) {
-            case 'price-ascending':
-              currentSearchClient = currentSearchClient.sort('price');
-              break;
-            case 'price-descending':
-              currentSearchClient = currentSearchClient.sort('-price');
-              break;
-            case 'created-descending':
-              currentSearchClient = currentSearchClient.sort('-created');
-              break;
-          }
-
-          const result = await currentSearchClient.search(this.searchValue, collectionId);
-          this.searchResult = result;
-          
-          if (isInitialLoad) {
-            this.intialResult = result;
-          }
-
-          
-      } catch (error) {
+          const safeResult = result ||  null; 
+            
+          this.searchResult = safeResult;
+          console.log(JSON.stringify(safeResult, null, 2));
+        } catch (error){
           console.log("Search failed:", error);
-          this.searchResult =  null;
-          } finally {
-          this.isLoading = false;
-      }
-    }
+          this.searchResult =  null; 
 
+        }finally {
+          this.isLoading = false;
+
+        }
+    }
+    
   }
 })
 

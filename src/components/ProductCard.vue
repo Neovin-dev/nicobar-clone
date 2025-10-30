@@ -99,7 +99,7 @@ export default defineComponent({
 
   computed: {
     formattedPrice(): string {
-      return this.productData.variants[0].price; 
+      return this.productData.price; 
     },
     
     currentImage(): { id: number, src: string } {
