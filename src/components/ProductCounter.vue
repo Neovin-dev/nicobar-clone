@@ -1,5 +1,5 @@
 <template>
-<div class="back-to-top-wrapper fixed bottom-22.5 right-22.5 bg-white px-4 py-2 text-[12px] rounded-full shadow-[0_2px_4px_#00000029]">
+<div @click="backToTopFn" v-if="visibility" class="back-to-top-wrapper fixed bottom-22.5 right-22.5 bg-white px-4 py-2 text-[12px] rounded-full shadow-[0_2px_4px_#00000029] cursor-pointer">
     <div class="product-count-backtotop flex">
         <span class="view-count">
             21
@@ -18,6 +18,36 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+    name: 'ProductCounter',
+    data() {
+        return {
+            visibility: false as boolean,
+        }
+    },
+    mounted(){
+        window.addEventListener('scroll', this.visibilityBTT);
+        this.visibilityBTT();
+    },
+    unmounted(){
+        window.removeEventListener('scroll', this.visibilityBTT);
+    },
+    methods: {
+        backToTopFn(){
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+            });
+        },
+        visibilityBTT(){
+            const currentScollPosition = window.scrollY;
+            if(currentScollPosition >= 500){
+                this.visibility = true;
+            }else {
+                this.visibility = false;
+            }
+        }
+    }
 
 })
 </script>

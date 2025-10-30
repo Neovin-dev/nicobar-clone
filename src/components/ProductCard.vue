@@ -1,7 +1,7 @@
 <template>
   <div class="cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 flex-[25%]">
     <div class="relative w-full aspect-3/4 bg-gray-100 group">
-        <span class="absolute top-3 bg-white text-xs font-semibold px-2 py-1 z-10">
+        <span class="absolute top-3 bg-white text-xs font-semibold px-2 py-1 z-1">
           New
         </span>
         <img 

@@ -1,5 +1,5 @@
 <template>
-<header id="section-header" class="flex w-full">
+<header id="section-header" class="flex w-full sticky top-0 bg-white z-2">
 
     <!-- Header element starts -->
     <div class="Header-Wrapper">
@@ -159,7 +159,6 @@
     </div>
     <!-- Header element ends -->
 
-
 </header>
 </template>
 
@@ -179,11 +178,7 @@ export default defineComponent ({
 }
 .Header-Wrapper {
     width: 100%;
-    /* border: 2px solid black; */
-    /* background-color: red; */
 }
-
-
 
 .logo a svg{
     height: 20px;

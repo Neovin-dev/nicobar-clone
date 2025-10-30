@@ -1,15 +1,15 @@
 <template>
-  <div class="hidden">
-    <div class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 "></div>
+  <div>
+    <div class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10 " @click="closeFilterBar"></div>
 
-      <div class="product-filter-sidebar absolute top-0 right-0 h-full bg-white h-100% w-[375px] px-5 py-7.5">
+      <div class="product-filter-sidebar fixed top-0 right-0 h-screen bg-white w-[375px] px-5 py-7.5 z-11">
         <div class="filter-bar-header mb-1.75 text-[14px] uppercase text-[#5b6670] font-medium ml-[-3px]">
           Express Delivery
         </div>
         <div class="filter-desc font-light text-[11px] mb-3.75 pb-3 ml-[-3px]">
           Enter your PIN Code 
         </div>
-        <div class=" overflow-y-auto h-120">
+        <div class=" overflow-y-auto h-150">
           <div>
             <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
               <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">+</div>
@@ -463,13 +463,13 @@
         </div>
       
 
-      <div class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 px-5 pr-10">
+      <div class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 px-5 pr-10 bg-white">
         <div class="footer-selector flex gap-2">
           <p class="total-selected-filters"><span class="active-count">1</span> filters selected</p>
           <button class="clear-all-filters-btn text-left">Clear filters</button>
         </div>
         <div class="flex flex-[100%]">
-          <button class="close-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
+          <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
           <button class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">See items</button>
         </div>
       </div>
@@ -483,7 +483,13 @@ import { defineComponent } from "vue";
 
 
 export default defineComponent ({
-    name: 'ProductFilterSidebar'
+    name: 'ProductFilterSidebar',
+    emits: ['close-filter-bar'],
+    methods: {
+      closeFilterBar(){
+        this.$emit('close-filter-bar')
+      }
+    }
 })
 </script>
 

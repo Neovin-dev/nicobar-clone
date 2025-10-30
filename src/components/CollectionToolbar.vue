@@ -1,28 +1,47 @@
 <template>
-<div class="collectionToolbar my-0.5 mx-10 flex justify-between mt-8">
+<div class="collectionToolbar py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 w-full">
     <div class="collectionToobarView flex flex-row py-5">
-        <button aria-label="Show four products per row" class="CollectionToolbar__LayoutType is-active h-5 w-5 flex justify-center align-middle" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh"><svg class="Icon Icon--wall-2" role="presentation">
-        <g id="grid4" transform="translate(-73 -520)">
-          <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#1c1b1b"></rect>
-          <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#1c1b1b"></rect>
-          <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#1c1b1b"></rect>
-          <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#1c1b1b"></rect>
-        </g>
-      </svg></button>
+      <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
+        <svg v-if="gridView === 'four'" class="Icon Icon--wall-2" role="presentation">
+          <g id="grid4" transform="translate(-73 -520)">
 
-      <button aria-label="Show two products per row" class="CollectionToolbar__LayoutType h-5 w-5 flex justify-center align-middle" data-action="change-layout-mode" data-grid-type="desktop" data-count="2" fdprocessedid="vbsbq8"><svg class="Icon Icon--wall-4 h-5 w-5" role="presentation">
-        <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
-          <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#bcbcbc"></rect>
-          <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#bcbcbc"></rect>
-        </g>
-      </svg></button>
+            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#1c1b1b"></rect>
+            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#1c1b1b"></rect>
+            <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#1c1b1b"></rect>
+            <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#1c1b1b"></rect>
+          </g>
+        </svg>
+        <svg v-else class="Icon Icon--wall-2" role="presentation">
+          <g id="grid4" transform="translate(-73 -520)">
+            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#bcbcbc"></rect>
+            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#bcbcbc"></rect>
+            <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#bcbcbc"></rect>
+            <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#bcbcbc"></rect>
+          </g>
+        </svg>
+      </button>
+
+      <button @click="gridChangertwo" aria-label="Show two products per row" class="CollectionToolbar-layout-two h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="2" fdprocessedid="vbsbq8">
+        <svg v-if="gridView === 'two'" class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+          <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#1c1b1b"></rect>
+            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#1c1b1b"></rect>
+          </g>
+        </svg>
+          <svg v-else class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+          <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#bcbcbc"></rect>
+            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#bcbcbc"></rect>
+          </g>
+        </svg>
+      </button>
       <span class="productCount text-[12px] text-[#9ea5ad] pl-2">
         371 Items
       </span>
     </div>
     <div class="collectionToolbarFilterSort flex h-10 align-middle">
       <div class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative">
-        <div class="sort-by-select-header flex text-center text-[10px]">
+        <div @click="sortState" class="sort-by-select-header flex text-center text-[10px] cursor-pointer">
             <span class="title-text text-[#9ea5ad]">
               Sort by:
             </span>
@@ -33,7 +52,7 @@
               <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide h-1 w-2 "><path xmlns="http://www.w3.org/2000/svg" id="down-arrow" d="M990.5,3700.5l3-3,3,3" transform="translate(997.208 3701.207) rotate(180)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path></svg>
             </div>
         </div>
-        <ul @click="handleSort" class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-20 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10 hidden">
+        <ul v-if="sortVisible" @click="handleSort" class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10">
               <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="3" data-value="created-descending"><span>What’s New</span></li>
               <li value="manual" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="0" data-value="manual"><span>Featured</span></li>
               <li value="price-ascending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid" data-index="1" data-value="price-ascending"><span>Price - low to high</span></li>
@@ -41,8 +60,8 @@
         </ul>
       
       </div>
-      <div class="filter-container flex ml-2.5">
-        <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">
+      <div class="filter-container flex ml-2.5 " @click="filterState" >
+        <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] cursor-pointer">
         <svg class="h-3 w-3 mr-2" xmlns="http://www.w3.org/2000/svg" width="13" height="12.294" viewBox="0 0 13 12.294">
           <g id="filters" transform="translate(0.5 0.5)">
             <g id="Group_1435" data-name="Group 1435">
@@ -68,11 +87,21 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
-
+type GridView = 'two' | 'four';
 export default defineComponent ({
     name: 'CollectionToolbar',
-    emits: ['handle-sort'],
+    data(): {gridView : GridView} {
+      return {
+        gridView: 'four',
+      };
+    },
+    emits: ['handle-sort', 'filter-state', 'sort-state'],
+    props: {
+      sortVisible: {
+        type: Boolean,
+        required: true,
+      }
+    },
     methods: {
       handleSort(event: Event){
         const targetli = (event.target as HTMLElement).closest('li');
@@ -80,6 +109,18 @@ export default defineComponent ({
           const selectedValue = targetli.getAttribute('value');
           this.$emit('handle-sort', selectedValue);
         }
+      },
+      gridChangerfour(){
+        this.gridView = 'four';
+      },
+      gridChangertwo(){
+        this.gridView = 'two';
+      },
+      filterState() {
+        this.$emit('filter-state')
+      },
+      sortState(){
+        this.$emit('sort-state')
       }
     }
 })
