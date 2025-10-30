@@ -1,37 +1,35 @@
 <template>
   <div class="cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 flex-[25%]">
     <div class="relative w-full aspect-3/4 bg-gray-100 group">
-      <span class="absolute top-3 bg-white text-xs font-semibold px-2 py-1 z-10">
-        New
-      </span>
-        <Transition :name="transitionDirection" mode="out-in">
-            <img 
-                :key="currentImage.id" 
-                :src="currentImage.src" 
-                :alt="productData.title" 
-                class="absolute top-0 left-0 w-full h-full object-cover"
-            >
-        </Transition>
-            <button 
+        <span class="absolute top-3 bg-white text-xs font-semibold px-2 py-1 z-10">
+          New
+        </span>
+        <img 
+            :key="currentImage.id" 
+            :src="currentImage.src" 
+            :alt="productData.title" 
+            class="absolute top-0 left-0 w-full h-full object-cover"
+        >
+        <button 
         @click="nextImage(-1)" 
-        class="absolute left-2 top-1/2 -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none"
-      >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-      </button>
+        class="absolute left-2 top-1/2 -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button 
+          @click="nextImage(1)" 
+          class="absolute right-2 top-1/2 -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
 
-      <button 
-        @click="nextImage(1)" 
-        class="absolute right-2 top-1/2 -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none"
-      >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-      </button>
     </div>
 
 
     <div class="p-4">
         <div class="flex justify-between pb-2">
-            <span class="inline-block border border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
-                            {{ productData.material[0].toUpperCase() }} 
+          <span class="inline-block border border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
+              {{ productData.material[0].toUpperCase() }} 
           </span>
           <div class="flex"> 
                         <button class="text-gray-500 mr-2">
@@ -71,14 +69,11 @@
       </p>
 
       <div class="flex space-x-2 mt-3">
-                <button 
+        <button 
           v-for="color in getColors" 
           :key="color"
           :style="{ backgroundColor: color }" 
-          :class="[
-            'w-3.5 h-3.5 rounded-full border border-gray-300', 
-            
-          ]"
+          :class="['w-3.5 h-3.5 rounded-full border border-gray-300',]"
         ></button>
       </div>
     </div>
@@ -98,14 +93,13 @@ export default defineComponent({
   },
   data() {
     return {
-      transitionDirection: 'slide-right',
       imageIndex: 0 as number, 
     };
   },
 
   computed: {
     formattedPrice(): string {
-      return this.productData.price; 
+      return this.productData.variants[0].price; 
     },
     
     currentImage(): { id: number, src: string } {
@@ -113,12 +107,12 @@ export default defineComponent({
     },
 
     getSizes(): string[] {
-      const sizeOption = this.productData.options.find((opt: any) => opt.name === 'Size');
+      const sizeOption = this.productData.options.find((option: any) => option.name === 'Size');
       return sizeOption ? sizeOption.values : [];
     },
 
     getColors(): string[] {
-      const colorOption = this.productData.options.find((opt: any) => opt.name === 'Color');
+      const colorOption = this.productData.options.find((option: any) => option.name === 'Color');
       return colorOption ? colorOption.values : [];
     }
   },
@@ -127,12 +121,6 @@ export default defineComponent({
     nextImage(step: number) {
       const numImages = this.productData.images.length; 
       let newIndex = this.imageIndex + step;
-
-      if (step > 0) {
-        this.transitionDirection = 'slide-right';
-      } else { 
-        this.transitionDirection = 'slide-left';
-      }
 
       if (newIndex >= numImages) {
         newIndex = 0;
@@ -145,47 +133,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: all 300ms ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.slide-right-enter-from {
-  transform: translateX(100%);
-}
-
-.slide-right-leave-to {
-  transform: translateX(-100%);
-}
-
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: all 300ms ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.slide-left-enter-from {
-  transform: translateX(-100%);
-}
-
-.slide-left-leave-to {
-  transform: translateX(100%);
-}
-
-.slide-right-enter-to,
-.slide-right-leave-from,
-.slide-left-enter-to,
-.slide-left-leave-from {
-  transform: translateX(0);
-}
-</style>
