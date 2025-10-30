@@ -15,7 +15,7 @@
       <ProductCardBanner />
       
   </div>
-  <CollectionToolbar />
+  <CollectionToolbar @handle-sort="applySort" />
   <div class="card-container flex flex-[100%] flex-wrap">
     <div class="loading-overlay" v-if="isLoading">Loading Products...</div>
     
@@ -26,7 +26,7 @@
         :product-data="product"
     />
 
-    <div class="no-results w-full" v-else-if="!isLoading">
+    <div class="no-results w-full" v-else-if="!isLoading && searchResult.results.length === 0">
       <div class="container flex-col items-center flex justify-center">
         <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
         <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span>for "{{ searchValue }}"</span></h2> 
@@ -48,7 +48,7 @@
   
 </template>
 
-<script lang="ts">
+<!-- <script lang="ts">
 
 // Imports
 import SearchClient from "@gaspl/search-client"
@@ -87,9 +87,10 @@ export default defineComponent({
     return {
       isLoading: true as boolean,
       searchValue: 'men' as string,
-      searchResult: null as any,
+      searchResult: { results: [] } as any,
+      intialResult: null as any,
       isSearchEnable: false as boolean,
-
+      currSort: 'manual' as string,
     };
   },
   async mounted(){
@@ -98,6 +99,7 @@ export default defineComponent({
       console.log("Componenet Mounted. Started searching");
       const result = await searchClient.search(this.searchValue, collectionId);
       this.searchResult = result;
+      this.intialResult = result; // caching initial load
       console.log(JSON.stringify(result, null, 2));
     } catch (error){
       console.log("Search failed:", error);
@@ -116,17 +118,55 @@ export default defineComponent({
         this.isSearchEnable = true;
       }
     },
-    async searchProducts(newSearchValue: string) {
-    this.isLoading = true;
-    this.searchResult = null;
+    async applySort(sortValue: string){
+        this.currSort = sortValue;
+        await this.searchProducts(this.searchValue)
+    },
+
+    async searchProducts(newSearchValue: string, isInitialLoad = false) {
     this.searchValue = newSearchValue;
 
+    if(!newSearchValue.trim()){
+      console.log("Empty Search String");
+      this.searchResult = this.intialResult;
+      this.isLoading = false;
+      return; // Exit early
+    }
+
+    this.isLoading = true;
+    if(!isInitialLoad){
+      this.searchResult = { results: [] }; // clear previous result
+    }
+    
+
     try {
-        console.log(`Searching for: ${this.searchValue}`);
-        const result = await searchClient.search(this.searchValue, collectionId);
+        console.log(`Searching for: "${this.searchValue}" with sort: "{this.currSort}"`);
+
+        let searchRequest = searchClient;
+
+        switch (this.currSort) {
+          case 'price-ascending':
+            searchRequest = searchRequest.sort('price');
+            break;
+          case 'price-descending':
+            searchRequest = searchRequest.sort('-price');
+            break;
+          case 'created-descending':
+            searchRequest = searchRequest.sort('-created');
+            break;
+        }
+
+        const result = await searchRequest.search(this.searchValue, collectionId);
         this.searchResult = result;
+        
+        if (isInitialLoad) {
+          this.intialResult = result;
+        }
+
+        
     } catch (error) {
         console.log("Search failed:", error);
+        this.searchResult = { results: [] };
         } finally {
         this.isLoading = false;
       }
@@ -135,8 +175,107 @@ export default defineComponent({
   }
 })
 
+</script> -->
+
+<script lang="ts">
+// Imports
+import SearchClient from "@gaspl/search-client"
+import { defineComponent } from "vue";
+
+// Working NICOBAR TOKENS
+const searchToken = import.meta.env.VITE_NICOBAR_SEARCH_TOKEN as string;
+const applicationId =import.meta.env.VITE_NICOBAR_APPLICATION_ID as string;
+const collectionId =import.meta.env.VITE_NICOBAR_COLLECTION_ID as string;
+
+// REMOVE CLIENT INITIALIZATION FROM HERE
+// var searchClient = new SearchClient(applicationId, searchToken);
+
+// ... All Component Imports ...
+
+export default defineComponent({
+  components: {
+    // ... all your components
+  },
+  data() {
+    return {
+      isLoading: true as boolean,
+      searchValue: 'men' as string,
+      searchResult: { results: [] } as any, // <-- SAFE INITIALIZATION
+      intialResult: null as any,
+      isSearchEnable: false as boolean,
+      currSort: 'manual' as string,
+    };
+  },
+  async mounted(){
+    // Just call searchProducts on mount
+    await this.searchProducts(this.searchValue, true); 
+  },
+  methods: {
+    closeSearchBar(){
+      this.isSearchEnable = false;
+    },
+    enableSearchBar(){
+      if(this.isSearchEnable === true){
+        this.isSearchEnable = false;
+      } else {
+        this.isSearchEnable = true;
+      }
+    },
+    
+    // FIX 4: Renamed 'appySort' to 'applySort' to match template
+    async applySort(sortValue: string){ 
+        this.currSort = sortValue;
+        await this.searchProducts(this.searchValue)
+    },
+
+    async searchProducts(newSearchValue: string, isInitialLoad = false) {
+      this.searchValue = newSearchValue;
+
+      if(!newSearchValue.trim()){
+        console.log("Empty Search String");
+        this.searchResult = this.intialResult;
+        this.isLoading = false;
+        return; // Exit early
+      }
+
+      this.isLoading = true;
+      if(!isInitialLoad){
+        this.searchResult = { results: [] }; // <-- SAFE RESET
+      }
+      
+      try {
+          // FIX 5: Corrected console.log typo
+          console.log(`Searching for: "${this.searchValue}" with sort: "${this.currSort}"`);
+
+          // FIX 6: Create a NEW, CLEAN client for every request
+          let searchRequest = new SearchClient(applicationId, searchToken);
+
+          switch (this.currSort) {
+            case 'price-ascending':
+              searchRequest = searchRequest.sort('price');
+              break;
+            case 'price-descending':
+              searchRequest = searchRequest.sort('-price');
+              break;
+            case 'created-descending':
+              searchRequest = searchRequest.sort('-created');
+              break;
+          }
+
+          const result = await searchRequest.search(this.searchValue, collectionId);
+          this.searchResult = result;
+          
+          if (isInitialLoad) {
+            this.intialResult = result;
+          }
+      
+      } catch (error) {
+          console.log("Search failed:", error);
+          this.searchResult = { results: [] }; // <-- SAFE CATCH
+      } finally {
+          this.isLoading = false;
+      }
+    }
+  }
+})
 </script>
-
-<style scoped>
-
-</style>
