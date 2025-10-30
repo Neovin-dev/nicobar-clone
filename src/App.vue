@@ -6,7 +6,7 @@
   <SearchBar 
       v-if="isSearchEnable" 
       @close-search-bar="closeSearchBar"
-      @update-search="searchProducts"
+      @update-search="searchOperation"
   />
   <div v-else>
     <CollectionBanner />
@@ -26,7 +26,7 @@
         :product-data="product"
     />
 
-    <div class="no-results w-full" v-else-if="!isLoading && searchResult.results.length === 0">
+    <div class="no-results w-full" v-else-if="isEmpty">
       <div class="container flex-col items-center flex justify-center">
         <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
         <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span>for "{{ searchValue }}"</span></h2> 
@@ -44,7 +44,7 @@
 
   <div>
 
-    <ProductFilterSidebar v-if="isFilterSidebar" @close-filter-bar="toggleVisibility"/>
+    <ProductFilterSidebar v-if="isFilterSidebar" @close-filter-bar="toggleVisibility" :filter-data="searchFilter"/>
   </div>
   
   <ProductCounter />
@@ -88,18 +88,50 @@ export default defineComponent({
   },
   data() {
     return {
+      currentCollectionId: collectionId as string,
       isLoading: true as boolean,
       searchValue: 'mens kurta' as string,
-      searchResult: { result: [] } as any,
+      searchFilter: { result: {} } as any,
+      searchResult: { result: {} } as any,
       intialResult: null as any,
       isSearchEnable: false as boolean,
       currSort: 'manual' as string,
       isFilterSidebar: false,
       isSortVisible: false,
+      isEmpty: false,
+      searchFields: ["title",
+                    "id",
+                    "isActive",
+                    "image",
+                    "images",                 
+                    "discounted_price",                 
+                    "collections",
+                    "st_express_delivery",
+                    "price",
+                    "discount",
+                    "handle",
+                    "hasMultiplePrice",
+                    "variants",
+                    "vendor",
+                    "size",
+                    "tags",
+                    "voyagerAbsoluteDiscount",
+                    "st_sale_discount",
+                    "meta_subclass",
+                    "st_tags",
+                    "material",
+                    "meta_collection",
+                    "color",
+                    "st_sub_category",
+                    "st_category",
+                    "product_type",
+                    "searchtap_subcategory",
+                    "st_color",
+                    "options"]
     };
   },
   async mounted(){
-    this.searchOperation(this.searchValue, collectionId);
+    this.searchOperation(this.searchValue);
   },
   methods: {
     closeSearchBar(){
@@ -131,15 +163,70 @@ export default defineComponent({
          document.body.classList.add('overflow-hidden');
       }
     },
-    async searchOperation(searchVal: string, collectionId: string){
+    async searchOperation(searchVal: string){
       try {
           this.isLoading = true;
           console.log("Search Operation");
-          const result = await searchClient.search(searchVal, collectionId);
+          const result = await searchClient
+                                    .count(336)
+                                    .fields(
+                                      ...this.searchFields)
+                                    .textFacets(
+                                      "stCollectionCategory",
+                                      "size",
+                                      "st_category",
+                                      "st_color",
+                                      "st_material",
+                                      "st_sub_category",
+                                      "st_by_pattern",
+                                      "st_bottomwear_fit",
+                                      "st_sleeve",
+                                      "st_ocassion",
+                                      "st_topwear_fit",
+                                      "meta_length")
+                                      .facetCount(99)
+                                    .sort(
+                                      "-isActive", 
+                                      "all_products_search_position", 
+                                      "-_rank")
+                                      .numericFacets("discount", [
+                                          { min: 10, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 20, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 30, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 40, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 50, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 60, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 70, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 80, max: 100, minInclusive: true, maxInclusive: false },
+                                          { min: 90, max: 100, minInclusive: true, maxInclusive: false },
+                                      ])
+                                      .numericFacets("discounted_price", [
+                                          { min: 0, max: 1000, minInclusive: true, maxInclusive: false },
+                                          { min: 1001, max: 2000, minInclusive: true, maxInclusive: false },
+                                          { min: 2001, max: 3000, minInclusive: true, maxInclusive: false },
+                                          { min: 3001, max: 4000, minInclusive: true, maxInclusive: false },
+                                          { min: 4001, max: 5000, minInclusive: true, maxInclusive: false },
+                                          { min: 5001, max: 10000, minInclusive: true, maxInclusive: false },
+                                          { min: 10001, max: 2000000, minInclusive: true, maxInclusive: false },
+                                      ])
+                                    .searchFields('*')
+                                    .filter("isSearchable = 1 AND isActive = 1 AND discounted_price > 0")
+                                    .search(searchVal, collectionId);              
+
 
           const safeResult = result ||  null; 
             
           this.searchResult = safeResult;
+          if(safeResult){
+            this.searchFilter = safeResult;
+          }
+
+          if(safeResult === 0) {
+            this.isEmpty = true;
+          } else {
+            this.isEmpty = false;
+          }
+          
           console.log(JSON.stringify(safeResult, null, 2));
         } catch (error){
           console.log("Search failed:", error);
@@ -147,7 +234,6 @@ export default defineComponent({
 
         }finally {
           this.isLoading = false;
-
         }
     }
     
