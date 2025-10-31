@@ -1,6 +1,6 @@
 <template>
-  <div class="z-50">
-    <div class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 " @click="closeFilterBar"></div>
+  <div>
+    <div class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10" @click="closeFilterBar"></div>
       <div class="product-filter-sidebar fixed top-0 right-0 h-screen bg-white w-[375px] px-5 py-7.5 z-11">
         <div class="filter-bar-header mb-1.75 text-[14px] uppercase text-[#5b6670] font-medium ml-[-3px]">
           Express Delivery
@@ -9,44 +9,43 @@
           Enter your PIN Code 
         </div>
 
-        <div class="overflow-y-auto h-150" v-if="filterData && filterData.textFacets">
+        <div class="overflow-y-auto h-150" v-if="filterData">
           
-          <div 
-            v-for="(options, categoryKey) in filterData.textFacets" 
-            :key="categoryKey"
-            v-if="options.length > 0" >
-            <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
-              <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">+</div>
-              <h3 class="filter-title uppercase text-[#5b6670] cursor-pointer font-bold text-[14px]">
-                {{ FilterTitleFormatter(categoryKey) }}
-              </h3>
-            </div>
+          <template v-for="(options, categoryKey) in filterData" :key="categoryKey">
+            <div v-if="options.length > 0">
+              <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
+                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">+</div>
+                <h3 class="filter-title uppercase text-[#5b6670] cursor-pointer font-bold text-[14px]">
+                  {{ FilterTitleFormatter(categoryKey) }}
+                </h3>
+              </div>
 
-            <div class="filter-options-list flex">
-              <ul :class="categoryKey === 'size' ? 'size-options flex flex-wrap' : 'default-options-list p-4'">
-                
-                <li 
-                  class="filter-option-item" 
-                  v-for="option in options" 
-                  :key="option.label"
-                >
-                  <label :for="'Filter-' + categoryKey + '-' + option.label" class="facet-checkbox-label text-[10px]">
-                    <input 
-                      type="checkbox" 
-                      :name="'filter.' + categoryKey" 
-                      :value="option.label" 
-                      :id="'Filter-' + categoryKey + '-' + option.label"
-                      class="size-checkbox"
-                      @change="handleFilterChange(categoryKey, option.label, $event)"
-                    >
-                    <span class="filter-item-value pr-2">{{ option.label }}</span>
-                    <span class="filter-item-count">({{ option.value }})</span>
-                  </label>
-                </li>
+              <div class="filter-options-list flex">
+                <ul :class="categoryKey === 'size' ? 'size-options flex flex-wrap' : 'default-options-list p-4'">
+                  
+                  <li 
+                    class="filter-option-item" 
+                    v-for="option in options" 
+                    :key="option.label"
+                  >
+                    <label :for="'Filter-' + categoryKey + '-' + option.label" class="facet-checkbox-label text-[10px]">
+                      <input 
+                        type="checkbox" 
+                        :name="'filter.' + categoryKey" 
+                        :value="option.label" 
+                        :id="'Filter-' + categoryKey + '-' + option.label"
+                        class="size-checkbox"
+                        @change="handleFilterChange(categoryKey, option.label, $event)"
+                      >
+                      <span class="filter-item-value pr-2">{{ option.label }}</span>
+                      <span class="filter-item-count">({{ option.value }})</span>
+                    </label>
+                  </li>
 
-              </ul>
+                </ul>
+              </div>
             </div>
-          </div>
+          </template>
         </div>
         <div class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 px-5 pr-10 bg-white">
           <div class="footer-selector flex gap-2 pb-2">
@@ -76,15 +75,15 @@ export default defineComponent ({
     data() {
       return {
           selectedFilters: {} as Record<string, string[]>
-          }
-        },
+        }
+      },
     emits: ['close-filter-bar', 'apply-filters'],
     methods: {
       closeFilterBar(){
         this.$emit('close-filter-bar')
       },
       FilterTitleFormatter(key: string): string {
-
+        console.log(this.filterData);
         if (key === 'size') return 'Size';
         if (key === 'st_color') return 'Color';
         if (key === 'meta_length') return 'Length';
@@ -94,8 +93,10 @@ export default defineComponent ({
         if (key === 'st_by_pattern') return 'Pattern';
         if (key === 'st_sleeve') return 'Sleeve';
         if (key === 'st_topwear_fit') return 'Top Fit';
+        // FIX 2: Removed the extra 'S' from '==='
         if (key === 'st_bottomwear_fit') return 'Bottom Fit';
         if (key === 'st_category') return 'Category';
+        // Fallback for any other keys
         return key
           .replace('st_', '')
           .split('_')
@@ -147,7 +148,7 @@ label {
   display: inline-flex;
 }
 
- label > input[type="checkbox"]::before {
+  label > input[type="checkbox"]::before {
   content: '';
   position: absolute;
   top: 50%;

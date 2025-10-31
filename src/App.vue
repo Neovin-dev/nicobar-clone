@@ -15,7 +15,12 @@
       <ProductCardBanner />
   </div>
 
-  <CollectionToolbar @filter-state="toggleVisibility" :sort-visible="isSortVisible" @sort-state="toggleSortState"/>
+  <CollectionToolbar
+          @filter-state="toggleVisibility"
+          :sort-visible="isSortVisible" 
+          @sort-state="toggleSortState"
+  />
+
   <div class="card-container flex flex-[100%] flex-wrap">
     <div class="loading-overlay" v-if="isLoading">Loading Products...</div>
     
@@ -43,12 +48,10 @@
   <SectionFooter />
 
   <div>
-
     <ProductFilterSidebar 
-        v-if="isFilterSidebar" 
+        v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
-        @apply-filters="runFilteredSearch"
     />
   </div>
   
@@ -101,7 +104,7 @@ export default defineComponent({
       intialResult: null as any,
       isSearchEnable: false as boolean,
       currSort: 'manual' as string,
-      isFilterSidebar: false,
+      isFilterSidebar: true,
       isSortVisible: false,
       isEmpty: false,
       searchFields: ["title",
@@ -158,14 +161,16 @@ export default defineComponent({
     },
     toggleVisibility(){
       if(this.isFilterSidebar){
-          this.isFilterSidebar = false;
-          if(document.body.classList.contains('overflow-hidden')){
-            document.body.classList.remove('overflow-hidden');
+        this.isFilterSidebar = false;
+        if(document.body.classList.contains('overflow-hidden')){
+            document.body.classList.remove('overflow-hidden'); 
           }
-          
       } else {
+        console.log('button clicked to toggle on')
          this.isFilterSidebar = true;
-         document.body.classList.add('overflow-hidden');
+         if(!document.body.classList.contains('overflow-hidden')){
+            document.body.classList.add('overflow-hidden'); 
+          }
       }
     },
     async searchOperation(searchVal: string){
@@ -223,7 +228,7 @@ export default defineComponent({
             
           this.searchResult = safeResult;
           if(safeResult){
-            this.searchFilter = safeResult;
+            this.searchFilter = safeResult.textFacets;
           }
 
           if(safeResult === 0) {

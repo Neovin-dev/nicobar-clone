@@ -118,6 +118,7 @@ export default defineComponent ({
       },
       filterState() {
         this.$emit('filter-state')
+        console.log('filter-state-triggered');
       },
       sortState(){
         this.$emit('sort-state')
