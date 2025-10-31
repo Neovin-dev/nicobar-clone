@@ -11,33 +11,34 @@
 
         <div class="overflow-y-auto h-150" v-if="filterData">
           
-          <template v-for="(options, categoryKey) in filterData" :key="categoryKey">
+          <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 0">
-              <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
-                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">+</div>
-                <h3 class="filter-title uppercase text-[#5b6670] cursor-pointer font-bold text-[14px]">
-                  {{ FilterTitleFormatter(categoryKey) }}
+              <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
+                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
+                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
+                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">{{ categoryToggleState[categoryName] ? '-' : '+' }}</div>
+                <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
+                  {{ FilterTitleFormatter(categoryName) }}
                 </h3>
               </div>
 
               <div class="filter-options-list flex">
-                <ul :class="categoryKey === 'size' ? 'size-options flex flex-wrap' : 'default-options-list p-4'">
-                  
+                <ul v-if="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4' : 'default-options-list p-4 w-100'">
                   <li 
                     class="filter-option-item" 
                     v-for="option in options" 
                     :key="option.label"
                   >
-                    <label :for="'Filter-' + categoryKey + '-' + option.label" class="facet-checkbox-label text-[10px]">
+                    <label :for="'Filter-' + categoryName + '-' + option.label" class="facet-checkbox-label text-[12px]">
                       <input 
                         type="checkbox" 
-                        :name="'filter.' + categoryKey" 
+                        :name="'filter.' + categoryName" 
                         :value="option.label" 
-                        :id="'Filter-' + categoryKey + '-' + option.label"
+                        :id="'Filter-' + categoryName + '-' + option.label"
                         class="size-checkbox"
-                        @change="handleFilterChange(categoryKey, option.label, $event)"
+                        @change="handleFilterChange(categoryName, option.label, $event)"
                       >
-                      <span class="filter-item-value pr-2">{{ option.label }}</span>
+                      <span class="filter-item-value pr-2 flex">{{ option.label }}</span>
                       <span class="filter-item-count">({{ option.value }})</span>
                     </label>
                   </li>
@@ -49,8 +50,8 @@
         </div>
         <div class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 px-5 pr-10 bg-white">
           <div class="footer-selector flex gap-2 pb-2">
-            <p class="total-selected-filters text-sm"><span class="active-count">1</span> filters selected</p>
-            <button class="clear-all-filters-btn text-left text-sm text-amber-200">Clear filters</button>
+            <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
+            <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%]">
             <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
@@ -74,7 +75,9 @@ export default defineComponent ({
     },
     data() {
       return {
-          selectedFilters: {} as Record<string, string[]>
+          selectedFilters: {} as Record<string, string[]>,
+          filterSelectedCount: 0 as Number,
+          categoryToggleState: {} as Record<string, boolean>,
         }
       },
     emits: ['close-filter-bar', 'apply-filters'],
@@ -93,35 +96,44 @@ export default defineComponent ({
         if (key === 'st_by_pattern') return 'Pattern';
         if (key === 'st_sleeve') return 'Sleeve';
         if (key === 'st_topwear_fit') return 'Top Fit';
-        // FIX 2: Removed the extra 'S' from '==='
         if (key === 'st_bottomwear_fit') return 'Bottom Fit';
         if (key === 'st_category') return 'Category';
-        // Fallback for any other keys
         return key
           .replace('st_', '')
           .split('_')
           .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ');
       },
-      handleFilterChange(categoryKey: string, optionLabel: string, event: Event) {
+      handleFilterChange(categoryName: string, optionLabel: string, event: Event) {
         const isChecked = (event.target as HTMLInputElement).checked;
 
-        if (!this.selectedFilters[categoryKey]) {
-          this.selectedFilters[categoryKey] = [];
+        if (!this.selectedFilters[categoryName]) {
+          this.selectedFilters[categoryName] = [];
         }
         
         if (isChecked) {
-          this.selectedFilters[categoryKey].push(optionLabel);
+          this.selectedFilters[categoryName].push(optionLabel);
         } else {
-          const index = this.selectedFilters[categoryKey].indexOf(optionLabel);
+          const index = this.selectedFilters[categoryName].indexOf(optionLabel);
           if (index > -1) {
-            this.selectedFilters[categoryKey].splice(index, 1);
+            this.selectedFilters[categoryName].splice(index, 1);
           }
         }
       },
       applyFilters() {
         this.$emit('apply-filters', this.selectedFilters);
-      }
+      },
+      toggleOptions(categoryName: string){
+        this.categoryToggleState[categoryName] = !this.categoryToggleState[categoryName]
+      },
+      clearFiltersHelper(){
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]')
+        allCheckboxes.forEach(element => {
+          const checkbox = element as HTMLInputElement;
+          checkbox.checked = false;
+        });
+        this.selectedFilters = {};
+      },
     },
 })
 </script>

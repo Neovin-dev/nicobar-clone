@@ -104,7 +104,7 @@ export default defineComponent({
       intialResult: null as any,
       isSearchEnable: false as boolean,
       currSort: 'manual' as string,
-      isFilterSidebar: true,
+      isFilterSidebar: false,
       isSortVisible: false,
       isEmpty: false,
       searchFields: ["title",

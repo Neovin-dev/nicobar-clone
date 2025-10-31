@@ -46,17 +46,17 @@
               Sort by:
             </span>
             <span class="active-sort-by flex items-center pl-1 font-bold">
-              <span>Featured</span>
+              <span>{{ ActiveSortApplied }}</span>
             </span>
             <div class="chevron-down-icon pl-2 pt-1.5">
               <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide h-1 w-2 "><path xmlns="http://www.w3.org/2000/svg" id="down-arrow" d="M990.5,3700.5l3-3,3,3" transform="translate(997.208 3701.207) rotate(180)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path></svg>
             </div>
         </div>
         <ul v-if="sortVisible" @click="handleSort" class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10 cursor-pointer">
-              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"><span>What’s New</span></li>
-              <li value="manual" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="manual"><span>Featured</span></li>
-              <li value="price-ascending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="price-ascending"><span>Price - low to high</span></li>
-              <li value="price-descending" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="price-descending"><span>Price - high to low</span></li>
+              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"><span>Featured</span></li>
+              <li value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"><span>What’s New</span></li>
+              <li value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice"><span>Lowest Price</span></li>
+              <li value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice"><span>Highest Price</span></li>
         </ul>
       
       </div>
@@ -87,12 +87,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 type GridView = 'two' | 'four';
+type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
+
 export default defineComponent ({
     name: 'CollectionToolbar',
-    data(): {gridView : GridView} {
+    data(): {gridView : GridView, ActiveSortApplied : sortOptions} {
       return {
         gridView: 'four',
+        ActiveSortApplied: 'Featured',
       };
     },
     emits: ['handle-sort', 'filter-state', 'sort-state'],
