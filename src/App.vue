@@ -15,7 +15,7 @@
       <ProductCardBanner />
   </div>
 
-  <CollectionToolbar @handle-sort="applySort" @filter-state="toggleVisibility" :sort-visible="isSortVisible" @sort-state="toggleSortState"/>
+  <CollectionToolbar @filter-state="toggleVisibility" :sort-visible="isSortVisible" @sort-state="toggleSortState"/>
   <div class="card-container flex flex-[100%] flex-wrap">
     <div class="loading-overlay" v-if="isLoading">Loading Products...</div>
     
@@ -44,7 +44,12 @@
 
   <div>
 
-    <ProductFilterSidebar v-if="isFilterSidebar" @close-filter-bar="toggleVisibility" :filter-data="searchFilter"/>
+    <ProductFilterSidebar 
+        v-if="isFilterSidebar" 
+        @close-filter-bar="toggleVisibility" 
+        :filter-data="searchFilter"
+        @apply-filters="runFilteredSearch"
+    />
   </div>
   
   <ProductCounter />
