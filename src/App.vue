@@ -11,7 +11,7 @@
   <div v-else>
     <CollectionBanner />
       <TopCarousel />
-      <ExpressBanner />
+      <ExpressBanner @filter-state="toggleVisibility" />
       <ProductCardBanner />
   </div>
 
@@ -19,10 +19,17 @@
           @filter-state="toggleVisibility"
           :sort-visible="isSortVisible" 
           @sort-state="toggleSortState"
+          :display-data="searchResult"
   />
 
   <div class="card-container flex flex-[100%] flex-wrap">
-    <div class="loading-overlay" v-if="isLoading">Loading Products...</div>
+
+  <div class="loading-overlay w-full flex items-center justify-center h-50" v-if="isLoading">
+    <span class="w-full flex items-center justify-center ">
+      <img class="animate-spin w-20 h-20" src="./assets/image.png" alt="">
+    </span>
+    <!-- <span>Loading Products...</span> -->
+  </div>
     
     <ProductCard 
         v-else-if="!isLoading"
@@ -44,7 +51,7 @@
     </div>
   </div>
   
-  <PaginationSection />
+  <!-- <PaginationSection v-if="!isLoading" /> -->
   <SectionFooter />
 
   <div>
@@ -52,6 +59,7 @@
         v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
+        @search-filters-active="editFilters"
     />
   </div>
   
@@ -135,7 +143,8 @@ export default defineComponent({
                     "product_type",
                     "searchtap_subcategory",
                     "st_color",
-                    "options"]
+                    "options"],
+      filterObject: {} as Record<string, string[]>,
     };
   },
   async mounted(){
@@ -173,12 +182,25 @@ export default defineComponent({
           }
       }
     },
+    editFilters(filtersObj: string) {
+      // console.log('filtersObj',filtersObj);
+      // let allFilterValuesString = '' as string;
+      // Object.keys(filtersObj).forEach((category: string) => {
+      //   console.log('Category', category);
+      //   const selectedValues: string[] = filtersObj[category];
+      //   const categoryValuesString = selectedValues.join(', ')
+      //   // allFilterValuesString += `${category}: ${categoryValuesString} | `;
+      //   allFilterValuesString += `${categoryValuesString}, `
+      // })
+      // console.log('allFilterValues', allFilterValuesString);
+      
+    },
     async searchOperation(searchVal: string){
       try {
           this.isLoading = true;
           console.log("Search Operation");
           const result = await searchClient
-                                    .count(336)
+                                    .count(40)
                                     .fields(
                                       ...this.searchFields)
                                     .textFacets(

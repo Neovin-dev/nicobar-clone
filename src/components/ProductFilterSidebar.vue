@@ -10,6 +10,17 @@
         </div>
 
         <div class="overflow-y-auto h-150" v-if="filterData">
+          <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
+                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
+                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
+                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">-</div>
+                <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
+                  Price
+                </h3>
+              </div>
+          <div class="flex  w-[80%] justify-center items-center">
+            <input class="flex items-center justify-center w-full" type="range" name="price-range" id="price-range-val">
+          </div>
           
           <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 0">
@@ -80,13 +91,13 @@ export default defineComponent ({
           categoryToggleState: {} as Record<string, boolean>,
         }
       },
-    emits: ['close-filter-bar', 'apply-filters'],
+    emits: ['close-filter-bar', 'apply-filters', 'search-filters-active'],
     methods: {
       closeFilterBar(){
         this.$emit('close-filter-bar')
       },
       FilterTitleFormatter(key: string): string {
-        console.log(this.filterData);
+        // console.log(this.filterData);
         if (key === 'size') return 'Size';
         if (key === 'st_color') return 'Color';
         if (key === 'meta_length') return 'Length';
@@ -119,6 +130,8 @@ export default defineComponent ({
             this.selectedFilters[categoryName].splice(index, 1);
           }
         }
+        console.log(this.selectedFilters);
+        this.$emit('search-filters-active' ,this.selectedFilters)
       },
       applyFilters() {
         this.$emit('apply-filters', this.selectedFilters);
@@ -139,6 +152,7 @@ export default defineComponent ({
 </script>
 
 <style>
+
 /* input[type="checkbox"] {
     padding: 0;
     height: 20px;

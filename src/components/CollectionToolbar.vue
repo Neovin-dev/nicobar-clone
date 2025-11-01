@@ -36,7 +36,7 @@
         </svg>
       </button>
       <span class="productCount text-[12px] text-[#9ea5ad] pl-2">
-        371 Items
+        {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }} Items
       </span>
     </div>
     <div class="collectionToolbarFilterSort flex h-10 align-middle">
@@ -101,6 +101,10 @@ export default defineComponent ({
     },
     emits: ['handle-sort', 'filter-state', 'sort-state'],
     props: {
+      displayData: {
+        type: Object,
+        required: true,
+      },
       sortVisible: {
         type: Boolean,
         required: true,
@@ -116,6 +120,7 @@ export default defineComponent ({
       },
       gridChangerfour(){
         this.gridView = 'four';
+        console.log(this.displayData);
       },
       gridChangertwo(){
         this.gridView = 'two';
