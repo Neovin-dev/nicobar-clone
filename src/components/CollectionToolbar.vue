@@ -81,13 +81,13 @@
             </div>
         </div>
         <ul v-if="sortVisible" @click="handleSort" class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10 cursor-pointer">
-              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
+              <li @click="sortState" value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
               :class="{ 'bg-[#ebedf1] hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Featured' }"
               ><span>Featured</span></li>
-              <li value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
+              <li @click="sortState" value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
               :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'What\'s New' }"><span>What's New</span></li>
-              <li value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Lowest Price' }"><span>Lowest Price</span></li>
-              <li value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Highest Price' }"><span>Highest Price</span></li>
+              <li @click="sortState" value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Lowest Price' }"><span>Lowest Price</span></li>
+              <li @click="sortState" value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Highest Price' }"><span>Highest Price</span></li>
         </ul>
       
       </div>

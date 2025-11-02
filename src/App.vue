@@ -55,12 +55,14 @@
   <SectionFooter />
 
   <div>
+    <transition name="slide-right">
     <ProductFilterSidebar 
         v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
         
     />
+    </transition>
     <!-- @search-filters-active="editFilters" -->
   </div>
   
