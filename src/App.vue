@@ -9,10 +9,7 @@
       @update-search="searchOperation"
   />
   <div v-else>
-    <CollectionBanner />
-      <TopCarousel />
-      <ExpressBanner @filter-state="toggleVisibility" />
-      <ProductCardBanner />
+      <HomePageMenBanner @filter-state="toggleVisibility"/>
   </div>
 
   <CollectionToolbar
@@ -20,6 +17,7 @@
           :sort-visible="isSortVisible" 
           @sort-state="toggleSortState"
           :display-data="searchResult"
+          @grid-changer="updateProductCardWidth"
   />
 
   <div class="card-container flex flex-[100%] flex-wrap">
@@ -36,6 +34,7 @@
         v-for="product in searchResult.results" 
         :key="product.id"
         :product-data="product"
+        :product-card-width="productCardWidth"
     />
 
     <div class="no-results w-full" v-else-if="isEmpty">
@@ -52,6 +51,7 @@
   </div>
   
   <!-- <PaginationSection v-if="!isLoading" /> -->
+   <v-pagination :length="searchResult.totalHits/40"></v-pagination>
   <SectionFooter />
 
   <div>
@@ -59,8 +59,9 @@
         v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
-        @search-filters-active="editFilters"
+        
     />
+    <!-- @search-filters-active="editFilters" -->
   </div>
   
   <ProductCounter />
@@ -83,13 +84,9 @@ const collectionId = import.meta.env.VITE_NICOBAR_COLLECTION_ID as string;
 var searchClient = new SearchClient(applicationId, searchToken);
 
 // Componenet Imports
-import CollectionBanner from './components/CollectionBanner.vue';
 import HeaderBar from './components/HeaderBar.vue';
 import AnnouncementCarousel from './components/AnnouncementCarousel.vue';
 import ProductCard from './components/ProductCard.vue';
-import TopCarousel from './components/TopCarousel.vue';
-import ExpressBanner from './components/ExpressBanner.vue';
-import ProductCardBanner from './components/ProductCardBanner.vue';
 import CollectionToolbar from './components/CollectionToolbar.vue';
 import PaginationSection from './components/PaginationSection.vue';
 import SectionFooter from './components/SectionFooter.vue';
@@ -97,10 +94,11 @@ import ProductFilterSidebar from './components/ProductFilterSidebar.vue';
 import SearchBar from './components/SearchBar.vue';
 import WhatsappRedirect from './components/WhatsappRedirect.vue';
 import ProductCounter from './components/ProductCounter.vue';
+import HomePageMenBanner from "./components/HomePageMenBanner.vue";
 
 export default defineComponent({
   components: {
-    CollectionBanner, HeaderBar, AnnouncementCarousel, ProductCard, TopCarousel, ExpressBanner, ProductCardBanner, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, HomePageMenBanner, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, SearchBar, WhatsappRedirect, ProductCounter
   },
   data() {
     return {
@@ -145,12 +143,17 @@ export default defineComponent({
                     "st_color",
                     "options"],
       filterObject: {} as Record<string, string[]>,
+      productCardWidth: '25%',
     };
   },
   async mounted(){
     this.searchOperation(this.searchValue);
   },
   methods: {
+    updateProductCardWidth(widthPercentage: number){
+      this.productCardWidth = `${widthPercentage}%`;
+      console.log(`Setting product card width to: ${this.productCardWidth}`);
+    },
     closeSearchBar(){
       this.isSearchEnable = false;
     },
@@ -182,19 +185,19 @@ export default defineComponent({
           }
       }
     },
-    editFilters(filtersObj: string) {
-      // console.log('filtersObj',filtersObj);
-      // let allFilterValuesString = '' as string;
-      // Object.keys(filtersObj).forEach((category: string) => {
-      //   console.log('Category', category);
-      //   const selectedValues: string[] = filtersObj[category];
-      //   const categoryValuesString = selectedValues.join(', ')
-      //   // allFilterValuesString += `${category}: ${categoryValuesString} | `;
-      //   allFilterValuesString += `${categoryValuesString}, `
-      // })
-      // console.log('allFilterValues', allFilterValuesString);
+    // editFilters(filtersObj: string) {
+    //   // console.log('filtersObj',filtersObj);
+    //   // let allFilterValuesString = '' as string;
+    //   // Object.keys(filtersObj).forEach((category: string) => {
+    //   //   console.log('Category', category);
+    //   //   const selectedValues: string[] = filtersObj[category];
+    //   //   const categoryValuesString = selectedValues.join(', ')
+    //   //   // allFilterValuesString += `${category}: ${categoryValuesString} | `;
+    //   //   allFilterValuesString += `${categoryValuesString}, `
+    //   // })
+    //   // console.log('allFilterValues', allFilterValuesString);
       
-    },
+    // },
     async searchOperation(searchVal: string){
       try {
           this.isLoading = true;

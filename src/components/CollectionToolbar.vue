@@ -1,47 +1,75 @@
 <template>
 <div class="collectionToolbar py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 w-full">
     <div class="collectionToobarView flex flex-row py-5">
-      <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
-        <svg v-if="gridView === 'four'" class="Icon Icon--wall-2" role="presentation">
-          <g id="grid4" transform="translate(-73 -520)">
+      <div v-if="widthValue== true" class="viewOrientationSidepanelDesktop flex flex-row">
+          <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
+            <svg v-if="gridView === 'four'" class="Icon Icon--wall-2" role="presentation">
+              <g id="grid4" transform="translate(-73 -520)">
 
-            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#1c1b1b"></rect>
-            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#1c1b1b"></rect>
-            <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#1c1b1b"></rect>
-            <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#1c1b1b"></rect>
-          </g>
-        </svg>
-        <svg v-else class="Icon Icon--wall-2" role="presentation">
-          <g id="grid4" transform="translate(-73 -520)">
-            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#bcbcbc"></rect>
-            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#bcbcbc"></rect>
-            <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#bcbcbc"></rect>
-            <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#bcbcbc"></rect>
-          </g>
-        </svg>
-      </button>
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#1c1b1b"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#1c1b1b"></rect>
+                <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#1c1b1b"></rect>
+                <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#1c1b1b"></rect>
+              </g>
+            </svg>
+            <svg v-else class="Icon Icon--wall-2" role="presentation">
+              <g id="grid4" transform="translate(-73 -520)">
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="6" transform="translate(73 520)" fill="#bcbcbc"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="6" transform="translate(82 520)" fill="#bcbcbc"></rect>
+                <rect id="Rectangle_285" data-name="Rectangle 285" width="6" height="6" transform="translate(82 529)" fill="#bcbcbc"></rect>
+                <rect id="Rectangle_286" data-name="Rectangle 286" width="6" height="6" transform="translate(73 529)" fill="#bcbcbc"></rect>
+              </g>
+            </svg>
+          </button>
 
-      <button @click="gridChangertwo" aria-label="Show two products per row" class="CollectionToolbar-layout-two h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="2" fdprocessedid="vbsbq8">
-        <svg v-if="gridView === 'two'" class="Icon Icon--wall-4 h-5 w-5" role="presentation">
-          <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
-            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#1c1b1b"></rect>
-            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#1c1b1b"></rect>
-          </g>
-        </svg>
-          <svg v-else class="Icon Icon--wall-4 h-5 w-5" role="presentation">
-          <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
-            <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#bcbcbc"></rect>
-            <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#bcbcbc"></rect>
-          </g>
-        </svg>
-      </button>
+          <button @click="gridChangertwo" aria-label="Show two products per row" class="CollectionToolbar-layout-two h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="2" fdprocessedid="vbsbq8">
+            <svg v-if="gridView === 'two'" class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+              <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#1c1b1b"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#1c1b1b"></rect>
+              </g>
+            </svg>
+              <svg v-else class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+              <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#bcbcbc"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#bcbcbc"></rect>
+              </g>
+            </svg>
+          </button>
+      </div>
+      <div v-if="widthValue == false" class="viewOrientationSidepanelMobile flex flex-row">
+          <button @click="gridChangerone" aria-label="Show one product per row" class="CollectionToolbar__LayoutType h-4 w-4 flex justify-center align-middle cursor-pointer mr-2" data-action="change-layout-mode" data-grid-type="mobile" data-count="1">
+            <svg  v-if="gridView === 'one'" class="Icon Icon--wall-1 h-3.75 w-3.75" role="presentation">
+              <rect fill="#1c1b1b" width="36" height="36"></rect>
+            </svg>
+            <svg v-else class="Icon Icon--wall-1 h-3.75 w-3.75" role="presentation">
+              <rect fill="#bcbcbc" width="36" height="36"></rect>
+            </svg>
+          </button>
+
+          <button @click="gridChangertwo" aria-label="Show two products per row" class="CollectionToolbar-layout-two h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="2" fdprocessedid="vbsbq8">
+            <svg v-if="gridView === 'two'" class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+              <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#1c1b1b"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#1c1b1b"></rect>
+              </g>
+            </svg>
+              <svg v-else class="Icon Icon--wall-4 h-5 w-5" role="presentation">
+              <g xmlns="http://www.w3.org/2000/svg" id="grid2" transform="translate(-73 -520)">
+                <rect id="Rectangle_283" data-name="Rectangle 283" width="6" height="15" transform="translate(73 520)" fill="#bcbcbc"></rect>
+                <rect id="Rectangle_284" data-name="Rectangle 284" width="6" height="15" transform="translate(82 520)" fill="#bcbcbc"></rect>
+              </g>
+            </svg>
+          </button>
+      </div>
+      
       <span class="productCount text-[12px] text-[#9ea5ad] pl-2">
         {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }} Items
       </span>
     </div>
     <div class="collectionToolbarFilterSort flex h-10 align-middle">
-      <div class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative">
-        <div @click="sortState" class="sort-by-select-header flex text-center text-[10px] cursor-pointer">
+      <div  @click="sortState" class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1]">
+        <div class="sort-by-select-header flex text-center text-[10px] ">
             <span class="title-text text-[#9ea5ad]">
               Sort by:
             </span>
@@ -53,15 +81,18 @@
             </div>
         </div>
         <ul v-if="sortVisible" @click="handleSort" class="min-w-[270px] sort-by-data absolute top-12 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 -left-10 cursor-pointer">
-              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"><span>Featured</span></li>
-              <li value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"><span>What’s New</span></li>
-              <li value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice"><span>Lowest Price</span></li>
-              <li value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice"><span>Highest Price</span></li>
+              <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
+              :class="{ 'bg-[#ebedf1] hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Featured' }"
+              ><span>Featured</span></li>
+              <li value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
+              :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'What\'s New' }"><span>What's New</span></li>
+              <li value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Lowest Price' }"><span>Lowest Price</span></li>
+              <li value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Highest Price' }"><span>Highest Price</span></li>
         </ul>
       
       </div>
-      <div class="filter-container flex ml-2.5 " @click="filterState" >
-        <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] cursor-pointer">
+      <div class="filter-container flex ml-2.5" @click="filterState" >
+        <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] hover:bg-[#ebedf1] cursor-pointer">
         <svg class="h-3 w-3 mr-2" xmlns="http://www.w3.org/2000/svg" width="13" height="12.294" viewBox="0 0 13 12.294">
           <g id="filters" transform="translate(0.5 0.5)">
             <g id="Group_1435" data-name="Group 1435">
@@ -83,23 +114,30 @@
       
     </div>
 </div>
+<div class="selected-category-list align-middle hidden">
+      <div class="flex flex-row">
+        <!-- <span>{{ selectedCategory }}</span> -->
+        <!-- <span>X</span> -->
+      </div>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
-type GridView = 'two' | 'four';
+type GridView = 'one'| 'two' | 'four';
 type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
 
 export default defineComponent ({
     name: 'CollectionToolbar',
-    data(): {gridView : GridView, ActiveSortApplied : sortOptions} {
+    data(): {gridView : GridView, ActiveSortApplied : sortOptions, widthValue: boolean} {
       return {
         gridView: 'four',
         ActiveSortApplied: 'Featured',
+        widthValue: false,
       };
     },
-    emits: ['handle-sort', 'filter-state', 'sort-state'],
+    emits: ['handle-sort', 'filter-state', 'sort-state', 'grid-changer'],
     props: {
       displayData: {
         type: Object,
@@ -115,15 +153,27 @@ export default defineComponent ({
         const targetli = (event.target as HTMLElement).closest('li');
         if(targetli){
           const selectedValue = targetli.getAttribute('value');
+          const selectedText = targetli.querySelector('span')?.textContent;
+          if(targetli){
+            this.ActiveSortApplied = selectedText as sortOptions;
+            this.sortState();
+          }
           this.$emit('handle-sort', selectedValue);
         }
       },
+      gridChangerone(){
+        this.gridView = 'one';
+        this.$emit('grid-changer', 100);
+        console.log(this.displayData);
+      },
       gridChangerfour(){
         this.gridView = 'four';
+        this.$emit('grid-changer', 25);
         console.log(this.displayData);
       },
       gridChangertwo(){
         this.gridView = 'two';
+        this.$emit('grid-changer', 50);
       },
       filterState() {
         this.$emit('filter-state')
@@ -132,6 +182,29 @@ export default defineComponent ({
       sortState(){
         this.$emit('sort-state')
       }
-    }
+    },
+    mounted(){
+
+      const windowInnerWidth = window.innerWidth;
+      let initialGridView: GridView;
+      let initialWidth: number;
+      if(windowInnerWidth > 1024){
+          this.widthValue = true;
+          initialGridView = 'four';
+          initialWidth = 25;
+      } else if(windowInnerWidth > 768) {
+          this.widthValue = false;
+          initialGridView = 'two';
+          initialWidth = 50;
+      } else {
+          this.widthValue = false;
+          initialGridView = 'one';
+          initialWidth = 100;
+      }
+
+      this.gridView = initialGridView;
+      this.$emit('grid-changer', initialWidth);
+
+    },
 })
 </script>
