@@ -383,12 +383,12 @@ export default defineComponent({
   border-bottom: 1px solid #6a6a6a;
 }
 
-.page-item.disabled {
+/* .page-item.disabled {
   color: white;
   pointer-events: none;
   margin-bottom: -2px;
   border-bottom: 4px solid #ffffff;
-}
+} */
 
 .page-item {
   display: flex;
