@@ -114,12 +114,14 @@
       
     </div>
 </div>
-<div class="selected-category-list align-middle hidden">
-      <div class="flex flex-row">
-        <!-- <span>{{ selectedCategory }}</span> -->
-        <!-- <span>X</span> -->
-      </div>
+<div class="st-filter-tag-list px-9 py-4">
+  <div class="st-filter-tag">
+    <div class="st-filter-tag-wrapper inline-flex rounded-full px-2 py-1 items-center bg-[#ECECEC] ">
+      <span class="st-tag-text pr-2">Cotton Blend</span> 
+      <a class="tag-icon"><svg role="presentation" viewBox="0 0 16 14" class="Icon Icon--close w-2 h-2"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></a>
     </div>
+  </div>
+</div>
 </template>
 
 <script lang="ts">
