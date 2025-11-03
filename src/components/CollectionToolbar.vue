@@ -192,7 +192,7 @@ export default defineComponent ({
           this.widthValue = true;
           initialGridView = 'four';
           initialWidth = 25;
-      } else if(windowInnerWidth > 768) {
+      } else if(windowInnerWidth > 428) {
           this.widthValue = false;
           initialGridView = 'two';
           initialWidth = 50;

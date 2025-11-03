@@ -9,18 +9,20 @@
           Enter your PIN Code 
         </div>
 
+
         <div class="overflow-y-auto h-150" v-if="filterData">
-          <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
+          <!-- <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
                 <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
-                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">-</div>
+                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">-</div>
                 <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
                   Price
-                </h3>
-              </div>
-          <div class="flex  w-[80%] justify-center items-center">
-            <input class="flex items-center justify-center w-full" type="range" name="price-range" id="price-range-val">
-          </div>
+                </h3> -->
+          <!-- </div> -->
+          <!-- <div class="flex  w-[80%] justify-center items-center">
+          <input class="flex items-center justify-center w-full" type="range" name="price-range" id="price-range-val">
+        </div> -->
+        
           
           <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 0">
@@ -66,7 +68,7 @@
           </div>
           <div class="flex flex-[100%]">
             <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
-            <button @click="applyFilters" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">See items</button>
+            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">See items</button>
           </div>
         </div>
       </div>

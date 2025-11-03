@@ -13,6 +13,7 @@
   </div>
 
   <CollectionToolbar
+          @handle-sort="selectedSortOp"
           @filter-state="toggleVisibility"
           :sort-visible="isSortVisible" 
           @sort-state="toggleSortState"
@@ -50,8 +51,7 @@
     </div>
   </div>
   
-  <!-- <PaginationSection v-if="!isLoading" /> -->
-   <v-pagination :length="searchResult.totalHits/40"></v-pagination>
+  <PaginationSection v-if="!isLoading" />
   <SectionFooter />
 
   <div>
@@ -60,10 +60,14 @@
         v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
-        
+        @search-filters-active="updateActiveFilters"
     />
     </transition>
     <!-- @search-filters-active="editFilters" -->
+  </div>
+
+  <div>
+    
   </div>
   
   <ProductCounter />
@@ -111,7 +115,7 @@ export default defineComponent({
       searchResult: { result: {} } as any,
       intialResult: null as any,
       isSearchEnable: false as boolean,
-      currSort: 'manual' as string,
+      currSort: 'all_products_search_position' as string,
       isFilterSidebar: false,
       isSortVisible: false,
       isEmpty: false,
@@ -152,6 +156,22 @@ export default defineComponent({
     this.searchOperation(this.searchValue);
   },
   methods: {
+    updateActiveFilters(activeFilters: Record<string, string[]>) {
+      this.filterObject = activeFilters;
+      this.searchOperation(this.searchValue);
+    },
+    selectedSortOp(selectedValue: string){
+      if(selectedValue === 'created-descending'){
+        this.currSort = "all_products_search_position"
+      } else if(selectedValue === "whatsnew"){
+        this.currSort = "-created_at";
+      } else if(selectedValue === "lowestPrice"){
+        this.currSort = "discounted_price";
+      } else if (selectedValue === "highestPrice") {
+        this.currSort = "-discounted_price"
+      }
+      this.searchOperation(this.searchValue);
+    },
     updateProductCardWidth(widthPercentage: number){
       this.productCardWidth = `${widthPercentage}%`;
       console.log(`Setting product card width to: ${this.productCardWidth}`);
@@ -204,7 +224,7 @@ export default defineComponent({
       try {
           this.isLoading = true;
           console.log("Search Operation");
-          const result = await searchClient
+          let searchBuilder = await searchClient
                                     .count(40)
                                     .fields(
                                       ...this.searchFields)
@@ -221,10 +241,10 @@ export default defineComponent({
                                       "st_ocassion",
                                       "st_topwear_fit",
                                       "meta_length")
-                                      .facetCount(99)
+                                    .facetCount(99)
                                     .sort(
                                       "-isActive", 
-                                      "all_products_search_position", 
+                                      this.currSort, 
                                       "-_rank")
                                       .numericFacets("discount", [
                                           { min: 10, max: 100, minInclusive: true, maxInclusive: false },
@@ -248,7 +268,14 @@ export default defineComponent({
                                       ])
                                     .searchFields('*')
                                     .filter("isSearchable = 1 AND isActive = 1 AND discounted_price > 0")
-                                    .search(searchVal, collectionId);              
+                                         
+          for (const category in this.filterObject) {
+            const values = this.filterObject[category];
+            if (values && values.length > 0) {
+              searchBuilder = searchBuilder.textFacetFilters(category, values);
+            }
+          } 
+          const result = await searchBuilder.search(searchVal, collectionId)                         
 
 
           const safeResult = result ||  null; 
