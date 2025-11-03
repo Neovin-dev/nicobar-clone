@@ -145,7 +145,6 @@ import HeaderBar from './components/HeaderBar.vue';
 import AnnouncementCarousel from './components/AnnouncementCarousel.vue';
 import ProductCard from './components/ProductCard.vue';
 import CollectionToolbar from './components/CollectionToolbar.vue';
-import PaginationSection from './components/PaginationSection.vue';
 import SectionFooter from './components/SectionFooter.vue';
 import ProductFilterSidebar from './components/ProductFilterSidebar.vue';
 import SearchBar from './components/SearchBar.vue';
@@ -156,7 +155,7 @@ import ProductFilterMobileOverlay from "./components/ProductFilterMobileOverlay.
 
 export default defineComponent({
   components: {
-    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
   },
   data() {
     return {
