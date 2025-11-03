@@ -65,14 +65,56 @@
     </transition>
     <!-- @search-filters-active="editFilters" -->
   </div>
-
-  <div>
-    
-  </div>
   
-  <ProductCounter 
+    <div v-if="isSortMobile" class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10"></div>
+    <div class="collectionToolbarFilterSort h-15 align-middle fixed bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20 hidden">
+      <div class="collectionToolbarSort inline-flex py-2 px-6 border-2 mx-3 border-solid font-bold border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1] flex-[50%]">
+          <div class="sort-by-select-header flex text-center text-[10px]">
+              <span class="title-text text-[#1A1F29] uppercase">
+                Sort by
+              </span>
+          </div>
+        </div>
+        <ul v-if="isSortMobile" class="flex flex-col sort-by-data absolute bottom-15 left-0 bg-white text-left text-[10px] text-[#1a1f29] z-10 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 cursor-pointer">
+                <li value="title" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid uppercase" data-index="3" data-value="title"><span>Sort By</span></li>
+                <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
+                ><span>Featured</span></li>
+                <li  value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
+                ><span>What's New</span></li>
+                <li  value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice"><span>Lowest Price</span></li>
+                <li  value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice"><span>Highest Price</span></li>
+        </ul>
+      <div class="filter-container flex mx-3 flex-[50%]" >
+          <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] font-bold rounded-full justify-center items-center  text-[10px] hover:bg-[#ebedf1] w-full cursor-pointer">
+            <svg class="h-3 w-3 mr-2" xmlns="http://www.w3.org/2000/svg" width="13" height="12.294" viewBox="0 0 13 12.294">
+              <g id="filters" transform="translate(0.5 0.5)">
+                <g id="Group_1435" data-name="Group 1435">
+                <circle id="Ellipse_24" data-name="Ellipse 24" cx="1.445" cy="1.445" r="1.445" transform="translate(4.541)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></circle>
+                <line id="Line_3" data-name="Line 3" x2="4.712" transform="translate(7.288 1.445)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                <line id="Line_4" data-name="Line 4" x2="4.679" transform="translate(0 1.445)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                <circle id="Ellipse_25" data-name="Ellipse 25" cx="1.445" cy="1.445" r="1.445" transform="translate(1.791 4.202)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></circle>
+                <line id="Line_5" data-name="Line 5" x2="7.603" transform="translate(4.397 5.647)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                <line id="Line_6" data-name="Line 6" x2="1.789" transform="translate(0 5.647)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                <circle id="Ellipse_26" data-name="Ellipse 26" cx="1.445" cy="1.445" r="1.445" transform="translate(3.139 8.405)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></circle>
+                <line id="Line_7" data-name="Line 7" x2="6.158" transform="translate(5.842 9.849)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                <line id="Line_8" data-name="Line 8" x2="3.236" transform="translate(0 9.849)" fill="none" stroke="#424a54" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+                </g>
+              </g>
+            </svg>
+              FILTERS
+          </button>
+        </div>
+      </div>
+  <ProductFilterMobileOverlay
+        v-if="isFilterSidebar"
+        @close-filter-bar="toggleVisibilityMobile" 
+        :filter-data="searchFilter"
+        @search-filters-active="updateActiveFilters"
+   />
+  
+  <!-- <ProductCounter 
       :display-data="searchResult" 
-  />
+  /> -->
   <WhatsappRedirect />
   
 </template>
@@ -103,10 +145,11 @@ import SearchBar from './components/SearchBar.vue';
 import WhatsappRedirect from './components/WhatsappRedirect.vue';
 import ProductCounter from './components/ProductCounter.vue';
 import HomePageMenBanner from "./components/HomePageMenBanner.vue";
+import ProductFilterMobileOverlay from "./components/ProductFilterMobileOverlay.vue";
 
 export default defineComponent({
   components: {
-    HeaderBar, HomePageMenBanner, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, HomePageMenBanner, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
   },
   data() {
     return {
@@ -119,7 +162,9 @@ export default defineComponent({
       isSearchEnable: false as boolean,
       currSort: 'all_products_search_position' as string,
       isFilterSidebar: false,
+      isFilterMobile: false,
       isSortVisible: false,
+      isSortMobile: false,
       isEmpty: false,
       searchFields: ["title",
                     "id",
@@ -209,19 +254,14 @@ export default defineComponent({
           }
       }
     },
-    // editFilters(filtersObj: string) {
-    //   // console.log('filtersObj',filtersObj);
-    //   // let allFilterValuesString = '' as string;
-    //   // Object.keys(filtersObj).forEach((category: string) => {
-    //   //   console.log('Category', category);
-    //   //   const selectedValues: string[] = filtersObj[category];
-    //   //   const categoryValuesString = selectedValues.join(', ')
-    //   //   // allFilterValuesString += `${category}: ${categoryValuesString} | `;
-    //   //   allFilterValuesString += `${categoryValuesString}, `
-    //   // })
-    //   // console.log('allFilterValues', allFilterValuesString);
-      
-    // },
+    toggleVisibilityMobile(){
+      if(this.isFilterMobile){
+        this.isFilterMobile = false;
+      } else {
+        console.log('button clicked to toggle on')
+         this.isFilterMobile = true;
+      }
+    },
     async searchOperation(searchVal: string){
       try {
           this.searchValue = searchVal
@@ -284,6 +324,7 @@ export default defineComponent({
           const safeResult = result ||  null; 
             
           this.searchResult = safeResult;
+          console.log(`${"SearchResulty for keyword " + searchVal + " and SearchResult is "+ safeResult.result }`)
           if(safeResult){
             this.searchFilter = safeResult.textFacets;
           }

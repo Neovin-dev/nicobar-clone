@@ -81,7 +81,7 @@
                 </div>
                 <div class="right-side-icon flex gap-10">
                     <span class="search-icon cursor-pointer" @click="$emit('enable-search-bar')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 20 19" fill="none">
                             <g filter="url(#filter0_d_1029_1556)">
                                 <mask id="path-1-outside-1_1029_1556" maskUnits="userSpaceOnUse" x="0.958984" y="0.208984" width="18" height="18" fill="black">
                                 <rect fill="white" x="0.958984" y="0.208984" width="18" height="18"></rect>

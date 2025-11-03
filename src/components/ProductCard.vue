@@ -35,7 +35,7 @@
     <div class="p-4">
         <div class="flex justify-between pb-2">
           <span class="inline-block border border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
-              {{ productData.material[0].toUpperCase() }} 
+              {{ productData.material[0] ? productData.material[0].toUpperCase(): '' }} 
           </span>
           <div class="flex"> 
             <button class="text-gray-500 mr-2">
@@ -57,7 +57,7 @@
       
       <div class="flex items-center justify-between mt-2 mb-3 relative">
         <div class="flex items-center justify-between mt-1 mb-3 absolute left-0 top-[-0.5] h-2 bg-white  py-2 group-hover:opacity-0 group-hover:invisible transition-opacity duration-300">
-          <div class="flex space-x-2 text-[14px] pr-2 mt-2 items-center justify-center rounded-sm">
+          <div class="flex space-x-2 text-[14px] pr-2 mt-2 bg-white items-center justify-center rounded-sm">
             <span> {{ productData.title }}</span>
           </div>
         </div>
