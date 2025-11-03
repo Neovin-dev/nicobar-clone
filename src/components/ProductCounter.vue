@@ -2,11 +2,11 @@
 <div @click="backToTopFn" v-if="visibility" class="back-to-top-wrapper fixed bottom-22.5 right-22.5 bg-white px-4 py-2 text-[12px] rounded-full shadow-[0_2px_4px_#00000029] cursor-pointer">
     <div class="product-count-backtotop flex">
         <span class="view-count">
-            21
+            <!-- Display how many cards passed behind me -->
         </span>
         <span>/</span>
         <total-product-count class="pr-2">
-            144
+            {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }}
         </total-product-count>
         <img src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/arrow-top.svg?v=1671523432" alt="back to top"></img>
     </div>
@@ -19,9 +19,15 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     name: 'ProductCounter',
+    props: {
+        displayData: {
+            type: Object,
+            required: true,
+        }
+    },
     data() {
         return {
-            visibility: false as boolean,
+            visibility: true as boolean,
         }
     },
     mounted(){

@@ -70,7 +70,9 @@
     
   </div>
   
-  <ProductCounter />
+  <ProductCounter 
+      :display-data="searchResult" 
+  />
   <WhatsappRedirect />
   
 </template>
