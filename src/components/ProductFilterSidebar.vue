@@ -25,7 +25,7 @@
         
           
           <template v-for="(options, categoryName) in filterData" :key="categoryName">
-            <div v-if="options.length > 0">
+            <div v-if="options.length > 1">
               <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
                 <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
@@ -95,6 +95,16 @@ export default defineComponent ({
       },
     emits: ['close-filter-bar', 'apply-filters', 'search-filters-active'],
     methods: {
+      clearFiltersHelper(){
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]')
+        allCheckboxes.forEach(element => {
+          const checkbox = element as HTMLInputElement;
+            checkbox.checked = false;
+            });
+            this.selectedFilters = {};
+
+            this.$emit('search-filters-active' ,this.selectedFilters);
+      },
       closeFilterBar(){
         this.$emit('close-filter-bar')
       },
@@ -141,14 +151,14 @@ export default defineComponent ({
       toggleOptions(categoryName: string){
         this.categoryToggleState[categoryName] = !this.categoryToggleState[categoryName]
       },
-      clearFiltersHelper(){
-        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]')
-        allCheckboxes.forEach(element => {
-          const checkbox = element as HTMLInputElement;
-          checkbox.checked = false;
-        });
-        this.selectedFilters = {};
-      },
+      // clearFiltersHelper(){
+      //   const allCheckboxes = document.querySelectorAll('input[type="checkbox"]')
+      //   allCheckboxes.forEach(element => {
+      //     const checkbox = element as HTMLInputElement;
+      //     checkbox.checked = false;
+      //   });
+      //   this.selectedFilters = {};
+      // },
     },
 })
 </script>

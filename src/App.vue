@@ -222,6 +222,7 @@ export default defineComponent({
     // },
     async searchOperation(searchVal: string){
       try {
+          this.searchValue = searchVal
           this.isLoading = true;
           console.log("Search Operation");
           let searchBuilder = await searchClient
