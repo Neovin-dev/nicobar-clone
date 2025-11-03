@@ -126,7 +126,7 @@
                        <div class="Footer-promotional-care">
 
                        </div>
-                       <div class="butterfly-image absolute top-30 left-98">
+                       <div class="butterfly-image absolute top-30 right-[-10%]">
                             <div class="butterfly-img-wrapper">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.289" height="46.162" viewBox="0 0 79.289 46.162">
                                 <g id="Group_3239" data-name="Group 3239" transform="translate(0 0)">

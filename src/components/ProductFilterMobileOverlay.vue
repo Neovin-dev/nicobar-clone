@@ -10,7 +10,6 @@
 
 
         <div class="overflow-y-auto h-150" v-if="filterData">
-          
           <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 1">
               <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">

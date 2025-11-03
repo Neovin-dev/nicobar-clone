@@ -19,6 +19,7 @@
           @sort-state="toggleSortState"
           :display-data="searchResult"
           @grid-changer="updateProductCardWidth"
+          :filter-tags="filterObject"
   />
 
   <div class="card-container flex flex-[100%] flex-wrap">
@@ -51,7 +52,18 @@
     </div>
   </div>
   
-  <PaginationSection v-if="!isLoading" />
+  <div class="pagination-wrapper w-full flex justify-center mb-20 mt-7.5">
+      <paginate
+        class="flex items-center gap-3 text-[#6A6A6A] my-5"
+        :page-count= "Math.ceil(searchResult.totalHits/40)"
+        :click-handler="paginationHandler"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination-element'"
+        :page-class="'page-item'"
+      ></paginate>
+  </div>
+    
   <SectionFooter />
 
   <div>
@@ -104,25 +116,20 @@
               FILTERS
           </button>
         </div>
-      </div>
-  <ProductFilterMobileOverlay
-        v-if="isFilterSidebar"
-        @close-filter-bar="toggleVisibilityMobile" 
-        :filter-data="searchFilter"
-        @search-filters-active="updateActiveFilters"
-   />
+    </div>
   
-  <!-- <ProductCounter 
+  <ProductCounter 
       :display-data="searchResult" 
-  /> -->
+  />
   <WhatsappRedirect />
-  
 </template>
 
 <script lang="ts">
 
 // Imports
-import SearchClient from "@gaspl/search-client"
+import SearchClient from "@gaspl/search-client";
+
+import Paginate from "vuejs-paginate-next";
 import { defineComponent } from "vue";
 
 // Working NICOBAR TOKENS
@@ -149,7 +156,7 @@ import ProductFilterMobileOverlay from "./components/ProductFilterMobileOverlay.
 
 export default defineComponent({
   components: {
-    HeaderBar, HomePageMenBanner, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, PaginationSection, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
   },
   data() {
     return {
@@ -166,6 +173,7 @@ export default defineComponent({
       isSortVisible: false,
       isSortMobile: false,
       isEmpty: false,
+      pageNum: 1 as number,
       searchFields: ["title",
                     "id",
                     "isActive",
@@ -203,6 +211,9 @@ export default defineComponent({
     this.searchOperation(this.searchValue);
   },
   methods: {
+    skipValue(pageNumber: number) {
+      this.pageNum = (pageNumber - 1) * 40;
+    },
     updateActiveFilters(activeFilters: Record<string, string[]>) {
       this.filterObject = activeFilters;
       this.searchOperation(this.searchValue);
@@ -218,6 +229,19 @@ export default defineComponent({
         this.currSort = "-discounted_price"
       }
       this.searchOperation(this.searchValue);
+    },
+    paginationHandler(pageNum: number){
+      let val = pageNum;
+      console.log(pageNum);
+      this.skipValue(val) 
+      
+      window.scrollTo({
+                top: 700,
+                left: 0,
+                behavior: 'smooth',
+      });
+      this.searchOperation(this.searchValue);
+
     },
     updateProductCardWidth(widthPercentage: number){
       this.productCardWidth = `${widthPercentage}%`;
@@ -309,6 +333,7 @@ export default defineComponent({
                                           { min: 5001, max: 10000, minInclusive: true, maxInclusive: false },
                                           { min: 10001, max: 2000000, minInclusive: true, maxInclusive: false },
                                       ])
+                                    .skip(this.pageNum)
                                     .searchFields('*')
                                     .filter("isSearchable = 1 AND isActive = 1 AND discounted_price > 0")
                                          
@@ -324,7 +349,7 @@ export default defineComponent({
           const safeResult = result ||  null; 
             
           this.searchResult = safeResult;
-          console.log(`${"SearchResulty for keyword " + searchVal + " and SearchResult is "+ safeResult.result }`)
+          console.log(`${"SearchResulty for keyword " + searchVal + " and SearchResult is "+ safeResult.result + "and Value is skip"+ this.skipValue}`)
           if(safeResult){
             this.searchFilter = safeResult.textFacets;
           }
@@ -335,7 +360,7 @@ export default defineComponent({
             this.isEmpty = false;
           }
           
-          console.log(JSON.stringify(safeResult, null, 2));
+          // console.log(JSON.stringify(safeResult, null, 2));
         } catch (error){
           console.log("Search failed:", error);
           this.searchResult =  null; 
@@ -349,3 +374,35 @@ export default defineComponent({
 })
 
 </script>
+
+<style>
+
+.pagination-element {
+  display: flex;
+  cursor:pointer;
+  font-size: 16px;
+  border-bottom: 1px solid #6a6a6a;
+}
+
+.page-item.disabled {
+  color: white;
+  pointer-events: none;
+  margin-bottom: -2px;
+  border-bottom: 4px solid #ffffff;
+}
+
+.page-item {
+  display: flex;
+  color: #6A6A6A;
+  padding: 16px 28px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.page-item.active {
+  color: #1C1B1B;
+  padding: 16px 28px;
+  border-bottom: 4px solid #1C1B1B;
+}
+
+</style>
