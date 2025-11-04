@@ -1,5 +1,5 @@
 <template>
-<div class="collectionToolbar flex-[100%] py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 mb-0.5 w-full">
+<div class="collectionToolbar flex-[100%] py-0.5 px-3.75 flex justify-between pt-4 sticky top-0 bg-white z-5 mb-0.5 w-full">
     <div class="collectionToobarView flex-[30%] flex flex-row py-2">
       <div v-if="widthValue== true" class="viewOrientationSidepanelDesktop flex flex-row">
           <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
@@ -92,7 +92,7 @@
               :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'What\'s New' }"><span>What's New</span></li>
 
               <li @click="sortState" value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Lowest Price' }"><span>Lowest Price</span></li>
-              
+
               <li @click="sortState" value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice" :class="{ 'bg-[#ebedf1]  hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Highest Price' }"><span>Highest Price</span></li>
         </ul>
       

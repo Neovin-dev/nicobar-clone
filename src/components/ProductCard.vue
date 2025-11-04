@@ -32,8 +32,8 @@
     </div>
 
     <div v-if="widthCalc" class="w-full  flex flex-[100%] text-[#1c1c1b] bg-[#F3F7F7]">
-      <div class="border-[#e0e2e4] border uppercase underline px-2.5 py-3 flex-[70%] text-[#1c1c1b] flex justify-center">
-        Add to cart
+      <div class="border-[#e0e2e4] border uppercase underline px-2.5 py-3 flex-[70%] text-[#1c1c1b] flex justify-center text-[13px]">
+        Add to Bag
       </div>
       <div class="px-2.5 py-3 flex border border-[#e0e2e4] flex-[30%] border-l-none">
         <button class="text-gray-500 mr-2 flex-[30%] flex justify-center h-full">
@@ -70,16 +70,16 @@
       
       <div class="flex items-center justify-between mt-2 mb-3 relative w-full bg-white">
         <div class="flex items-center justify-between w-full mt-1 mb-3 absolute left-0 top-[-0.5] h-2 bg-white  py-2 group-hover:opacity-0 group-hover:invisible transition-opacity duration-300">
-          <div class="flex space-x-2 text-[14px] pr-2 mt-2 bg-white items-center justify-center rounded-sm w-full">
+          <div class="flex space-x-2 text-[12px] pr-2 mt-2 bg-white items-center justify-center rounded-sm w-full">
             <span class="w-full"> {{ productData.title }}</span>
           </div>
         </div>
-        <div class="flex space-x-2 text-[14px] mt-0">
+        <div class="flex space-x-2 text-[12px] mt-0">
           <button 
             v-for="size in getSizes" 
             :key="size"
             :class="[
-              'pr-2 h- flex items-center justify-center rounded-sm',
+              'pr-2 h- flex items-center justify-center rounded-sm text-[13px]',
             ]"
           >
             {{ size }}
@@ -92,7 +92,7 @@
         ₹ {{ formattedPrice }}
       </p>
 
-      <div v-if="widthCalc" class="flex space-x-2 text-[14px] mt-0">
+      <div v-if="widthCalc" class="flex space-x-2 text-[10px] mt-2">
           <button 
             v-for="size in getSizes" 
             :key="size"
@@ -135,7 +135,7 @@ export default defineComponent({
   data() {
     return {
       imageIndex: 0 as number,
-      widthCalc: window.innerWidth < 1024,
+      widthCalc: window.innerWidth <= 1024,
     };
   },
 

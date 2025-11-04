@@ -3,7 +3,7 @@
     <div class="searchbar w-full relative">
         <input  @input="handleInput" ref="searchInput" type="text" class="search-input text-[21px] font-thin border w-full min-w-[180px] bg-white bg-none bg-position-[20px] bg-no-repeat leading-[normal] text-[#22272f] pl-5 pr-[130px] py-[30px] border-solid border-black placeholder:text-sm placeholder:font-bold" placeholder="Search for a Product, Category.. ">
         <!-- <span class="absolute right-20 top-[30%] border p-1.5 flex items-center"><button class="cursor-pointer">Search</button></span> -->
-        <span @click="resetValues" class="reset-container underline absolute right-20 top-0 h-full items-center flex">reset</span>
+        <span v-if="activeReset" @click="resetValues" class="reset-container underline absolute right-20 top-0 h-full items-center flex">Reset</span>
         <span class="close-btn absolute right-5 top-0 items-center flex h-full" @click="$emit('close-search-bar')">
             <img src="../../public/cross-svgrepo-com.svg" class="h-3 w-3" alt="">
         </span>
@@ -22,12 +22,22 @@ export default defineComponent({
             required: true,
         }
     },
+    data(){
+        return {
+            activeReset: false as boolean,
+        }
+    },
     emits: ['update-search', 'close-search-bar'],
     methods: {
         handleInput(event: Event){
             const target = event.target as HTMLInputElement;
             this.$emit('update-search', target.value);
             console.log("character entered", target.value)
+            if(target.value.length > 0){
+                this.activeReset = true;
+            }else {
+                this.activeReset = false;
+            }
         },
         resetValues(){
             this.$emit('update-search', 'mens kurta');
@@ -51,7 +61,7 @@ export default defineComponent({
                     })
                 }
             }
-        }
+        },
     },
 })
 </script>

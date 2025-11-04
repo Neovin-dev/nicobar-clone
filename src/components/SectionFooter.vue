@@ -327,6 +327,10 @@ export default defineComponent({
         font-family: 'EulerFlexBold';
     }
 
+    .delivery-wrapper-section {
+        display: none;
+    }
+
     @media (max-width: 820px){
         .footer-sign-me {
             flex: 100%;

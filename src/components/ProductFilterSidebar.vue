@@ -32,7 +32,7 @@
             <div v-if="options.length > 1">
               <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">{{ categoryToggleState[categoryName] ? '-' : '+' }}</div>
-                <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
+                <h3 class="filter-title uppercase text-[#5b6670] cursor-pointer font-bold text-[14px]">
                   {{ FilterTitleFormatter(categoryName) }}
                 </h3>
               </div>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div v-else class="filter-actions-footer fixed bottom-0 flex flex-col w-full pb-5 px-5 pr-10 bg-white pt-6 left-0">
-          <div class="footer-selector flex gap-2 pb-2">
+          <div v-if="Object.keys(selectedFilters).length !== 0" class="footer-selector flex gap-2 pb-2">
             <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm underline cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
@@ -109,7 +109,7 @@ export default defineComponent ({
           categoryToggleState: {} as Record<string, boolean>,
           widthResolution: window.innerWidth > 1024,
         }
-      },
+      }, 
     emits: ['close-filter-bar', 'apply-filters', 'search-filters-active'],
     methods: {
       clearFiltersHelper(){
