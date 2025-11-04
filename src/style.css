@@ -38,7 +38,7 @@
   border-bottom: 1px solid #6a6a6a;
 }
 
-.page-item {
+.page-link {
   display: flex;
   color: #6A6A6A;
   padding: 16px 28px;
@@ -47,11 +47,11 @@
 }
 
 .page-item.disabled {
-  cursor:default;
+  cursor:not-allowed;
 }
 
 .page-item.active {
+  cursor:not-allowed;
   color: #1C1B1B;
-  padding: 16px 28px;
   border-bottom: 4px solid #1C1B1B;
 }
