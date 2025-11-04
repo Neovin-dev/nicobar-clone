@@ -63,10 +63,14 @@
           </button>
       </div>
     </div>
-    <div v-if="searchResultMensKurta" class="searchBanner text-[#282b30] flex-[30%] flex items-center uppercase text-[12px]">
+    <div v-if="searchResultMensKurta && widthResolution" class="searchBanner text-[#282b30] flex-[30%] flex items-center uppercase text-[12px]">
         Showing {{ displayData.totalHits ? displayData.totalHits: 'Loading..'  }} products for "{{displayData.query.query ? displayData.query.query : "Loading.. " }}"
     </div>
-    <div class="collectionToolbarFilterSort flex align-middle items-center">
+    <div v-if="searchResultMensKurta && !widthResolution" class="searchBanner text-[#282b30] flex-[50%] flex items-center uppercase text-[12px] justify-end">
+        Showing {{ displayData.totalHits ? displayData.totalHits: 'Loading..'  }} products for "{{displayData.query.query ? displayData.query.query : "Loading.. " }}"
+    </div>
+    
+    <div v-if="widthResolution" class="collectionToolbarFilterSort flex align-middle items-center">
       <div  @click="sortState" class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1]">
         <div class="sort-by-select-header flex text-center text-[10px] ">
             <span class="title-text text-[#9ea5ad]">
@@ -149,12 +153,13 @@ type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
 
 export default defineComponent ({
     name: 'CollectionToolbar',
-    data(): {gridView : GridView, ActiveSortApplied : sortOptions, widthValue: boolean, searchResultMensKurta: boolean} {
+    data(): {gridView : GridView, ActiveSortApplied : sortOptions, widthValue: boolean, searchResultMensKurta: boolean, widthResolution: boolean} {
       return {
         gridView: 'four',
         ActiveSortApplied: 'Featured',
         widthValue: false,
         searchResultMensKurta: false,
+        widthResolution: window.innerWidth > 1024,
       };
     },
     emits: [

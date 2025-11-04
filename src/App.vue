@@ -20,7 +20,8 @@
           :display-data="searchResult"
           @grid-changer="updateProductCardWidth"
           :filter-tags="filterObject"
-          @remove-filter-tag="handleRemoveTag"           @clear-all-filter-tags="handleClearAllTags"
+          @remove-filter-tag="handleRemoveTag"           
+          @clear-all-filter-tags="handleClearAllTags"
   />
 
   <div class="card-container flex flex-[100%] flex-wrap">
@@ -65,7 +66,7 @@
       ></paginate>
   </div>
     
-  <!-- <SectionFooter /> -->
+  <SectionFooter />
 
   <div>
     <transition name="sidebar-slide">
@@ -79,25 +80,34 @@
     <!-- @search-filters-active="editFilters" -->
   </div>
   
-    <div v-if="isSortMobile" class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10"></div>
-    <div class="collectionToolbarFilterSort h-15 align-middle fixed bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20 hidden">
-      <div class="collectionToolbarSort inline-flex py-2 px-6 border-2 mx-3 border-solid font-bold border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1] flex-[50%]">
+    <div v-if="isSortMobile" @click="toggleSortStateMobile" class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-12"></div>
+    <div v-if="widthMobile" class="collectionToolbarFilterSort h-15 align-middle fixed flex bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20">
+      <div @click="toggleSortStateMobile" class="collectionToolbarSort inline-flex py-2 px-6 border-2 mx-3 border-solid font-bold border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1] flex-[50%]">
           <div class="sort-by-select-header flex text-center text-[10px]">
               <span class="title-text text-[#1A1F29] uppercase">
                 Sort by
               </span>
           </div>
         </div>
-        <ul v-if="isSortMobile" class="flex flex-col sort-by-data absolute bottom-15 left-0 bg-white text-left text-[10px] text-[#1a1f29] z-10 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 cursor-pointer">
-                <li value="title" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid uppercase" data-index="3" data-value="title"><span>Sort By</span></li>
-                <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
-                ><span>Featured</span></li>
-                <li  value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
-                ><span>What's New</span></li>
-                <li  value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice"><span>Lowest Price</span></li>
-                <li  value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice"><span>Highest Price</span></li>
-        </ul>
-      <div class="filter-container flex mx-3 flex-[50%]" >
+        <Transition
+        enter-from-class="opacity-0 translate-y-40"
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-active-class="transition-all duration-200 ease-in"
+        leave-to-class="opacity-0 translate-y-40"
+        >
+          <ul v-if="isSortMobile" class="flex flex-col sort-by-data absolute bottom-15 left-0 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 cursor-pointer">
+                  <li value="title" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid uppercase" data-index="3" data-value="title"><span>Sort By</span></li>
+                  <li value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending"
+                  ><span>Featured</span></li>
+                  <li  value="whatsnew" class="data is-selected tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="0" data-value="whatsnew"
+                  ><span>What's New</span></li>
+                  <li  value="lowestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="1" data-value="lowestPrice"><span>Lowest Price</span></li>
+                  <li  value="highestPrice" class="data tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="2" data-value="highestPrice"><span>Highest Price</span></li>
+          </ul>
+        </Transition>
+      <div @click="toggleVisibility" class="filter-container flex mx-3 flex-[50%]" >
           <button class="filter-bar inline-flex py-2 px-6 border-2 border-solid border-[#dfe1e3] font-bold rounded-full justify-center items-center  text-[10px] hover:bg-[#ebedf1] w-full cursor-pointer">
             <svg class="h-3 w-3 mr-2" xmlns="http://www.w3.org/2000/svg" width="13" height="12.294" viewBox="0 0 13 12.294">
               <g id="filters" transform="translate(0.5 0.5)">
@@ -205,6 +215,7 @@ export default defineComponent({
                     "options"],
       filterObject: {} as Record<string, string[]>,
       productCardWidth: '25%',
+      widthMobile: window.innerWidth < 1024
     };
   },
   async mounted(){
@@ -262,6 +273,13 @@ export default defineComponent({
         this.isSortVisible = false;
       } else {
         this.isSortVisible = true;
+      }
+    },
+    toggleSortStateMobile(){
+      if(this.isSortMobile){
+        this.isSortMobile= false;
+      } else {
+        this.isSortMobile = true;
       }
     },
     toggleVisibility(){

@@ -76,3 +76,15 @@ export default defineComponent ({
     }    
 })
 </script>
+
+<style scoped>
+.collection-banner-image::-webkit-scrollbar {
+  display: none;
+}
+.collection-banner-image {
+  scrollbar-width: none;
+}
+.collection-banner-image {
+  -ms-overflow-style: none;
+}
+</style>
