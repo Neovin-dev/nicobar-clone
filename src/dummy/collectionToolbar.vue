@@ -139,7 +139,6 @@
 <div 
     v-if="hasActiveFilters" 
     class="flex items-center ml-2 underline text-[11px] cursor-pointer"
-    @click="clearAllFilters"
     >
     Clear Filters
 </div>
@@ -177,7 +176,7 @@ export default defineComponent ({
     },
     computed: {
       hasActiveFilters(){
-        return this.filterTags.length > 0;
+        return Object.keys(this.filterTags).length > 0;
       }
     },
     methods: {
