@@ -28,7 +28,7 @@
             v-if="filterData"
         >
       
-          <template v-for="(options, categoryName) in filterData" :key="categoryName">
+        <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 1">
               <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">{{ categoryToggleState[categoryName] ? '-' : '+' }}</div>
@@ -38,6 +38,7 @@
               </div>
 
               <div class="filter-options-list flex">
+              <Transition name="category-slide">
                 <ul v-if="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4' : 'default-options-list p-4 w-100'">
                   <li 
                     class="filter-option-item" 
@@ -59,6 +60,7 @@
                   </li>
 
                 </ul>
+              </Transition>
               </div>
             </div>
           </template>
@@ -90,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, Transition } from "vue";
 
 export default defineComponent ({
     name: 'ProductFilterSidebar',
@@ -172,7 +174,6 @@ export default defineComponent ({
 
 <style>
 
-
 input[type="checkbox"] { 
   appearance: none;
   -webkit-appearance: none;
@@ -222,5 +223,24 @@ label > input[type="checkbox"]:checked::after {
 
 .size-options:first-child {
   margin-top: 10px;
+}
+
+.category-slide-enter-active,
+.category-slide-leave-active {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Start state for entering (opening)
+  End state for leaving (closing)
+*/
+.category-slide-enter-from,
+.category-slide-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+.category-slide-enter-to,
+.category-slide-leave-from {
+  max-height: 200px; 
+  opacity: 1;
 }
 </style>
