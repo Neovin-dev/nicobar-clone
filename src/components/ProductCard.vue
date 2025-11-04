@@ -1,5 +1,5 @@
 <template>
-  <div class="cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 group" :style="{ flex: `0 0 ${productCardWidth}` }">
+  <div class="product-wrapper cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 group" :style="{ flex: `0 0 ${productCardWidth}` }">
     <div class="relative w-full aspect-3/4 bg-gray-100 group">
         <span 
           class="absolute top-3 text-xs font-normal px-2 py-1 z-1"
@@ -176,3 +176,13 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+
+@media (max-width: 820px){
+  .product-wrapper {
+    padding: 1px;
+  }
+}
+
+</style>

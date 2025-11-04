@@ -5,6 +5,7 @@
   />
   <SearchBar 
       v-if="isSearchEnable" 
+      :active-search="isSearchEnable"
       @close-search-bar="closeSearchBar"
       @update-search="searchOperation"
   />
