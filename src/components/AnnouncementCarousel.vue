@@ -79,7 +79,7 @@ export default defineComponent({
     computed: {
         slidesToDisplay(): Announcement[] {
 
-            return [...this.announcements, this.announcements[0]]
+            return [this.announcements[0]!, this.announcements[0]!]
         },
 
         sliderStyle(): Record<string, string> {
