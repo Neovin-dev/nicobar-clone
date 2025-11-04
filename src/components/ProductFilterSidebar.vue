@@ -1,34 +1,35 @@
 <template>
   <div>
-    <div class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10" @click="closeFilterBar"></div>
-      <div class="product-filter-sidebar fixed top-0 right-0 h-screen bg-white w-[375px] px-5 py-7.5 z-11">
+    <div 
+      class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10" @click="closeFilterBar"
+    ></div>
+      <div 
+      class="product-filter-sidebar fixed top-0 right-0  bg-white px-5 py-7.5"      
+      :class="{
+        'z-30 w-full h-full': !widthResolution,
+        'z-11 w-[375px] h-screen': widthResolution,
+      }"
+      >
         <div class="filter-bar-header mb-1.75 text-[14px] uppercase text-[#5b6670] font-medium ml-[-3px]">
           Express Delivery
         </div>
         <div class="filter-desc font-light text-[11px] mb-3.75 pb-3 ml-[-3px]">
-          Enter your PIN Code 
+          Enter your <span class="underline cursor-pointer">PINCode</span>
         </div>
 
 
-        <div class="overflow-y-auto h-150" v-if="filterData">
-          <!-- <div class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
-                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
-                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
-                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">-</div>
-                <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
-                  Price
-                </h3> -->
-          <!-- </div> -->
-          <!-- <div class="flex  w-[80%] justify-center items-center">
-          <input class="flex items-center justify-center w-full" type="range" name="price-range" id="price-range-val">
-        </div> -->
-        
-          
+        <div 
+            class="overflow-y-auto h-150" 
+            :class="{
+              'h-[90%]': !widthResolution,
+              'h-150': widthResolution,
+            }"
+            v-if="filterData"
+        >
+      
           <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 1">
               <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
-                <!-- <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === false">+</div>
-                <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5" v-if="categoryToggleState[categoryName] === true">-</div> -->
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">{{ categoryToggleState[categoryName] ? '-' : '+' }}</div>
                 <h3 class="filter-title uppercase text-[#282b30] cursor-pointer font-bold text-[14px]">
                   {{ FilterTitleFormatter(categoryName) }}
@@ -61,16 +62,28 @@
             </div>
           </template>
         </div>
-        <div class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 px-5 pr-10 bg-white">
+        <div v-if="widthResolution" class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 pr-10 bg-white">
           <div class="footer-selector flex gap-2 pb-2">
             <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%]">
-            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
-            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">See items</button>
+            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 mr-3 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
+            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] bg-[#263b54] rounded-full justify-center items-center text-white text-[10px]">See items</button>
           </div>
         </div>
+        <div v-else class="filter-actions-footer fixed bottom-0 flex flex-col w-full pb-5 px-5 pr-10 bg-white pt-6 left-0">
+          <div class="footer-selector flex gap-2 pb-2">
+            <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
+            <button class="clear-all-filters-btn text-left text-sm underline cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
+          </div>
+          <div class="flex flex-[100%] gap-4">
+            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
+            <div class="flex-[40%]"></div>
+            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] bg-[#263b54] text-white">See items</button>
+          </div>
+        </div>
+
       </div>
   </div>
 </template>
@@ -91,6 +104,7 @@ export default defineComponent ({
           selectedFilters: {} as Record<string, string[]>,
           filterSelectedCount: 0 as Number,
           categoryToggleState: {} as Record<string, boolean>,
+          widthResolution: window.innerWidth > 1024,
         }
       },
     emits: ['close-filter-bar', 'apply-filters', 'search-filters-active'],
@@ -151,14 +165,6 @@ export default defineComponent ({
       toggleOptions(categoryName: string){
         this.categoryToggleState[categoryName] = !this.categoryToggleState[categoryName]
       },
-      // clearFiltersHelper(){
-      //   const allCheckboxes = document.querySelectorAll('input[type="checkbox"]')
-      //   allCheckboxes.forEach(element => {
-      //     const checkbox = element as HTMLInputElement;
-      //     checkbox.checked = false;
-      //   });
-      //   this.selectedFilters = {};
-      // },
     },
 })
 </script>

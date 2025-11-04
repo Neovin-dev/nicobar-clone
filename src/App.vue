@@ -65,7 +65,7 @@
       ></paginate>
   </div>
     
-  <SectionFooter />
+  <!-- <SectionFooter /> -->
 
   <div>
     <transition name="slide-right">
@@ -389,39 +389,3 @@ export default defineComponent({
 })
 
 </script>
-
-<style>
-
-.pagination-element {
-  display: flex;
-  cursor:pointer;
-  font-size: 16px;
-  border-bottom: 1px solid #6a6a6a;
-}
-
-/* .page-item.disabled {
-  color: white;
-  pointer-events: none;
-  margin-bottom: -2px;
-  border-bottom: 4px solid #ffffff;
-} */
-
-.page-item {
-  display: flex;
-  color: #6A6A6A;
-  padding: 16px 28px;
-  font-size: 12px;
-  width: 100%;
-}
-
-.page-item.disabled {
-  cursor:default;
-}
-
-.page-item.active {
-  color: #1C1B1B;
-  padding: 16px 28px;
-  border-bottom: 4px solid #1C1B1B;
-}
-
-</style>
