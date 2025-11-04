@@ -43,17 +43,19 @@
         :product-card-width="productCardWidth"
     />
 
-    <div class="no-results w-full" v-if="searchResult.totalHits === 0">
-      <div class="container flex-col items-center flex justify-center">
-        <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
-        <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px]">for "{{ searchValue }}"</span></h2> 
-        <div class="search-pform flex flex-col w-100 justify-center items-center">
-          <p> Please try a different term. 
-            <span style="display: none;">or try <a class="highlight-text">clearing</a> some filters</span>
-          </p>
+    <div class="no-results w-full" v-if="!isLoading">
+      <div  v-if="searchResult.totalHits === 0">
+          <div class="container flex-col items-center flex justify-center">
+            <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
+            <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px]">for "{{ searchValue }}"</span></h2> 
+            <div class="search-pform flex flex-col w-100 justify-center items-center">
+              <p> Please try a different term. <span style="display: none;">or try <a class="highlight-text">clearing</a> some filters</span>
+              </p>
+            </div>
+          </div> 
         </div>
-      </div> 
     </div>
+    
     <!-- the second product card -->
     <ProductCard 
         v-else-if="!isLoading"

@@ -269,3 +269,21 @@ export default defineComponent ({
     },
 })
 </script>
+
+<style scoped>
+@media (max-width: 420px){
+  .collectionToobarView{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .viewOrientationSidepanelMobile {
+    display: none;
+  }
+  .collectionToolbar {
+    height: 50px;
+    
+  }
+
+}
+</style>
