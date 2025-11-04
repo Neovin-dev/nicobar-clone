@@ -1,10 +1,11 @@
 <template>
   <div>
     <div 
-      class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10" @click="closeFilterBar"
+      class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-10 transition-opacity duration-300 ease-in-out"
+      @click="closeFilterBar"
     ></div>
       <div 
-      class="product-filter-sidebar fixed top-0 right-0  bg-white px-5 py-7.5"      
+      class="product-filter-sidebar fixed top-0 right-0  bg-white px-5 py-7.5 transition-transform duration-400 ease-in-out"      
       :class="{
         'z-30 w-full h-full': !widthResolution,
         'z-11 w-[375px] h-screen': widthResolution,

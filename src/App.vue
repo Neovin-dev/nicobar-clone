@@ -68,7 +68,7 @@
   <!-- <SectionFooter /> -->
 
   <div>
-    <transition name="slide-right">
+    <transition name="sidebar-slide">
     <ProductFilterSidebar 
         v-if="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
@@ -389,3 +389,34 @@ export default defineComponent({
 })
 
 </script>
+
+<style>
+
+.sidebar-slide-enter-from .overlay,
+.sidebar-slide-leave-to .overlay {
+  opacity: 0;
+}
+
+.sidebar-slide-enter-to .overlay,
+.sidebar-slide-leave-from .overlay {
+  opacity: 1;
+}
+
+
+.sidebar-slide-enter-from .product-filter-sidebar,
+.sidebar-slide-leave-to .product-filter-sidebar {
+  transform: translateX(100%);
+}
+
+.sidebar-slide-enter-to .product-filter-sidebar,
+.sidebar-slide-leave-from .product-filter-sidebar {
+  transform: translateX(0);
+}
+
+@media (max-width: 1024px) {
+  .sidebar-slide-enter-from .product-filter-sidebar,
+  .sidebar-slide-leave-to .product-filter-sidebar {
+    transform: translateY(100%);
+  }
+}
+</style>
