@@ -126,7 +126,7 @@
                        <div class="Footer-promotional-care">
 
                        </div>
-                       <div class="butterfly-image absolute top-30 right-[-40px]">
+                       <div class="butterfly-image absolute top-30 -right-10">
                             <div class="butterfly-img-wrapper">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.289" height="46.162" viewBox="0 0 79.289 46.162">
                                 <g id="Group_3239" data-name="Group 3239" transform="translate(0 0)">
@@ -209,7 +209,9 @@
                                 <div class="linklist-block-wrapper">
                                     <div class="Linklist-title pb-3.5">
                                         Quick links
-                                    </div><ul class="Linklist text-[14px] text-[#565e6b]"><li class="Linklist__Item">
+                                    </div>
+                                    <ul class="Linklist text-[14px] text-[#565e6b]">
+                                        <li class="Linklist__Item">
                                             <a href="https://www.nicobar.com/pages/tracking-order" class="xs-show Link Link--primary">Track your order</a>
                                         </li><li class="Linklist__Item">
                                             <a href="/pages/return-and-exchange" class="xs-show Link Link--primary">Initiate a return</a>
@@ -222,7 +224,8 @@
                                         </li><li class="Linklist__Item">
                                             <a href="/pages/privacy-policy" class="xs-show Link Link--primary">Privacy policy</a>
                                         </li>
-                                    </ul></div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="linklist-container flex justify-center flex-[0_0_33%] max-w-[33%] ">
@@ -323,4 +326,57 @@ export default defineComponent({
     .store-text {
         font-family: 'EulerFlexBold';
     }
+
+    @media (max-width: 820px){
+        .footer-middle-block, .footer-middle-right, .three-part-container{
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-middle-left {
+            padding: 40px;
+        }
+        .footer-middle-right, .footer-middle-left{
+            width: 100%;
+        }
+        .linklist-container {
+                flex: 0 0 100%;
+                max-width: 100%;
+                border: none;
+                border-bottom: 1px solid #6A6A6A;
+                justify-content: flex-start;
+                padding-top: 20px;
+                width: 100%;
+        }
+
+        .butterfly-image {
+            bottom: -30px;
+            top: unset;
+            right: 50%;
+
+        }
+        .linklist-title, .Linklist-title {
+            justify-content: flex-start;
+            
+        }
+        .linklist-block-wrapper {
+            margin-bottom: 20px;
+            
+        }
+        .linklist-block-inner {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 40px;
+        }
+        .linklist-block-wrapper {
+            justify-content: center;
+        }
+        .linklist-block-wrapper ul {
+            padding-left: 30vw;
+        }
+        .nicoradio-wrapper, .copyright-text-wrapper {
+            margin-bottom: 10px;
+            padding-left: 30vw;
+        }
+        }
 </style>

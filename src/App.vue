@@ -4,16 +4,17 @@
       @enable-search-bar="enableSearchBar"
   />
   <SearchBar 
-      v-if="isSearchEnable" 
+      v-show="isSearchEnable" 
       :active-search="isSearchEnable"
       @close-search-bar="closeSearchBar"
       @update-search="searchOperation"
   />
-  <div v-else>
+  <div v-if="!isSearchEnable" >
       <HomePageMenBanner @filter-state="toggleVisibility"/>
   </div>
 
-  <CollectionToolbar
+  <CollectionToolbar 
+          v-if="!(searchResult.totalHits === 0)"
           @handle-sort="selectedSortOp"
           @filter-state="toggleVisibility"
           :sort-visible="isSortVisible" 
@@ -53,10 +54,20 @@
         </div>
       </div> 
     </div>
+    <!-- the second product card -->
+    <ProductCard 
+        v-else-if="!isLoading"
+        v-show="searchResult.totalHits === 0"
+        v-for="product in searchResult.results" 
+        :key="product.id"
+        :product-data="product"
+        :product-card-width="productCardWidth"
+    />
   </div>
   
   <div class="pagination-wrapper w-full flex justify-center mb-20 mt-7.5">
       <paginate
+        v-if="!(searchResult.totalHits === 0)"
         class="flex items-center gap-3 text-[#6A6A6A] my-5"
         :page-count= "Math.ceil(searchResult.totalHits/40)"
         :click-handler="paginationHandler"

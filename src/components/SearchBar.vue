@@ -31,6 +31,7 @@ export default defineComponent({
         },
         resetValues(){
             this.$emit('update-search', 'mens kurta');
+            this.$emit('close-search-bar');
         },
         focusInput() {
             const inputElement = this.$refs.searchInput as HTMLInputElement;
