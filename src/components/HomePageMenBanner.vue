@@ -5,15 +5,15 @@
        <!-- for more than 1024 -->
        <img v-else class="w-full" fetchpriority="high" loading="eager" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/MW_BANNER_4b96e466-06ee-4ceb-9d54-7154dc694012.png?v=1757422514">
   </section>
-    <div class="flex justify-center w-full overflow-x-auto mb-10">
-    <div class="flex md:space-x-5">
+    <div class="image-wrapper flex justify-center w-full overflow-x-auto mb-10">
+    <div class="flex w-full">
       <a 
         v-for="item in carouselItems" 
         :name="item.name" 
         :href="item.link" 
         class="flex flex-col items-center text-center no-underline text-gray-800"
       >
-        <div class="w-[90px] h-[90px] mt-10 rounded-full overflow-hidden border flex border-none items-center justify-center ">
+        <div class="image-container w-[90px] h-[90px] mt-10 ml-1 rounded-full overflow-hidden border flex border-none items-center justify-center">
           <img 
             fetchpriority="high" 
             class="object-cover w-full h-full" 
@@ -22,13 +22,13 @@
           >
         </div>
         
-        <span class="mt-2 text-[13px] font-medium whitespace-normal">
+        <span class="image-text mt-2 text-[13px] font-medium whitespace-normal">
           {{ item.name }}
         </span> 
       </a>
     </div>
   </div>
-  <div class="relative express-plp flex justify-between items-center w-[calc(100%-79px)] mt-auto mb-[15px] mx-auto border-y-[#dfe1e3] border-t border-solid border-b h-[50px] p-[5px] pl-2.5 pr-2.5">
+  <div v-if="bannerEnable" class="relative express-plp flex justify-between items-center w-[calc(100%-79px)] mt-auto mb-[15px] mx-auto border-y-[#dfe1e3] border-t border-solid border-b h-[50px] p-[5px] pl-2.5 pr-2.5">
       <span id="express-plp-pincode" class="text-[12px] text-center"><span>Express Delivery:</span> <u>PIN code</u></span>
       <span class="apply-filter flex text-[12px] text-[#bcbcbc] fill-[#bcbcbc] cursor-pointer" @click="filterState">
         <img class="absolute right-[130px] bottom-0 h-[37px] pointer-events-none" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/Export_this_1.png?v=1754475935" alt="icon">
@@ -59,6 +59,7 @@ export default defineComponent ({
           { name: 'Bestsellers', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Bestsellers_3aa4dfad-cab3-4bad-9289-6f458e72e105_180x.png?v=1757479108' },
         ],
         widthCalculator: false as boolean,
+        bannerEnable: window.innerWidth >= 768,
       };
     },
     methods: {
@@ -86,5 +87,11 @@ export default defineComponent ({
 }
 .collection-banner-image {
   -ms-overflow-style: none;
+}
+
+@media (max-width: 480px){
+  .image-text {
+    font-size: 11px;
+  }
 }
 </style>

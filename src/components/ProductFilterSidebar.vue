@@ -11,6 +11,9 @@
         'z-11 w-[375px] h-screen': widthResolution,
       }"
       >
+        <span class="close-btn fixed right-5 top-5 items-center flex" @click="closeFilterBar">
+            <img src="../../public/cross-svgrepo-com.svg" class="h-3 w-3" alt="">
+        </span>
         <div class="filter-bar-header mb-1.75 text-[14px] uppercase text-[#5b6670] font-medium ml-[-3px]">
           Express Delivery
         </div>

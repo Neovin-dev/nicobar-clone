@@ -340,6 +340,10 @@ export default defineComponent({
             padding: 0;
             padding: 40px 20px;
             height: 100%;
+            
+        }
+        .footer-sign-me {
+            height: 100%;
         }
         .sign-me-img {
             display: none;
@@ -366,9 +370,8 @@ export default defineComponent({
         .sign-me-btn img {
             bottom: 75px;
         }
-        .footer-middle-block {
-            margin-top: 80px;
-        }
+        
+
         .footer-middle-block, .footer-middle-right, .three-part-container{
             display: flex;
             flex-direction: column;
@@ -426,6 +429,21 @@ export default defineComponent({
                 bottom: -30px;
                 top: unset;
                 right: 40%;
+            }
+        }
+
+        @media (max-width: 480px){
+            .sign-me-form {
+                display: none;
+                
+            }
+
+            .linklist-block-wrapper ul {
+                padding-left: 0;
+            }
+            
+            .nicoradio-wrapper, .copyright-text-wrapper {
+                padding-left: 0;
             }
         }
 </style>

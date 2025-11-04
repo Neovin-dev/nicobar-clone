@@ -1,10 +1,10 @@
 <template>
 <div class="search-bar-wrapper">
     <div class="searchbar w-full relative">
-        <input  @input="handleInput" ref="searchInput" type="text" class="search-input text-[21px] font-thin border w-full min-w-[180px] bg-white bg-none bg-position-[20px] bg-no-repeat leading-[normal] text-[#22272f] pl-5 pr-[130px] py-[30px] border-solid border-black placeholder:text-sm placeholder:font-bold" placeholder="Search for a Product, Category.. ">
+        <input  @input="handleInput" ref="searchInput" type="text" class="search-input text-[21px] font-thin border w-full min-w-[180px] bg-white bg-none bg-position-[20px] bg-no-repeat leading-[normal] text-[#22272f] pl-5 pr-[130px] py-[30px] border-solid border-black placeholder:text-sm placeholder:font-bold overflow-hidden whitespace-nowrap text-ellipsis" placeholder="Search for a Product, Category.. ">
         <!-- <span class="absolute right-20 top-[30%] border p-1.5 flex items-center"><button class="cursor-pointer">Search</button></span> -->
-        <span v-if="activeReset" @click="resetValues" class="reset-container underline absolute right-20 top-0 h-full items-center flex">Reset</span>
-        <span class="close-btn absolute right-5 top-0 items-center flex h-full" @click="$emit('close-search-bar')">
+        <span v-if="activeReset" @click="resetValues" class="reset-container underline absolute right-20 top-0 h-full items-center flex bg-white">Reset</span>
+        <span class="close-btn absolute right-5 top-0 items-center flex h-full bg-white" @click="$emit('close-search-bar')">
             <img src="../../public/cross-svgrepo-com.svg" class="h-3 w-3" alt="">
         </span>
     </div>
@@ -70,7 +70,7 @@ export default defineComponent({
 
 @media (max-width: 820px){
 .search-input {
-    margin: 20px;
+    /* margin: 20px; */
     padding: 10px;
     border: 0;
     border-bottom: 1px solid black;

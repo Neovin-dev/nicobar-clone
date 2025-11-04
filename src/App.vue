@@ -46,7 +46,7 @@
     <div class="no-results w-full" v-if="searchResult.totalHits === 0">
       <div class="container flex-col items-center flex justify-center">
         <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
-        <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span>for "{{ searchValue }}"</span></h2> 
+        <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px]">for "{{ searchValue }}"</span></h2> 
         <div class="search-pform flex flex-col w-100 justify-center items-center">
           <p> Please try a different term. 
             <span style="display: none;">or try <a class="highlight-text">clearing</a> some filters</span>
@@ -110,7 +110,7 @@
         leave-to-class="opacity-0 translate-y-40"
         >
           <ul v-if="isSortMobile" @click="handleSortMobile" class="flex flex-col sort-by-data absolute bottom-15 left-0 bg-white text-left text-[10px] text-[#1a1f29] z-9 w-full float-left shadow-[1px_1px_4px_#7070704d] m-0 cursor-pointer">
-                  <li @click="toggleSortStateMobile" value="title" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid uppercase" data-index="3" data-value="title" ><span>Sort By</span></li>
+                  <!-- <li @click="toggleSortStateMobile" value="title" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid uppercase" data-index="3" data-value="title" ><span>Sort By</span></li> -->
 
                   <li @click="toggleSortStateMobile" value="created-descending" class="data first-child tracking-[0] font-normal px-5 py-[15px] text-[#1a1f29] border-t-[rgba(182,184,187,0.2)] border-t border-solid hover:bg-[#ebedf1]" data-index="3" data-value="created-descending" :class="{ 'bg-[#ebedf1] hover:bg-[#ebedf1] border-l-4 border-l-[#9ea5ad]': ActiveSortApplied === 'Featured' }" ><span>Featured</span></li>
 
@@ -177,13 +177,12 @@ import SearchBar from './components/SearchBar.vue';
 import WhatsappRedirect from './components/WhatsappRedirect.vue';
 import ProductCounter from './components/ProductCounter.vue';
 import HomePageMenBanner from "./components/HomePageMenBanner.vue";
-import ProductFilterMobileOverlay from "./components/ProductFilterMobileOverlay.vue";
 
 type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
 
 export default defineComponent({
   components: {
-    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, SectionFooter, ProductFilterSidebar, ProductFilterMobileOverlay, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, SectionFooter, ProductFilterSidebar, SearchBar, WhatsappRedirect, ProductCounter
   },
   data() {
     return {

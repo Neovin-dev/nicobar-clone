@@ -204,4 +204,10 @@ export default defineComponent ({
     fill: #2f343e;
     filter: none;
 }
+
+@media (max-width: 480px) {
+    .right-side-icon {
+        gap: 25px;
+    }
+}
 </style>

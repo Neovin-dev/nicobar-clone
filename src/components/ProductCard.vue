@@ -70,7 +70,7 @@
       
       <div class="flex items-center justify-between mt-2 mb-3 relative w-full bg-white">
         <div class="flex items-center justify-between w-full mt-1 mb-3 absolute left-0 top-[-0.5] h-2 bg-white  py-2 group-hover:opacity-0 group-hover:invisible transition-opacity duration-300">
-          <div class="flex space-x-2 text-[12px] pr-2 mt-2 bg-white items-center justify-center rounded-sm w-full">
+          <div class="flex space-x-2 text-[12px] pr-2 mt-2 bg-white items-center justify-center rounded-sm w-full text-ellipsis">
             <span class="w-full"> {{ productData.title }}</span>
           </div>
         </div>
