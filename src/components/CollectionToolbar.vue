@@ -1,5 +1,5 @@
 <template>
-<div class="collectionToolbar flex-[100%] py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 w-full">
+<div class="collectionToolbar flex-[100%] py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 mb-0.5 w-full">
     <div class="collectionToobarView flex-[30%] flex flex-row py-2">
       <div v-if="widthValue== true" class="viewOrientationSidepanelDesktop flex flex-row">
           <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
@@ -63,7 +63,7 @@
           </button>
       </div>
     </div>
-    <div v-if="searchResultMensKurta" class="searchBanner flex-[30%] flex items-center uppercase text-[12px]">
+    <div v-if="searchResultMensKurta" class="searchBanner text-[#282b30] flex-[30%] flex items-center uppercase text-[12px]">
         Showing {{ displayData.totalHits ? displayData.totalHits: 'Loading..'  }} products for "{{displayData.query.query ? displayData.query.query : "Loading.. " }}"
     </div>
     <div class="collectionToolbarFilterSort flex align-middle items-center">
@@ -113,7 +113,7 @@
       
     </div>
 </div>
-<div class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
+<div v-if="Object.keys(filterTags).length > 0"  class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
   <div class="st-filter-tag flex flex-wrap items-center">
         <template v-for="(values, category) in filterTags" :key="category">
             <div 

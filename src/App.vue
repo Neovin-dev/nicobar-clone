@@ -173,7 +173,7 @@ export default defineComponent({
       isSortVisible: false,
       isSortMobile: false,
       isEmpty: false,
-      pageNum: 1 as number,
+      pageNum: 0 as number,
       searchFields: ["title",
                     "id",
                     "isActive",
@@ -412,6 +412,10 @@ export default defineComponent({
   padding: 16px 28px;
   font-size: 12px;
   width: 100%;
+}
+
+.page-item.disabled {
+  cursor:default;
 }
 
 .page-item.active {
