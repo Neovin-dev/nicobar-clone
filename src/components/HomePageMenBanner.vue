@@ -6,7 +6,7 @@
        <img v-else class="w-full" fetchpriority="high" loading="eager" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/MW_BANNER_4b96e466-06ee-4ceb-9d54-7154dc694012.png?v=1757422514">
   </section>
     <div class="image-wrapper flex justify-center w-full overflow-x-auto mb-10">
-    <div class="flex w-full">
+    <div class="items flex w-full justify-center">
       <a 
         v-for="item in carouselItems" 
         :name="item.name" 
@@ -92,6 +92,10 @@ export default defineComponent ({
 @media (max-width: 480px){
   .image-text {
     font-size: 11px;
+  }
+
+  .items {
+    justify-content: flex-start;
   }
 }
 </style>
