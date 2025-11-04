@@ -20,6 +20,7 @@
           :display-data="searchResult"
           @grid-changer="updateProductCardWidth"
           :filter-tags="filterObject"
+          @remove-filter-tag="handleRemoveTag"           @clear-all-filter-tags="handleClearAllTags"
   />
 
   <div class="card-container flex flex-[100%] flex-wrap">
@@ -367,8 +368,23 @@ export default defineComponent({
         }finally {
           this.isLoading = false;
         }
-    }
-    
+    },
+    handleRemoveTag(tagInfo: {category: string, value: string}){
+      const {category, value} = tagInfo;
+      if(this.filterObject[category]) {
+        this.filterObject[category] = this.filterObject[category].filter(
+          (item: string) => item !== value
+        );
+        if(this.filterObject[category].length === 0){
+          delete this.filterObject[category];
+        };
+      }
+      this.searchOperation(this.searchValue);
+    },
+    handleClearAllTags(){
+      this.filterObject = {};
+      this.searchOperation(this.searchValue);
+    },
   }
 })
 

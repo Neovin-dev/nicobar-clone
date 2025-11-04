@@ -63,7 +63,7 @@
           </button>
       </div>
     </div>
-    <div v-if="searchResultMensKurta" class="searchBanner flex-[30%] flex items-center">
+    <div v-if="searchResultMensKurta" class="searchBanner flex-[30%] flex items-center uppercase text-[12px]">
         Showing {{ displayData.totalHits ? displayData.totalHits: 'Loading..'  }} products for "{{displayData.query.query ? displayData.query.query : "Loading.. " }}"
     </div>
     <div class="collectionToolbarFilterSort flex align-middle items-center">
@@ -113,13 +113,31 @@
       
     </div>
 </div>
-<div class="st-filter-tag-list flex-[30%] px-9 py-4">
-  <div class="st-filter-tag">
-    <div class="st-filter-tag-wrapper inline-flex rounded-full px-2 py-1 items-center bg-[#ECECEC] ">
-      <span class="st-tag-text pr-2">Cotton Blend</span> 
-      <a class="tag-icon"><svg role="presentation" viewBox="0 0 16 14" class="Icon Icon--close w-2 h-2"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></a>
+<div class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
+  <div class="st-filter-tag flex flex-wrap items-center">
+        <template v-for="(values, category) in filterTags" :key="category">
+            <div 
+              v-for="value in values" 
+              :key="category + '-' + value"
+              class="st-filter-tag-wrapper inline-flex rounded-full px-2 py-1 mr-2 bg-[#ECECEC] items-center hover:bg-[#9ea5ad] cursor-pointer"
+              @click="removeTag(category, value)"
+            >
+            <span class="st-tag-text pr-2 text-[11px] px-2">{{ value }}</span>
+                <a class="tag-icon" >
+                    <svg role="presentation" viewBox="0 0 16 14" class="Icon Icon--close w-2 h-2">
+                        <path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+        </template>
     </div>
-  </div>
+    <div 
+        v-if="Object.keys(filterTags).length > 0" 
+        class="clear-all-tag flex text-[11px] items-center justify-center underline cursor-pointer"
+        @click="clearAllTags"
+    >
+      Clear All
+    </div>
 </div>
 </template>
 
@@ -139,7 +157,14 @@ export default defineComponent ({
         searchResultMensKurta: false,
       };
     },
-    emits: ['handle-sort', 'filter-state', 'sort-state', 'grid-changer'],
+    emits: [
+      'handle-sort', 
+      'filter-state', 
+      'sort-state', 
+      'grid-changer',
+      'remove-filter-tag',
+      'clear-all-filter-tags'
+    ],
     props: {
       displayData: {
         type: Object,
@@ -148,24 +173,28 @@ export default defineComponent ({
       sortVisible: {
         type: Boolean,
         required: true,
+      },
+      filterTags: {
+        type: Object,
+        required: true,
       }
     },
     watch: {
-  'displayData.query.query': {
-    handler(newQueryValue) {
-      if (newQueryValue) {
-        if (newQueryValue === 'mens kurta') {
-          this.searchResultMensKurta = false;
-        } else {
-          this.searchResultMensKurta = true;
-        }
-        } else {
-          this.searchResultMensKurta = false;
-        }
-      },
-        immediate: true,
-      },
-    },
+      'displayData.query.query': {
+        handler(newQueryValue) {
+          if (newQueryValue) {
+            if (newQueryValue === 'mens kurta') {
+              this.searchResultMensKurta = false;
+            } else {
+              this.searchResultMensKurta = true;
+            }
+            } else {
+              this.searchResultMensKurta = false;
+            }
+          },
+            immediate: true,
+          },
+        },
     methods: {
       handleSort(event: Event){
         const targetli = (event.target as HTMLElement).closest('li');
@@ -199,6 +228,12 @@ export default defineComponent ({
       },
       sortState(){
         this.$emit('sort-state')
+      },
+      removeTag(category: string, value: string){
+        this.$emit('remove-filter-tag', {category, value});
+      },
+      clearAllTags(){
+        this.$emit('clear-all-filter-tags');
       }
     },
     mounted(){
