@@ -1,6 +1,6 @@
 <template>
-<div class="collectionToolbar py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 w-full">
-    <div class="collectionToobarView flex flex-row py-5">
+<div class="collectionToolbar flex-[100%] py-0.5 px-10 flex justify-between pt-4 sticky top-0 bg-white z-5 w-full">
+    <div class="collectionToobarView flex-[30%] flex flex-row py-2">
       <div v-if="widthValue== true" class="viewOrientationSidepanelDesktop flex flex-row">
           <button @click="gridChangerfour" aria-label="Show four products per row" class="CollectionToolbar-layout-four h-5 w-5 flex justify-center align-middle cursor-pointer" data-action="change-layout-mode" data-grid-type="desktop" data-count="4" fdprocessedid="b0xfnh">
             <svg v-if="gridView === 'four'" class="Icon Icon--wall-2" role="presentation">
@@ -62,12 +62,11 @@
             </svg>
           </button>
       </div>
-      
-      <span class="productCount text-[12px] text-[#9ea5ad] pl-2">
-        {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }} Items
-      </span>
     </div>
-    <div class="collectionToolbarFilterSort flex h-10 align-middle">
+    <div v-if="searchResultMensKurta" class="searchBanner flex-[30%] flex items-center">
+        Showing {{ displayData.totalHits ? displayData.totalHits: 'Loading..'  }} products for "{{displayData.query.query ? displayData.query.query : "Loading.. " }}"
+    </div>
+    <div class="collectionToolbarFilterSort flex align-middle items-center">
       <div  @click="sortState" class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1]">
         <div class="sort-by-select-header flex text-center text-[10px] ">
             <span class="title-text text-[#9ea5ad]">
@@ -114,7 +113,7 @@
       
     </div>
 </div>
-<div class="st-filter-tag-list px-9 py-4">
+<div class="st-filter-tag-list flex-[30%] px-9 py-4">
   <div class="st-filter-tag">
     <div class="st-filter-tag-wrapper inline-flex rounded-full px-2 py-1 items-center bg-[#ECECEC] ">
       <span class="st-tag-text pr-2">Cotton Blend</span> 
@@ -132,11 +131,12 @@ type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
 
 export default defineComponent ({
     name: 'CollectionToolbar',
-    data(): {gridView : GridView, ActiveSortApplied : sortOptions, widthValue: boolean} {
+    data(): {gridView : GridView, ActiveSortApplied : sortOptions, widthValue: boolean, searchResultMensKurta: boolean} {
       return {
         gridView: 'four',
         ActiveSortApplied: 'Featured',
         widthValue: false,
+        searchResultMensKurta: false,
       };
     },
     emits: ['handle-sort', 'filter-state', 'sort-state', 'grid-changer'],
@@ -149,6 +149,22 @@ export default defineComponent ({
         type: Boolean,
         required: true,
       }
+    },
+    watch: {
+  'displayData.query.query': {
+    handler(newQueryValue) {
+      if (newQueryValue) {
+        if (newQueryValue === 'mens kurta') {
+          this.searchResultMensKurta = false;
+        } else {
+          this.searchResultMensKurta = true;
+        }
+        } else {
+          this.searchResultMensKurta = false;
+        }
+      },
+        immediate: true,
+      },
     },
     methods: {
       handleSort(event: Event){

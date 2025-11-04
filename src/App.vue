@@ -24,7 +24,7 @@
 
   <div class="card-container flex flex-[100%] flex-wrap">
 
-  <div class="loading-overlay w-full flex items-center justify-center h-50" v-if="isLoading">
+  <div v-if="isLoading" class="loading-overlay w-full flex items-center justify-center h-50" >
     <span class="w-full flex items-center justify-center ">
       <img class="animate-spin w-20 h-20" src="./assets/image.png" alt="">
     </span>
@@ -39,7 +39,7 @@
         :product-card-width="productCardWidth"
     />
 
-    <div class="no-results w-full" v-else-if="isEmpty">
+    <div class="no-results w-full" v-if="searchResult.totalHits === 0">
       <div class="container flex-col items-center flex justify-center">
         <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
         <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span>for "{{ searchValue }}"</span></h2> 
