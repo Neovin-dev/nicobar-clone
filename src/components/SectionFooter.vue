@@ -328,6 +328,43 @@ export default defineComponent({
     }
 
     @media (max-width: 820px){
+        .footer-sign-me {
+            flex: 100%;
+        }
+        .sign-me-form {
+            flex: 70%;
+            padding: 0;
+            padding: 40px 20px;
+            height: 100%;
+        }
+        .sign-me-img {
+            display: none;
+        }
+        .sign-me-tree {
+            display: none;
+        }
+
+        .delivery-detail-section {
+            display: none;
+        }
+
+        .sign-me-btn {
+            margin-top: 20px;
+            flex-direction: column;
+            width: 80%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .sign-me-btn span {
+            width: 100%;
+        }
+
+        .sign-me-btn img {
+            bottom: 75px;
+        }
+        .footer-middle-block {
+            margin-top: 80px;
+        }
         .footer-middle-block, .footer-middle-right, .three-part-container{
             display: flex;
             flex-direction: column;
@@ -378,5 +415,13 @@ export default defineComponent({
             margin-bottom: 10px;
             padding-left: 30vw;
         }
+        }
+
+        @media (max-width: 767px){
+            .butterfly-image {
+                bottom: -30px;
+                top: unset;
+                right: 40%;
+            }
         }
 </style>
