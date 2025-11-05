@@ -71,7 +71,7 @@
       <paginate
         v-if="!(searchResult.totalHits === 0) && !isLoading"
         class="flex items-center gap-3 text-[#6A6A6A] my-5"
-        :page-count= "Math.ceil(searchResult.totalHits/40)"
+        :page-count= "Math.ceil(searchResult.totalHits? searchResult.totalHits/40: 0)"
         :click-handler="paginationHandler"
         :prev-text="'<'"
         :next-text="'>'"

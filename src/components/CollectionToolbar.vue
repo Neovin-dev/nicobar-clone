@@ -71,6 +71,7 @@
     </div>
     
     <div v-if="widthResolution" class="collectionToolbarFilterSort flex align-middle items-center">
+      <div v-if="sortVisible" class="bg-transparent w-full h-full z-8 fixed top-0 left-0" @click="sortState"></div>
       <div  @click="sortState" class="collectionToolbarSort inline-flex py-2 px-4 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1]">
         <div class="sort-by-select-header flex text-center text-[10px] ">
             <span class="title-text text-[#9ea5ad]">
