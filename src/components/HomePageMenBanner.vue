@@ -79,19 +79,22 @@ export default defineComponent ({
 </script>
 
 <style scoped>
-.collection-banner-image::-webkit-scrollbar {
+.image-wrapper::-webkit-scrollbar {
   display: none;
 }
-.collection-banner-image {
+.image-wrapper {
   scrollbar-width: none;
 }
-.collection-banner-image {
+.image-wrapper {
   -ms-overflow-style: none;
 }
 
 @media (max-width: 480px){
   .image-text {
     font-size: 11px;
+  }
+  .image-wrapper {
+    padding: 0 2.5px;
   }
 
   .items {
