@@ -30,13 +30,13 @@
   </div>
   <div v-if="bannerEnable" class="relative express-plp flex justify-between items-center w-[calc(100%-79px)] mt-auto mb-[15px] mx-auto border-y-[#dfe1e3] border-t border-solid border-b h-[50px] p-[5px] pl-2.5 pr-2.5">
       <span id="express-plp-pincode" class="text-[12px] text-center"><span>Express Delivery:</span> <u>PIN code</u></span>
-      <span class="apply-filter flex text-[12px] text-[#bcbcbc] fill-[#bcbcbc] cursor-pointer" @click="filterState">
-        <img class="absolute right-[130px] bottom-0 h-[37px] pointer-events-none" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/Export_this_1.png?v=1754475935" alt="icon">
+      <span class="apply-filter flex text-[12px] text-[#bcbcbc] fill-[#bcbcbc] cursor-pointer underline" @click="filterState">
+        <img class="airplane-img absolute right-[90px] bottom-0 h-[37px] pointer-events-none" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/Export_this_1.png?v=1754475935" alt="icon">
         APPLY FILTER
       </span>
   </div>
   <div class="mens-collection-banner flex flex-col justify-center align-middle text-[#424954] text-center text-[15px] italic font-normal leading-5 tracking-[0.45px] w-[79%] m-auto py-3.5">
-    <h1 class="text-[#282b30] text-center text-xs not-italic flex justify-center font-bold pb-[15px] tracking-[1.2px] uppercase">All Men</h1>
+    <h1 class="title-express text-[#282b30] text-center text-xs not-italic flex justify-center font-bold pb-[15px] tracking-[1.2px] uppercase">All Men</h1>
     Check express delivery availability by PIN code and apply filter to browse.
   </div>
 </template>
@@ -59,7 +59,7 @@ export default defineComponent ({
           { name: 'Bestsellers', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Bestsellers_3aa4dfad-cab3-4bad-9289-6f458e72e105_180x.png?v=1757479108' },
         ],
         widthCalculator: false as boolean,
-        bannerEnable: window.innerWidth >= 768,
+        bannerEnable: true,
       };
     },
     methods: {
@@ -88,6 +88,30 @@ export default defineComponent ({
 .image-wrapper {
   -ms-overflow-style: none;
 }
+.image-container {
+    margin-right: 10px;
+
+}
+#express-plp-pincode {
+  letter-spacing: .40px;
+  font-size: 13px;
+}
+
+@media (max-width: 1024px){
+  .image-container {
+    height: 80px;
+    width: 77px;
+  }
+
+  .title-express{
+    font-size: 18px;
+  }
+
+  .express-plp {
+    width: 100%;
+    margin: inherit 0px;
+  }
+}
 
 @media (max-width: 480px){
   .image-text {
@@ -99,6 +123,10 @@ export default defineComponent ({
 
   .items {
     justify-content: flex-start;
+  }
+
+  .airplane-img {
+    height: 25px;
   }
 }
 </style>
