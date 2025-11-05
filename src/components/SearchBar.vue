@@ -1,12 +1,9 @@
 <template>
 <div class="search-bar-wrapper flex-[100%]">
-    <div class="searchbar w-full relative flex-[60%] pr-20 border-b">
+    <div class="searchbar w-full relative flex-[80%] pr-20 border-b border-t flex">
         <input  @input="handleInput" ref="searchInput" type="text" class="search-input text-[21px] font-thin w-full min-w-[180px] bg-white bg-none bg-position-[20px] bg-no-repeat leading-[normal] text-[#22272f] pl-5 pr-[130px] py-[30px] placeholder:text-sm placeholder:font-bold overflow-hidden whitespace-nowrap text-ellipsis focus:outline-none" placeholder="Search for a Product, Category.. ">
-        <!-- <span class="absolute right-20 top-[30%] border p-1.5 flex items-center"><button class="cursor-pointer">Search</button></span> -->
-        <span v-if="activeReset" @click="resetValues" class="reset-container underline absolute right-10 top-0 h-full items-center flex text-[12px]">Reset</span>
-        <span class="close-btn absolute right-5 top-0 items-center flex h-full" @click="$emit('close-search-bar')">
-            <img src="../../public/cross-svgrepo-com.svg" class="h-3 w-3" alt="">
-        </span>
+        <span v-if="activeReset" @click="resetValues" class="reset-container underline absolute right-20 top-0 h-full items-center flex text-[12px]">Reset</span>
+        <svg @click="$emit('close-search-bar')" class="cross-svg h-8 w-8 absolute right-5 top-[30%]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19 5L5 19M5.00001 5L19 19" stroke="#000000" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
     </div>
 </div>
 </template>
@@ -57,7 +54,7 @@ export default defineComponent({
             handler(newValue: boolean) {
                 if (newValue) {
                     nextTick(() => {
-                       this.focusInput(); 
+                       this.focusInput();
                     })
                 }
             }
@@ -69,11 +66,19 @@ export default defineComponent({
 <style scoped>
 
 @media (max-width: 820px){
-.search-input {
-    /* margin: 20px; */
-    padding: 10px;
-    /* border: 0;
-    border-bottom: 1px solid black; */
-}
+    .search-input {
+        /* margin: 20px; */
+        padding: 10px;
+        /* border: 0;
+        border-bottom: 1px solid black; */
+    }
+    .searchbar {
+        border-top: none;
+    }
+    .cross-svg {
+        height: 20px;
+        width: 20px;
+    }
+
 }
 </style>
