@@ -7,27 +7,21 @@
            :style="sliderStyle"
            @transitionend="handleTransition"
         >
+        <!-- item and index fetched from Announcements -->
            <div 
               v-for="(item, index) in slidesToDisplay"
               :key="index"
               class="announcement-carosel-slider h-7 w-full shrink-0 flex items-center justify-center"
               :class="item.bgClass"
             >
+            <!-- fetching from the iterable item in slidesToDisplay -->
                <span :class="item.spanClass">
                     <p>
                         <a :href="item.link" :title = "item.textClass" >{{ item.text }}</a>
                     </p>
                </span>
            </div>
-           <!-- <div class="announcement-carosel-slider">
-                <span class="data-text-secondary">
-                     <p>
-                        <a href="https://www.nicobar.com/pages/terms-conditions" title="https://www.nicobar.com/pages/terms-conditions">REVISED GST RATES EFFECTIVE FROM 22.09.2025</a>
-                    </p>
-               </span>
-           </div> 
-        </div> -->
-    </div>
+        </div>
     </div>
     <!-- Announcement bar ends -->
 </template>
@@ -64,7 +58,7 @@ export default defineComponent({
                 id: 2,
                 text: 'REVISED GST RATES EFFECTIVE FROM 22.09.2025',
                 link: 'https://www.nicobar.com/pages/terms-conditions',
-                bgClass: 'bg-black', 
+                bgClass: 'bg-black', // black
                 textClass: 'text-white',
                 spanClass: 'data-text-secondary',
               } as Announcement,
@@ -79,26 +73,24 @@ export default defineComponent({
     computed: {
         slidesToDisplay(): Announcement[] {
 
-            return [this.announcements[0]!, this.announcements[0]!]
+            return [this.announcements[0]!, this.announcements[1]!,this.announcements[0]!]
         },
 
         sliderStyle(): Record<string, string> {
           return {
+            // transition using index 100% -> 200%
             transform: `translateX(-${this.currentIndex * 100}%)`
           }
         },
 
         sliderClasses(): string {
             if(this.isTransitioning) return 'transition-transform duration-500 ease-in-out';
-
             return 'transition-none';
         }
     },
 
     methods: {
         startCarousel(){
-            if(this.intervalId) clearInterval(this.intervalId);
-
             this.intervalId = window.setInterval(()=> {
                 this.goToSlide(this.currentIndex + 1)
             }, 3000)
@@ -109,26 +101,21 @@ export default defineComponent({
             this.currentIndex = index;
         },
 
-        // infinity looping logic moving from 2 to 1clone -> 1
+        // infinity looping logic moving from 2 to 1[clone] -> 1
         handleTransition(){
             if(this.currentIndex === this.announcements.length){
+              // pause transition and flip to 1
                 this.isTransitioning = false;
-
                 this.currentIndex = 0;
             }
         },
     },
 
     mounted(){
-        if(this.announcements.length > 1){
-            this.startCarousel();
-        }
+        this.startCarousel();
+        // as there is no need for a condition as it will always be as true as no. of banner is always > 1
+        
     },
-    beforeUnmount() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  },
 })
 
 </script>
