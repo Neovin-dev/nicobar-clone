@@ -161,9 +161,9 @@ import Paginate from "vuejs-paginate-next";
 import { defineComponent } from "vue";
 
 // Working NICOBAR TOKENS
-const searchToken = VITE_NICOBAR_SEARCH_TOKEN as string;
-const applicationId = VITE_NICOBAR_APPLICATION_ID as string;
-const collectionId = VITE_NICOBAR_COLLECTION_ID as string;
+const searchToken = import.meta.env.VITE_NICOBAR_SEARCH_TOKEN as string;
+const applicationId = import.meta.env.VITE_NICOBAR_APPLICATION_ID as string;
+const collectionId = import.meta.env.VITE_NICOBAR_COLLECTION_ID as string;
 
 // Client initialization
 var searchClient = new SearchClient(applicationId, searchToken);
