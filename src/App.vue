@@ -43,7 +43,7 @@
         :product-card-width="productCardWidth"
     />
 
-    <div class="no-results w-full" v-if="!isLoading">
+    <div class="no-results w-full" v-if="!isLoading && searchResult.totalHits === 0">
       <div  v-if="searchResult.totalHits === 0">
           <div class="container flex-col items-center flex justify-center">
             <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
@@ -54,8 +54,7 @@
               </p>
             </div>
           </div> 
-        </div>
-        <div></div>
+          <div></div>
         <div class="flex items-center justify-center text-[20px] border-b border-[#d1cece]">OR</div>
         <div></div>
         <div class="flex flex-col items-center justify-center mt-4">
@@ -66,6 +65,8 @@
           
           <p class="flex items-center justify-center mt-2 mb-2">in "Mens Collection"</p>
         </div>
+      </div>
+        
         <div class="card-container flex flex-[100%] flex-wrap mt-2">
         <ProductCard 
           v-for="product in emptySearchResult.results" 
@@ -257,7 +258,7 @@ export default defineComponent({
   },
   async mounted(){
     this.searchOperation(this.initialsearchValue);
-    this.searchOperation(this.emptyStateSearch);
+    // this.searchOperation(this.emptyStateSearch);
   },
   methods: {
     skipValue(pageNumber: number) {
@@ -382,6 +383,7 @@ export default defineComponent({
           this.currentPage = 1;
           this.pageNum = 0;
         };
+
         if(searchVal === 'mens kurta'){
           this.bannerEnable = true;
         } else {
@@ -494,6 +496,17 @@ export default defineComponent({
       this.searchOperation(this.searchValue);
     },
   },
+  watch: {
+    'searchResult.totalHits': {
+      handler(totalHits){
+        if(totalHits === 0){
+          this.searchOperation(this.emptyStateSearch);
+        } else {
+          console.log("successful search result")
+        }
+      }
+    }
+  }
 })
 
 </script>
