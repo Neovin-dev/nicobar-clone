@@ -42,7 +42,7 @@
 
               <div class="filter-options-list flex">
               <Transition name="category-slide">
-                <ul v-show="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4' : 'default-options-list p-4 w-100'">
+                <ul v-show="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4 uppercase' : 'default-options-list p-4 w-100'">
                   <li 
                     class="filter-option-item" 
                     v-for="option in options" 

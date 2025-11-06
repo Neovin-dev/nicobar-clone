@@ -320,6 +320,13 @@ export default defineComponent({
         if(document.body.classList.contains('overflow-hidden')){
             document.body.classList.remove('overflow-hidden'); 
           }
+        setTimeout(() => {
+          window.scrollTo({
+                  top: 600,
+                  left: 0,
+                  behavior: 'smooth',
+          });
+        }, 200);
       } else {
         console.log('button clicked to toggle on')
          this.isFilterSidebar = true;
@@ -478,6 +485,13 @@ export default defineComponent({
   .sidebar-slide-enter-from .product-filter-sidebar,
   .sidebar-slide-leave-to .product-filter-sidebar {
     transform: translateY(100%);
+  }
+}
+
+
+@media (max-width: 468px){
+  .no-result-img {
+    width: 250px;
   }
 }
 </style>

@@ -88,7 +88,7 @@
 
       </div>
       
-      <p class="text-[11px] text-gray-900">
+      <p class="text-[11px] text-gray-900 formatted-price">
         ₹ {{ formattedPrice }}
       </p>
 
@@ -210,6 +210,12 @@ export default defineComponent({
 @media (max-width: 820px){
   .product-wrapper {
     padding: 1px;
+  }
+}
+
+@media (max-width: 468px){
+  .formatted-price {
+    margin-top: 12px;
   }
 }
 

@@ -122,7 +122,7 @@
     </div>
 </div>
 <div v-if="Object.keys(filterTags).length > 0"  class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
-  <div class="st-filter-tag flex flex-wrap items-center">
+  <div class="st-filter-tag flex flex-wrap items-center" :class="filterTags.category === 'Size' ? 'uppercase': 'capitalize'">
         <template v-for="(values, category) in filterTags" :key="category">
             <div 
               v-for="value in values" 
@@ -150,7 +150,9 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent } from "vue";
+
 
 type GridView = 'one'| 'two' | 'four';
 type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
@@ -272,15 +274,14 @@ export default defineComponent ({
 </script>
 
 <style scoped>
-@media (max-width: 420px){
+@media (max-width: 468px){
   .collectionToobarView{
     display: flex;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    flex: 5%
+    
   }
-  .viewOrientationSidepanelMobile {
-    display: none;
-  }
+
   .collectionToolbar {
     height: 50px;
     
