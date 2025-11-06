@@ -33,7 +33,7 @@
       
         <template v-for="(options, categoryName) in filterData" :key="categoryName">
             <div v-if="options.length > 1">
-              <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b">
+              <div @click="toggleOptions(categoryName)" class="filter-header flex p-3 border-t-[#ebedf1] border-t border-solid border-b-[#ebedf1] border-b cursor-pointer">
                 <div class="pr-3 flex items-center justify-center font-bold text-[#5b6670] h-5">{{ categoryToggleState[categoryName] ? '-' : '+' }}</div>
                 <h3 class="filter-title uppercase text-[#5b6670] cursor-pointer font-bold text-[14px]">
                   {{ FilterTitleFormatter(categoryName) }}
@@ -74,8 +74,8 @@
             <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%]">
-            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 mr-3 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
-            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] bg-[#263b54] rounded-full justify-center items-center text-white text-[10px]">See items</button>
+            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 mr-3 px-6 border-2 border-solid border-[#dfe1e3] cursor-pointer rounded-full justify-center items-center text-[10px]">Close</button>
+            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] cursor-pointer bg-[#263b54] rounded-full justify-center items-center text-white text-[10px]">See items</button>
           </div>
         </div>
         <div v-else class="filter-actions-footer fixed bottom-0 flex flex-col w-full pb-5 px-5 pr-10 bg-white pt-6 left-0">
@@ -83,10 +83,10 @@
             <p class="total-selected-filters text-sm"><span class="active-count">{{ totalFiltersSelected }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm underline cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
-          <div class="flex flex-[100%] gap-4">
-            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px]">Close</button>
+          <div class="button-div flex flex-[100%] gap-4">
+            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center  cursor-pointer text-[10px]">Close</button>
             <div class="flex-[40%]"></div>
-            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] bg-[#263b54] text-white">See items</button>
+            <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] bg-[#263b54] text-white cursor-pointer">See items</button>
           </div>
         </div>
 
@@ -186,6 +186,10 @@ export default defineComponent ({
 </script>
 
 <style>
+
+.button-div button {
+  cursor: pointer;
+}
 
 input[type="checkbox"] { 
   appearance: none;

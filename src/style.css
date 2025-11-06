@@ -46,6 +46,15 @@
   width: 100%;
 }
 
+@media (max-width: 468px){
+  .page-link {
+    display: flex;
+    color: #6A6A6A;
+    padding: 8px 14px;
+    font-size: 12px;
+    width: 100%;
+  }
+}
 .page-item.disabled {
   cursor:not-allowed;
 }

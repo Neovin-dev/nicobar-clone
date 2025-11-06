@@ -1,5 +1,5 @@
 <template>
-  <div class="product-wrapper cursor-pointer bg-white p-1 overflow-hidden transition-all duration-300 group" :style="{ flex: `0 0 ${productCardWidth}` }">
+  <div class="product-wrapper bg-white p-1 overflow-hidden transition-all duration-300 group" :style="{ flex: `0 0 ${productCardWidth}` }">
     <div class="relative w-full aspect-3/4 bg-gray-100 group">
         <span 
           class="absolute top-3 text-xs font-normal px-2 py-1 z-1"
@@ -47,7 +47,7 @@
 
     <div class="pt-3.5 pl-1.25">
         <div class="flex justify-between pb-1">
-          <span class="inline-block border border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
+          <span class="inline-block border cursor-default border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
               {{ productData.material[0] ? productData.material[0].toUpperCase(): '' }} 
           </span>
           <div v-if="!widthCalc" class="flex"> 

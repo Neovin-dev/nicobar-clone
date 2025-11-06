@@ -9,12 +9,12 @@
       @close-search-bar="closeSearchBar"
       @update-search="searchOperation"
   />
-  <div v-if="!isSearchEnable" >
+  <div v-if="bannerEnable" >
       <HomePageMenBanner @filter-state="toggleVisibility"/>
   </div>
 
   <CollectionToolbar 
-          v-if="!(searchResult.totalHits === 0)"
+          v-if="!(searchResult.totalHits === 0) && searchValue.length"
           @handle-sort="selectedSortOp"
           @filter-state="toggleVisibility"
           :sort-visible="isSortVisible" 
@@ -57,19 +57,11 @@
         </div>
     </div>
     
-    <!-- the second product card -->
-    <!-- <ProductCard 
-        v-show="searchResult.totalHits === 0"
-        v-for="product in searchResult.results" 
-        :key="product.id"
-        :product-data="product"
-        :product-card-width="productCardWidth"
-    /> -->
   </div>
   
-  <div class="pagination-wrapper w-full flex justify-center mb-20 mt-7.5">
+  <div class="pagination-wrapper w-full flex justify-center mb-20 mt-7.5 ">
       <paginate
-        v-if="!(searchResult.totalHits === 0) && !isLoading"
+        v-if="!(searchResult.totalHits === 0) && !isLoading && searchValue.length != 0"
         v-model="currentPage"
         class="flex items-center gap-3 text-[#6A6A6A] my-5"
         :page-count= "Math.ceil(searchResult.totalHits? searchResult.totalHits/40: 0)"
@@ -191,9 +183,11 @@ export default defineComponent({
     return {
       currentCollectionId: collectionId as string,
       isLoading: true as boolean,
-      searchValue: 'mens kurta' as string,
+      initialsearchValue: 'mens kurta' as string,
+      searchValue: '' as string,
       searchFilter: { result: {} } as any,
       searchResult: { result: {} } as any,
+      searchResultCopy: { result: {} } as any,
       intialResult: null as any,
       isSearchEnable: false as boolean,
       currSort: 'all_products_search_position' as string,
@@ -237,10 +231,11 @@ export default defineComponent({
       widthMobile: window.innerWidth <= 1024,
       ActiveSortApplied: 'Featured' as sortOptions,
       currentPage: 1 as number,
+      bannerEnable: true as boolean,
     };
   },
   async mounted(){
-    this.searchOperation(this.searchValue);
+    this.searchOperation(this.initialsearchValue);
   },
   methods: {
     skipValue(pageNumber: number) {
@@ -279,11 +274,14 @@ export default defineComponent({
       console.log(this.currentPage);
       this.skipValue(pageNum) 
       
-      window.scrollTo({
-                top: 700,
+      setTimeout(() => {
+        window.scrollTo({
+                top: 600,
                 left: 0,
                 behavior: 'smooth',
-      });
+        });
+      }, 200);
+      
 
       this.searchOperation(this.searchValue);
 
@@ -340,6 +338,12 @@ export default defineComponent({
     },
     async searchOperation(searchVal: string){
       try {
+        if(searchVal === 'mens kurta'){
+          this.bannerEnable = true;
+        } else {
+          this.bannerEnable = false;
+        }
+          
           this.searchValue = searchVal
           this.isLoading = true;
           console.log("Search Operation");
@@ -395,12 +399,18 @@ export default defineComponent({
               searchBuilder = searchBuilder.textFacetFilters(category, values);
             }
           } 
+          this.currentPage = 1;
           const result = await searchBuilder.search(searchVal, collectionId)                         
-
 
           const safeResult = result ||  null; 
             
           this.searchResult = safeResult;
+
+          let x = 0;
+          if(x === 0) {
+            this.searchResultCopy = this.searchResult;
+            x++;
+          }
           console.log(`${"SearchResulty for keyword " + searchVal + " and SearchResult is "+ safeResult.result + "and Value is skip"+ this.skipValue}`)
           if(safeResult){
             this.searchFilter = safeResult.textFacets;

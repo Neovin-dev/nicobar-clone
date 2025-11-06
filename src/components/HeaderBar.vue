@@ -7,7 +7,7 @@
                     <div class="header-left flex">
                         <div class="header-burger-menu w-4">
                         <button class="left-burger-menu">
-                            <span class="burger-icon cursor-pointer">
+                            <span class="burger-icon ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19" viewBox="0 0 24 19" fill="none">
                                     <g filter="url(#filter0_d_1029_1532)">
                                     <rect x="2" y="1.25781" width="20" height="1" fill="white"></rect>
@@ -71,7 +71,7 @@
                         
                     </div>
                     <div class="right-side-icon flex gap-10">
-                        <span class="search-icon cursor-pointer" @click="$emit('enable-search-bar')">
+                        <span class="search-icon " @click="$emit('enable-search-bar')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 20 19" fill="none">
                                 <g filter="url(#filter0_d_1029_1556)">
                                     <mask id="path-1-outside-1_1029_1556" maskUnits="userSpaceOnUse" x="0.958984" y="0.208984" width="18" height="18" fill="black">
@@ -95,7 +95,7 @@
                                 </defs>
                                 </svg>
                         </span>
-                        <span class="profile-icon cursor-pointer">
+                        <span class="profile-icon ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none">
                             <g filter="url(#filter0_d_1029_1560)">
                                 <mask id="path-1-outside-1_1029_1560" maskUnits="userSpaceOnUse" x="0.59668" y="0.707031" width="18" height="19" fill="black">
@@ -119,7 +119,7 @@
                             </defs>
                             </svg>
                         </span>
-                        <span class="cart-icon cursor-pointer">
+                        <span class="cart-icon ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                             <g filter="url(#filter0_d_1029_1564)">
                                 <mask id="path-1-outside-1_1029_1564" maskUnits="userSpaceOnUse" x="0.40918" y="0.707031" width="19" height="19" fill="black">
