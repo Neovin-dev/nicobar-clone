@@ -201,4 +201,16 @@ export default defineComponent ({
         gap: 25px;
     }
 }
+
+@media (max-width: 420px){
+    .header-logo {
+        padding-left: 5px;
+    }
+    .logo a span svg{
+        width: 100px;
+    }   
+    .right-side-icon {
+        gap: 20px
+    }
+}
 </style>

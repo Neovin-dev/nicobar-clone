@@ -22,20 +22,23 @@ export default defineComponent({
     data(){
         return {
             activeReset: false as boolean,
+            val: '' as string,
         }
     },
-    emits: ['update-search', 'close-search-bar'],
+    emits: ['update-search', 'close-search-bar', 'entered-search'],
     methods: {
         handleInput(event: Event){
             const target = event.target as HTMLInputElement;
-            
+            this.val = target.value
             if(target.value.length > 0){
                 this.activeReset = true;
                 this.$emit('update-search', target.value); 
+                this.$emit('entered-search', this.val); 
                 console.log("character entered", target.value)
             }else {
                 this.activeReset = false;
                 this.$emit('update-search', 'shirts mens'); 
+                this.$emit('entered-search', this.val); 
                 console.log("character entered", 'mens kurta')
             }
         },
@@ -45,13 +48,16 @@ export default defineComponent({
             if (inputElement) {
                 inputElement.value = ''; 
                 this.$emit('update-search', 'mens kurta');
+                this.$emit('entered-search', this.val); 
                 this.activeReset = false; 
             }
             this.$emit('update-search', 'mens kurta');
+            this.$emit('entered-search', this.val); 
             this.$emit('close-search-bar');
         },
         resetsPage(){
             this.$emit('update-search', 'mens kurta');
+            this.$emit('entered-search', this.val); 
             this.$emit('close-search-bar');
         },
         focusInput() {
