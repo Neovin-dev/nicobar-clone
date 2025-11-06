@@ -122,7 +122,7 @@
     </div>
 </div>
 <div v-if="Object.keys(filterTags).length > 0"  class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
-  <div class="st-filter-tag flex flex-wrap items-center" :class="filterTags.category === 'Size' ? 'uppercase': 'capitalize'">
+  <div class="st-filter-tag flex flex-wrap items-center mb-0.5 flex-[80%]" :class="filterTags.category === 'Size' ? 'uppercase': 'capitalize'">
         <template v-for="(values, category) in filterTags" :key="category">
             <div 
               v-for="value in values" 
@@ -141,7 +141,7 @@
     </div>
     <div 
         v-if="Object.keys(filterTags).length > 0" 
-        class="clear-all-tag flex text-[11px] items-center justify-center underline cursor-pointer"
+        class="clear-all-tag flex text-[11px] items-center justify-center underline cursor-pointer flex-[20%]"
         @click="clearAllTags"
     >
       Clear All
@@ -274,12 +274,22 @@ export default defineComponent ({
 </script>
 
 <style scoped>
+
 @media (max-width: 468px){
   .collectionToobarView{
     display: flex;
     justify-content: flex-start;
     flex: 5%
     
+  }
+
+  .st-filter-tag-list {
+    padding: 0;
+    padding-left: 10px;
+  }
+
+  .st-filter-tag-wrapper {
+    margin-bottom: 5px;
   }
 
   .collectionToolbar {

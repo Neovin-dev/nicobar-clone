@@ -55,6 +55,25 @@
             </div>
           </div> 
         </div>
+        <div></div>
+        <div class="flex items-center justify-center text-[20px] border-b border-[#d1cece]">OR</div>
+        <div></div>
+        <div class="flex flex-col items-center justify-center mt-4">
+          <div class="flex items-center justify-center gap-2">
+            <svg class="mt-2" width="16" height="20" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.80968 15.0679C9.5273 12.1176 8.80817 8.40483 6.09966 6.24033C6.09808 6.23911 6.0965 6.23758 6.09523 6.23666L6.10694 6.26482L6.10504 6.28594C6.63276 7.63466 6.55873 9.11531 5.91047 10.3857L5.45362 11.2813L5.31347 10.2917C5.21824 9.62039 4.95659 8.98001 4.55353 8.43177H4.48994L4.4564 8.33993C4.46115 9.3657 4.23778 10.3762 3.7996 11.3294C3.22474 12.5768 3.30922 14.0152 4.02581 15.1778L4.52031 15.9804L3.63066 15.6168C2.16361 15.0171 0.990804 13.8618 0.412783 12.4473C-0.234842 10.8678 -0.114934 9.03633 0.733906 7.54925C1.17652 6.77572 1.48657 5.95443 1.65583 5.10773L1.82129 4.27787L2.24334 5.01804C2.44487 5.37098 2.59326 5.75301 2.68532 6.15432L2.69481 6.16381L2.70462 6.22809L2.71379 6.22533C3.97804 4.6002 4.73545 2.57805 4.84586 0.530486L4.87434 0L5.33435 0.290191C7.21173 1.47391 8.51552 3.37301 8.91827 5.5069L8.92744 5.55067L8.93219 5.5574L8.95275 5.52924C9.3207 5.05906 9.51496 4.4998 9.51496 3.91115V2.99956L10.0835 3.72626C11.4053 5.41537 12.083 7.51068 11.9919 9.62651C11.8799 12.117 10.4761 14.3029 8.23648 15.4873L7.26678 16L7.80968 15.0679Z" fill="#FFA200"></path></svg>
+          <h2 class="text-[20px] mt-3">Trending Searches</h2>
+          </div>
+          
+          <p class="flex items-center justify-center mt-2 mb-2">in "Mens Collection"</p>
+        </div>
+        <div class="card-container flex flex-[100%] flex-wrap mt-2">
+        <ProductCard 
+          v-for="product in emptySearchResult.results" 
+          :key="product.id"
+          :product-data="product"
+          :product-card-width="productCardWidth"
+        />
+        </div>
     </div>
     
   </div>
@@ -88,7 +107,7 @@
   </div>
   
     <div v-if="isSortMobile" @click="toggleSortStateMobile" class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-12"></div>
-    <div v-if="widthMobile" class="collectionToolbarFilterSort h-15 align-middle fixed flex bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20">
+    <div v-if="widthMobile" class="collectionToolbarFilterSortMobile h-15 align-middle fixed flex bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20">
       <div @click="toggleSortStateMobile" class="collectionToolbarSort inline-flex py-2 px-6 border-2 mx-3 border-solid font-bold border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1] flex-[50%]">
           <div class="sort-by-select-header flex text-center text-[10px]">
               <span class="title-text text-[#1A1F29] uppercase">
@@ -232,10 +251,13 @@ export default defineComponent({
       ActiveSortApplied: 'Featured' as sortOptions,
       currentPage: 1 as number,
       bannerEnable: true as boolean,
+      emptySearchResult: { result: {} } as any,
+      emptyStateSearch: 'mens collection'
     };
   },
   async mounted(){
     this.searchOperation(this.initialsearchValue);
+    this.searchOperation(this.emptyStateSearch);
   },
   methods: {
     skipValue(pageNumber: number) {
@@ -422,16 +444,18 @@ export default defineComponent({
             }
           } 
           // this.currentPage = 1;
+
+          
           const result = await searchBuilder.search(searchVal, collectionId)                         
 
           const safeResult = result ||  null; 
             
-          this.searchResult = safeResult;
+          
 
-          let x = 0;
-          if(x === 0) {
-            this.searchResultCopy = this.searchResult;
-            x++;
+          if(searchVal === 'mens collection'){
+            this.emptySearchResult = safeResult
+          } else {
+            this.searchResult = safeResult;
           }
           console.log(`${"SearchResulty for keyword " + searchVal + " and SearchResult is "+ safeResult.result + "and Value is skip"+ this.skipValue}`)
           if(safeResult){
@@ -475,6 +499,12 @@ export default defineComponent({
 </script>
 
 <style>
+
+.collectionToolbarFilterSortMobile {
+  box-shadow: 1px -8px 31px 11px rgba(188,188,188,0.72);
+-webkit-box-shadow: 1px -8px 31px 11px rgba(188,188,188,0.72);
+-moz-box-shadow: 1px -8px 31px 11px rgba(188,188,188,0.72);
+}
 
 .sidebar-slide-enter-from .overlay,
 .sidebar-slide-leave-to .overlay {
