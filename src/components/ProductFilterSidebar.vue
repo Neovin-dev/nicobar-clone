@@ -69,8 +69,8 @@
           </template>
         </div>
         <div v-if="widthResolution" class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 pr-10 bg-white">
-          <div v-if="Object.keys(selectedFilters).length !== 0" class="footer-selector flex gap-2 pb-2">
-            <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
+          <div v-if="totalFiltersSelected !== 0" class="footer-selector flex gap-2 pb-2">
+            <p class="total-selected-filters text-sm"><span class="active-count">{{ totalFiltersSelected }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%]">
@@ -79,8 +79,8 @@
           </div>
         </div>
         <div v-else class="filter-actions-footer fixed bottom-0 flex flex-col w-full pb-5 px-5 pr-10 bg-white pt-6 left-0">
-          <div v-if="Object.keys(selectedFilters).length !== 0" class="footer-selector flex gap-2 pb-2">
-            <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
+          <div v-if="totalFiltersSelected !== 0" class="footer-selector flex gap-2 pb-2">
+            <p class="total-selected-filters text-sm"><span class="active-count">{{ totalFiltersSelected }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm underline cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%] gap-4">
@@ -171,6 +171,16 @@ export default defineComponent ({
       toggleOptions(categoryName: string){
         this.categoryToggleState[categoryName] = !this.categoryToggleState[categoryName]
       },
+    },
+    computed: {
+      // simply traverse the whole object
+        totalFiltersSelected(): number {
+            let count = 0;
+            for (let categoryKey in this.selectedFilters) {
+                count += this.selectedFilters[categoryKey]? this.selectedFilters[categoryKey].length: 0;
+            }
+            return count;
+        }
     },
 })
 </script>

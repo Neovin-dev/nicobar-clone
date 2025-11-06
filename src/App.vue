@@ -434,7 +434,7 @@ export default defineComponent({
       this.filterObject = {};
       this.searchOperation(this.searchValue);
     },
-  }
+  },
 })
 
 </script>
