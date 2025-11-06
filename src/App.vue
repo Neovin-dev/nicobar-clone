@@ -26,7 +26,7 @@
           @clear-all-filter-tags="handleClearAllTags"
   />
 
-  <div class="card-container flex flex-[100%] flex-wrap">
+  <div class="card-container flex flex-[100%] flex-wrap mt-2">
 
   <div v-if="isLoading" class="loading-overlay w-full flex items-center justify-center h-50" >
     <span class="w-full flex items-center justify-center ">
