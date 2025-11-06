@@ -309,8 +309,14 @@ export default defineComponent({
     },
     toggleSortStateMobile(){
       if(this.isSortMobile){
+        if(document.body.classList.contains('overflow-hidden')){
+            document.body.classList.remove('overflow-hidden'); 
+          }
+
         this.isSortMobile= false;
       } else {
+        document.body.classList.add('overflow-hidden'); 
+        
         this.isSortMobile = true;
       }
     },
@@ -345,6 +351,15 @@ export default defineComponent({
     },
     async searchOperation(searchVal: string){
       try {
+        const isSearchNew = this.searchValue !== searchVal;
+
+        if(isSearchNew){
+          this.filterObject = {};
+          this.currSort = 'all_products_search_position';
+          this.ActiveSortApplied = "Featured" as sortOptions;
+          this.currentPage = 1;
+          this.pageNum = 0;
+        };
         if(searchVal === 'mens kurta'){
           this.bannerEnable = true;
         } else {
@@ -406,7 +421,7 @@ export default defineComponent({
               searchBuilder = searchBuilder.textFacetFilters(category, values);
             }
           } 
-          this.currentPage = 1;
+          // this.currentPage = 1;
           const result = await searchBuilder.search(searchVal, collectionId)                         
 
           const safeResult = result ||  null; 
