@@ -16,3 +16,14 @@ export default defineComponent({
     name: "WhatsappRedirect"
 })
 </script>
+
+<style scoped>
+@media (max-width: 468px){
+   .whatsapp-wrapper {
+    height: 30px;
+    width: 30px;
+    bottom: 95px;
+    } 
+} 
+
+</style>
