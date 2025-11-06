@@ -74,7 +74,7 @@
             <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="flex flex-[100%]">
-            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[50%] py-2 mr-3 px-6 border-2 border-solid border-[#dfe1e3] cursor-pointer rounded-full justify-center items-center text-[10px]">Close</button>
+            <button @click="closeFilterBar" class="close-filter-btn font-bold inline-flex flex-[50%] py-2 mr-3 px-6 border-2 border-solid border-[#dfe1e3] cursor-pointer rounded-full justify-center items-center text-[10px]">Close</button>
             <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[50%] py-2 px-6 border-2 border-solid border-[#dfe1e3] cursor-pointer bg-[#263b54] rounded-full justify-center items-center text-white text-[10px]">See items</button>
           </div>
         </div>
@@ -84,7 +84,7 @@
             <button class="clear-all-filters-btn text-left text-sm underline cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
           <div class="button-div flex flex-[100%] gap-4">
-            <button @click="closeFilterBar" class="close-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center  cursor-pointer text-[10px]">Close</button>
+            <button @click="closeFilterBar" class="close-filter-btn font-bold inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center  cursor-pointer text-[10px]">Close</button>
             <div class="flex-[40%]"></div>
             <button @click="closeFilterBar" class="apply-filter-btn inline-flex flex-[30%] py-2 px-6 border-2 border-solid border-[#dfe1e3] rounded-full justify-center items-center text-[10px] bg-[#263b54] text-white cursor-pointer">See items</button>
           </div>
@@ -259,5 +259,11 @@ label > input[type="checkbox"]:checked::after {
 .category-slide-leave-from {
   max-height: 200px; 
   opacity: 1;
+}
+
+@media (max-width: 400px){
+  .apply-filter-btn, .close-filter-btn {
+    flex: 40%;
+  }
 }
 </style>
