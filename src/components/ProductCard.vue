@@ -18,13 +18,13 @@
         >
         <button 
         @click="nextImage(-1)" 
-        class="absolute left-2 top-1/2 cursor-pointer -translate-y-1/2 p-2 text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none"
+        class="absolute left-2 top-1/2 cursor-pointer -translate-y-1/2 p-2 text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none h-full"
         >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
         </button>
         <button 
           @click="nextImage(1)" 
-          class="absolute right-2 top-1/2 cursor-pointer -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none"
+          class="absolute right-2 top-1/2 cursor-pointer -translate-y-1/2 p-2  text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-100 focus:outline-none h-full"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
         </button>
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="p-4">
+    <div class="pt-3.5 pl-1.25">
         <div class="flex justify-between pb-2">
           <span class="inline-block border border-gray-300 text-[10px] font-medium px-2 py-0.5 mb-1">
               {{ productData.material[0] ? productData.material[0].toUpperCase(): '' }} 

@@ -42,7 +42,7 @@
 
               <div class="filter-options-list flex">
               <Transition name="category-slide">
-                <ul v-if="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4' : 'default-options-list p-4 w-100'">
+                <ul v-show="categoryToggleState[categoryName]" :class="categoryName === 'size' ? 'size-options flex flex-wrap pl-4' : 'default-options-list p-4 w-100'">
                   <li 
                     class="filter-option-item" 
                     v-for="option in options" 
@@ -69,7 +69,7 @@
           </template>
         </div>
         <div v-if="widthResolution" class="filter-actions-footer fixed bottom-0 flex flex-col w-[375px] pb-7.5 pr-10 bg-white">
-          <div class="footer-selector flex gap-2 pb-2">
+          <div v-if="Object.keys(selectedFilters).length !== 0" class="footer-selector flex gap-2 pb-2">
             <p class="total-selected-filters text-sm"><span class="active-count">{{ Object.keys(selectedFilters).length }}</span>  filters selected</p>
             <button class="clear-all-filters-btn text-left text-sm text-amber-200 cursor-pointer" @click="clearFiltersHelper">Clear filters</button>
           </div>
