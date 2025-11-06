@@ -200,8 +200,6 @@ export default defineComponent({
         this.isTransitioning = false;
       }
       
-      // this.imageIndex = newIndex; 
-      
     }
   },
 });

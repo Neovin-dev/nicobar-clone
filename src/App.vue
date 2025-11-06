@@ -47,7 +47,8 @@
       <div  v-if="searchResult.totalHits === 0">
           <div class="container flex-col items-center flex justify-center">
             <div class="no-result-img flex flex-col w-100 justify-center items-center"><img src="../public/image.png" alt=""></div> 
-            <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px]">for "{{ searchValue }}"</span></h2> 
+            <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result</h2> 
+            <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px] flex justify-center items-center"> for "{{ searchValue }}"</span>
             <div class="search-pform flex flex-col w-100 justify-center items-center">
               <p> Please try a different term. <span style="display: none;">or try <a class="highlight-text">clearing</a> some filters</span>
               </p>
@@ -57,19 +58,19 @@
     </div>
     
     <!-- the second product card -->
-    <ProductCard 
-        v-else-if="!isLoading"
+    <!-- <ProductCard 
         v-show="searchResult.totalHits === 0"
         v-for="product in searchResult.results" 
         :key="product.id"
         :product-data="product"
         :product-card-width="productCardWidth"
-    />
+    /> -->
   </div>
   
   <div class="pagination-wrapper w-full flex justify-center mb-20 mt-7.5">
       <paginate
         v-if="!(searchResult.totalHits === 0) && !isLoading"
+        v-model="currentPage"
         class="flex items-center gap-3 text-[#6A6A6A] my-5"
         :page-count= "Math.ceil(searchResult.totalHits? searchResult.totalHits/40: 0)"
         :click-handler="paginationHandler"
@@ -201,7 +202,7 @@ export default defineComponent({
       isSortVisible: false,
       isSortMobile: false,
       isEmpty: false,
-      pageNum: 0 as number,
+      pageNum: 1 as number,
       searchFields: ["title",
                     "id",
                     "isActive",
@@ -235,6 +236,7 @@ export default defineComponent({
       productCardWidth: '25%',
       widthMobile: window.innerWidth <= 1024,
       ActiveSortApplied: 'Featured' as sortOptions,
+      currentPage: 1 as number,
     };
   },
   async mounted(){
@@ -273,15 +275,16 @@ export default defineComponent({
         }
       },
     paginationHandler(pageNum: number){
-      let val = pageNum;
-      console.log(pageNum);
-      this.skipValue(val) 
+      this.currentPage = pageNum;
+      console.log(this.currentPage);
+      this.skipValue(pageNum) 
       
       window.scrollTo({
                 top: 700,
                 left: 0,
                 behavior: 'smooth',
       });
+
       this.searchOperation(this.searchValue);
 
     },
@@ -450,7 +453,6 @@ export default defineComponent({
 .sidebar-slide-leave-from .overlay {
   opacity: 1;
 }
-
 
 .sidebar-slide-enter-from .product-filter-sidebar,
 .sidebar-slide-leave-to .product-filter-sidebar {

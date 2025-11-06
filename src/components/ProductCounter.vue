@@ -7,7 +7,7 @@
         <!-- </span> -->
         <!-- <span>/</span> -->
         <total-product-count class="pr-2">
-            {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }}
+            {{ displayData.totalHits ? displayData.totalHits: 'Loading..' }} Items
         </total-product-count>
         <img src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/arrow-top.svg?v=1671523432" alt="back to top"></img>
     </div>
