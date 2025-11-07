@@ -55,6 +55,7 @@
                         :value="option.label" 
                         :id="'Filter-' + categoryName + '-' + option.label"
                         class="size-checkbox"
+                        :checked="selectedFilters[categoryName] && selectedFilters[categoryName].includes(option.label)"
                         @change="handleFilterChange(categoryName, option.label, $event)"
                       >
                       <span class="filter-item-value pr-2 flex">{{ option.label }}</span>
@@ -104,15 +105,27 @@ export default defineComponent ({
         type: Object,
         required: true,
       },
+      activeFilters: {
+        type: Object,
+        required: true,
+      }
     },
     data() {
       return {
-          selectedFilters: {} as Record<string, string[]>,
+          selectedFilters: JSON.parse(JSON.stringify(this.activeFilters)) as Record<string, string[]>,
           filterSelectedCount: 0 as Number,
           categoryToggleState: {} as Record<string, boolean>,
           widthResolution: window.innerWidth > 1024,
         }
       }, 
+    watch: {
+      activeFilters: {
+        handler(newFilters) {
+          this.selectedFilters = JSON.parse(JSON.stringify(newFilters));
+        },
+        deep: true
+      }
+    },
     emits: ['close-filter-bar', 'apply-filters', 'search-filters-active'],
     methods: {
       clearFiltersHelper(){

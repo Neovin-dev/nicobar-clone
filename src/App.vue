@@ -103,6 +103,7 @@
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
         @search-filters-active="updateActiveFilters"
+        :active-filters="filterObject"
     />
     </transition>
     <!-- @search-filters-active="editFilters" -->
