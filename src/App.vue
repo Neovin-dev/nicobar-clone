@@ -198,7 +198,17 @@ type sortOptions = 'Featured' | "What's New" | 'Lowest Price' | 'Highest Price';
 
 export default defineComponent({
   components: {
-    HeaderBar, HomePageMenBanner,Paginate, AnnouncementCarousel, ProductCard, CollectionToolbar, SectionFooter, ProductFilterSidebar, SearchBar, WhatsappRedirect, ProductCounter
+    HeaderBar, 
+    HomePageMenBanner,
+    Paginate, 
+    AnnouncementCarousel, 
+    ProductCard, 
+    CollectionToolbar, 
+    SectionFooter, 
+    ProductFilterSidebar, 
+    SearchBar, 
+    WhatsappRedirect, 
+    ProductCounter
   },
   data() {
     return {
