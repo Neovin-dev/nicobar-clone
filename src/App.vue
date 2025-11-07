@@ -110,7 +110,7 @@
   </div>
   
     <div v-if="isSortMobile" @click="toggleSortStateMobile" class="overlay w-full h-full bg-[#00000080] fixed top-0 bottom-0 z-12"></div>
-    <div v-if="widthMobile" class="collectionToolbarFilterSortMobile h-15 align-middle fixed flex bottom-0 w-full bg-white flex-[100%] py-2 px-5 z-20">
+    <div v-if="widthMobile" class="collectionToolbarFilterSortMobile h-15 align-middle fixed flex bottom-0 w-full bg-white flex-[100%] py-2 z-20">
       <div @click="toggleSortStateMobile" class="collectionToolbarSort inline-flex py-2 px-6 border-2 mx-3 border-solid font-bold border-[#dfe1e3] rounded-full justify-center items-center relative cursor-pointer hover:bg-[#ebedf1] flex-[50%]">
           <div class="sort-by-select-header flex text-center text-[10px]">
               <span class="title-text text-[#1A1F29] uppercase">
