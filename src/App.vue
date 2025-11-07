@@ -99,7 +99,7 @@
   <div>
     <transition name="sidebar-slide">
     <ProductFilterSidebar 
-        v-if="isFilterSidebar"
+        v-show="isFilterSidebar"
         @close-filter-bar="toggleVisibility" 
         :filter-data="searchFilter"
         @search-filters-active="updateActiveFilters"

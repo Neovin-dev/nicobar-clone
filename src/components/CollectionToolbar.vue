@@ -121,8 +121,8 @@
       
     </div>
 </div>
-<div v-if="Object.keys(filterTags).length > 0"  class="st-filter-tag-list flex-[30%] px-9 py-4 flex">
-  <div class="st-filter-tag flex flex-wrap items-center mb-0.5 flex-[80%]" :class="filterTags.category === 'Size' ? 'uppercase': 'capitalize'">
+<div v-if="Object.keys(filterTags).length > 0"  class="st-filter-tag-list flex-[30%] px-2 py-4 flex justify-start">
+  <div class="st-filter-tag flex flex-wrap items-center mb-0.5" :class="filterTags.category === 'Size' ? 'uppercase': 'capitalize'">
         <template v-for="(values, category) in filterTags" :key="category">
             <div 
               v-for="value in values" 
@@ -139,13 +139,13 @@
             </div>
         </template>
     </div>
-    <div 
+  <div 
         v-if="Object.keys(filterTags).length > 0" 
-        class="clear-all-tag flex text-[11px] items-center justify-center underline cursor-pointer flex-[20%]"
+        class="clear-all-tag flex text-[11px] items-center justify-center underline cursor-pointer"
         @click="clearAllTags"
-    >
-      Clear All
-    </div>
+  >
+    Clear All
+  </div>
 </div>
 </template>
 
