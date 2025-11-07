@@ -48,9 +48,9 @@
       <div class="w-full flex  flex-col justify-center items-center" v-if="searchResult.totalHits === 0">
           <div class="container flex-col items-center flex justify-center w-[280px]">
             <div class="no-result-img flex flex-col w-full justify-center items-center"><img src="../public/image.png" alt=""></div> 
-            <h2 class="page-heading flex flex-col w-100 justify-center items-center">Sorry, we can’t find any result</h2> 
+            <h2 class="page-heading flex flex-col w-70 justify-center items-center">Sorry, we can’t find any result</h2> 
             <span class="overflow-hidden whitespace-nowrap text-ellipsis w-[250px] flex justify-center items-center"> for "{{ searchValue }}"</span>
-            <div class="search-pform flex flex-col w-100 justify-center items-center">
+            <div class="search-pform flex flex-col w-50 justify-center items-center">
               <p> Please try a different term. <span style="display: none;">or try <a class="highlight-text">clearing</a> some filters</span>
               </p>
             </div>
