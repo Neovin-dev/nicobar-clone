@@ -1,8 +1,10 @@
 <template>
   <AnnouncementCarousel />
+
   <HeaderBar 
       @enable-search-bar="enableSearchBar"
   />
+
   <SearchBar 
       v-show="isSearchEnable" 
       :active-search="isSearchEnable"
@@ -10,6 +12,7 @@
       @update-search="searchOperation"
       @entered-search="searchStringVal"
   />
+  
   <div v-if="bannerEnable" >
       <HomePageMenBanner @filter-state="toggleVisibility"/>
   </div>
@@ -315,7 +318,7 @@ export default defineComponent({
       
       setTimeout(() => {
         window.scrollTo({
-                top: 600,
+                top: 0,
                 left: 0,
                 behavior: 'smooth',
         });
@@ -367,7 +370,7 @@ export default defineComponent({
           }
         setTimeout(() => {
           window.scrollTo({
-                  top: 600,
+                  top: 0,
                   left: 0,
                   behavior: 'smooth',
           });
@@ -457,7 +460,7 @@ export default defineComponent({
                                     .filter("isSearchable = 1 AND isActive = 1 AND discounted_price > 0")
                                          
           for (const category in this.filterObject) {
-            const values = this.filterObject[category];
+            const values = this.filterObject.category;
             if (values && values.length > 0) {
               searchBuilder = searchBuilder.textFacetFilters(category, values);
             }

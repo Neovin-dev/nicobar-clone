@@ -162,6 +162,7 @@ export default defineComponent({
 
     getSizes(): string[] {
       const sizeOption = this.productData.options.find((option: any) => option.name === 'Size');
+      console.log(sizeOption.values);
       return sizeOption ? sizeOption.values : [];
     },
 

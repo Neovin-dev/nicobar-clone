@@ -1,11 +1,11 @@
 <template>
-    <section class="collection-banner-image w-full overflow-hidden no-scrollbar">
+  <section class="collection-banner-image w-full overflow-hidden no-scrollbar">
     <!-- for less than 1024 -->
       <img v-if="widthCalculator" class="w-full overflow-hidden align-top max-h-[400px] object-cover object-center" fetchpriority="high" loading="eager" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/MW_BANNER_MOBILE_e3069101-3895-494d-91ac-09b90991392e.png?v=1757422516">
        <!-- for more than 1024 -->
        <img v-else class="w-full" fetchpriority="high" loading="eager" src="https://cdn.shopify.com/s/files/1/0270/5129/4854/files/MW_BANNER_4b96e466-06ee-4ceb-9d54-7154dc694012.png?v=1757422514">
   </section>
-    <div class="image-wrapper flex justify-center w-full overflow-x-auto mb-10">
+  <div class="image-wrapper flex justify-center w-full overflow-x-auto mb-10">
     <div class="items flex w-full justify-center">
       <a 
         v-for="item in carouselItems" 
@@ -14,7 +14,7 @@
         class="flex flex-col items-center text-center no-underline text-gray-800"
       >
         <div class="image-container w-[90px] h-[90px] mt-10 ml-1 rounded-full overflow-hidden border flex border-none items-center justify-center">
-          <img 
+          <img
             fetchpriority="high" 
             class="object-cover w-full h-full" 
             :src="item.imageSrc" 
@@ -50,13 +50,42 @@ export default defineComponent ({
     data() {
       return {
         carouselItems: [
-          { name: 'Shirts', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Shirts_d896521a-1c4b-4651-89bb-2e687f0d4623_180x.png?v=1757479108' },
-          { name: 'Kurtas & Jackets', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Kurtas_c6db3f2e-105a-4953-80e0-9e57e0ac45b0_180x.png?v=1757479109' },
-          { name: 'T-Shirts', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/T-Shirts_Essentials_180x.png?v=1752822232' },
-          { name: 'Trousers', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Trousers_522f8d82-de78-44b9-a908-551781502b45_180x.png?v=1757479108' },
-          { name: 'Gifts for him', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/GIFTS_FOR_HIM_747dd0d6-73d7-46eb-84c7-3a08509890d0_180x.png?v=1757479108' },
-          { name: 'New Arrivals', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/New_Arrivals_681b745c-d7a1-42a2-9879-6e42a79a3011_180x.png?v=1757479108' }, 
-          { name: 'Bestsellers', link: '#', imageSrc: 'https://www.nicobar.com/cdn/shop/files/Bestsellers_3aa4dfad-cab3-4bad-9289-6f458e72e105_180x.png?v=1757479108' },
+          { 
+            name: 'Shirts', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/Shirts_d896521a-1c4b-4651-89bb-2e687f0d4623_180x.png?v=1757479108' 
+          },
+          { 
+            name: 'Kurtas & Jackets', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/Kurtas_c6db3f2e-105a-4953-80e0-9e57e0ac45b0_180x.png?v=1757479109' 
+          },
+          { 
+            name: 'T-Shirts', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/T-Shirts_Essentials_180x.png?v=1752822232' 
+          },
+          { 
+            name: 'Trousers', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/Trousers_522f8d82-de78-44b9-a908-551781502b45_180x.png?v=1757479108' 
+          },
+          { 
+            name: 'Gifts for him', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/GIFTS_FOR_HIM_747dd0d6-73d7-46eb-84c7-3a08509890d0_180x.png?v=1757479108' 
+          },
+          { 
+            name: 'New Arrivals', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/New_Arrivals_681b745c-d7a1-42a2-9879-6e42a79a3011_180x.png?v=1757479108' 
+
+          }, 
+          { 
+            name: 'Bestsellers', 
+            link: '#', 
+            imageSrc: 'https://www.nicobar.com/cdn/shop/files/Bestsellers_3aa4dfad-cab3-4bad-9289-6f458e72e105_180x.png?v=1757479108' 
+          },
         ],
         widthCalculator: false as boolean,
         bannerEnable: true,

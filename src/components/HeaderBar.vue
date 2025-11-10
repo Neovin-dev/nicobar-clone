@@ -163,7 +163,7 @@ export default defineComponent ({
     methods: {
         reloadPage(){
             window.location.reload();
-        }
+        },
     }
 })
 </script>

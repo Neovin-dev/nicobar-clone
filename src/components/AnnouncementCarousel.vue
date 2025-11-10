@@ -8,19 +8,19 @@
            @transitionend="handleTransition"
         >
         <!-- item and index fetched from Announcements -->
-           <div 
-              v-for="(item, index) in slidesToDisplay"
-              :key="index"
-              class="announcement-carosel-slider h-7 w-full shrink-0 flex items-center justify-center"
-              :class="item.bgClass"
-            >
-            <!-- fetching from the iterable item in slidesToDisplay -->
-               <span :class="item.spanClass">
-                    <p>
-                        <a :href="item.link" :title = "item.textClass" >{{ item.text }}</a>
-                    </p>
-               </span>
-           </div>
+          <div 
+            v-for="item in slidesToDisplay"
+            :key="item.id"
+            class="announcement-carosel-slider h-7 w-full shrink-0 flex items-center justify-center"
+            :class="item.bgClass"
+          >
+          <!-- fetching from the iterable item in slidesToDisplay -->
+            <span :class="item.spanClass">
+              <p>
+                <a :href="item.link" :title = "item.textClass"> {{ item.text }} </a>
+              </p>
+            </span>
+          </div>
         </div>
     </div>
     <!-- Announcement bar ends -->
@@ -70,6 +70,11 @@ export default defineComponent({
         }
     },
 
+    mounted(){
+        this.startCarousel();
+        // as there is no need for a condition as it will always be as true as no. of banner is always > 1
+    },
+
     computed: {
         slidesToDisplay(): Announcement[] {
 
@@ -109,12 +114,6 @@ export default defineComponent({
                 this.currentIndex = 0;
             }
         },
-    },
-
-    mounted(){
-        this.startCarousel();
-        // as there is no need for a condition as it will always be as true as no. of banner is always > 1
-        
     },
 })
 
